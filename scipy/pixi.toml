@@ -1,0 +1,59 @@
+[project]
+name = "scipy"
+version = "1.15.0.dev0"
+description = "Fundamental algorithms for scientific computing in Python"
+authors = ["SciPy Developers <scipy-dev@python.org>"]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tasks]
+build = {cmd = "python dev.py build", cwd = "scipy"}
+wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../wheelhouse", cwd = "scipy"}
+
+[dependencies]
+compilers = ">=1.7.0,<2"
+pkg-config = ">=0.29.2,<0.30"
+ninja = ">=1.12.1,<2"
+meson = ">=1.5.1,<2"
+meson-python = ">=0.16.0"
+openblas = ">=0.3.27,<0.4"
+cython = ">=3.0.10,<4"
+build = "*"
+numpy = ">=2.0.0"
+pybind11 = ">=2.13.1"
+pythran = ">=0.15.0"
+rich-click = "*"
+pydevtool = "*"
+
+[feature.test.dependencies]
+pytest = "*"
+hypothesis = "*"
+pytest-cov = "*"
+pytest-timeout = "*"
+pytest-xdist = "*"
+asv = "*"
+threadpoolctl = "*"
+pooch = "*"
+mpmath = "*"
+gmpy2 = "*"
+mypy = "1.10.*"
+typing_extensions = "*"
+types-psutil = "*"
+
+[feature.lint.dependencies]
+ruff = "*"
+pycodestyle = "*"
+cython-lint = ">=0.12.2"
+
+
+[feature.test.tasks]
+test = {cmd = "python dev.py test", cwd = "scipy"}
+mypy = {cmd = "python dev.py mypy", cwd = "scipy"}
+
+[feature.lint.tasks]
+lint = {cmd = "python dev.py lint", cwd = "scipy"}
+
+
+[environments]
+test = ["test"]
+lint = ["lint"]

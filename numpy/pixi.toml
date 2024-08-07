@@ -1,0 +1,46 @@
+[project]
+name = "trypixi"
+version = "0.1.0"
+description = "Add a short description here"
+authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tasks]
+build = {cmd = "spin build", cwd = "numpy"}
+wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../wheelhouse", cwd = "numpy"}
+
+[dependencies]
+compilers = ">=1.7.0,<2"
+pkg-config = ">=0.29.2,<0.30"
+ninja = ">=1.12.1,<2"
+meson = ">=1.5.1,<2"
+meson-python = ">=0.16.0,<0.17"
+openblas = ">=0.3.27,<0.4"
+spin = ">=0.11,<0.12"
+cython = ">=3.0.10,<4"
+build = "*"
+
+[feature.test.dependencies]
+pytest = "*"
+hypothesis = "*"
+pytest-xdist = "*"
+mypy = "1.10.*"
+
+[feature.lint.dependencies]
+ruff = "*"
+pycodestyle = "2.8.*"
+gitpython = ">=3.1.30"
+
+
+[feature.test.tasks]
+test = {cmd = "spin test", cwd = "numpy"}
+mypy = {cmd = "spin mypy", cwd = "numpy"}
+
+[feature.lint.tasks]
+lint = {cmd = "spin lint", cwd = "numpy"}
+
+
+[environments]
+test = ["test"]
+lint = ["lint"]
