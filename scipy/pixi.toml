@@ -8,7 +8,7 @@ platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
 build = {cmd = "python dev.py build", cwd = "scipy"}
-wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../wheelhouse", cwd = "scipy"}
+wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy"}
 
 [dependencies]
 compilers = ">=1.7.0,<2"
