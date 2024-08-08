@@ -9,6 +9,7 @@ platforms = ["osx-arm64", "linux-64"]
 [tasks]
 build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy" }
 wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
+ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
 
 [dependencies]
 compilers = ">=1.7.0,<2"
@@ -24,6 +25,7 @@ pybind11 = ">=2.13.1"
 pythran = ">=0.15.0"
 rich-click = "*"
 pydevtool = "*"
+ipython = "*"
 
 [feature.test.dependencies]
 pytest = "*"
