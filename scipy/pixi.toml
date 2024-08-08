@@ -7,8 +7,8 @@ channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
-build = {cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy"}
-wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy"}
+build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy" }
+wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
 
 [dependencies]
 compilers = ">=1.7.0,<2"
@@ -47,11 +47,11 @@ cython-lint = ">=0.12.2"
 
 
 [feature.test.tasks]
-test = {cmd = "python dev.py test", cwd = "scipy"}
-mypy = {cmd = "python dev.py mypy", cwd = "scipy"}
+test = { cmd = "python dev.py test", cwd = "scipy" }
+mypy = { cmd = "python dev.py mypy", cwd = "scipy" }
 
 [feature.lint.tasks]
-lint = {cmd = "python dev.py lint", cwd = "scipy"}
+lint = { cmd = "python dev.py lint", cwd = "scipy" }
 
 
 # BLAS/LAPACK features
@@ -69,14 +69,14 @@ mkl = ">=2023.2.0,<2025"
 platforms = ["linux-64", "osx-arm64"]
 
 [feature.cpu.tasks]
-test-cpu = {cmd = "python dev.py test -b all", cwd = "scipy"}
+test-cpu = { cmd = "python dev.py test -b all", cwd = "scipy" }
 
 [feature.cuda]
 platforms = ["linux-64"]
-system-requirements = {cuda = "12"}
+system-requirements = { cuda = "12" }
 
 [feature.cuda.tasks]
-test-cuda = {cmd = "python dev.py test -b all", cwd = "scipy"}
+test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy" }
 
 
 # Array libraries we have support for
@@ -87,7 +87,7 @@ platforms = ["linux-64", "osx-arm64"]
 pytorch = "*"
 
 [feature.pytorch.tasks]
-test-torch = {cmd = "python dev.py test -b pytorch", cwd = "scipy"}
+test-torch = { cmd = "python dev.py test -b pytorch", cwd = "scipy" }
 
 [feature.cupy]
 platforms = ["linux-64"]
@@ -96,16 +96,16 @@ platforms = ["linux-64"]
 cupy = "*"
 
 [feature.cupy.tasks]
-test-cupy = {cmd = "python dev.py test -b cupy", cwd = "scipy"}
+test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy" }
 
 [feature.jax]
 platforms = ["linux-64", "osx-arm64"]
 
 [feature.jax.dependencies]
-jax = "*"
+jax = "=0.4.28"
 
 [feature.jax.tasks]
-test-jax = {cmd = "python dev.py test -b jax.numpy", cwd = "scipy"}
+test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy" }
 
 [feature.array_api_strict]
 platforms = ["linux-64", "osx-arm64"]
@@ -114,11 +114,11 @@ platforms = ["linux-64", "osx-arm64"]
 array-api-strict = "*"
 
 [feature.array_api_strict.tasks]
-test-strict = {cmd = "python dev.py test -b array_api_strict", cwd = "scipy"}
+test-strict = { cmd = "python dev.py test -b array_api_strict", cwd = "scipy" }
 
 [feature.mlx]
 platforms = ["osx-arm64"]
-system-requirements = {macos = "13.5"}
+system-requirements = { macos = "13.5" }
 
 [feature.mlx.dependencies]
 mlx = "*"
@@ -136,4 +136,12 @@ jax = ["jax", "test"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict", "test"]
 array-api = ["cpu", "mkl", "pytorch", "jax", "array_api_strict", "test"]
-array-api-cuda = ["cuda", "mkl", "pytorch", "jax", "cupy", "array_api_strict", "test"]
+array-api-cuda = [
+    "cuda",
+    "mkl",
+    "pytorch",
+    "jax",
+    "cupy",
+    "array_api_strict",
+    "test",
+]
