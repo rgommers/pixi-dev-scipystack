@@ -54,6 +54,67 @@ mypy = {cmd = "python dev.py mypy", cwd = "scipy"}
 lint = {cmd = "python dev.py lint", cwd = "scipy"}
 
 
+# CPU/CUDA features
+[feature.cpu]
+platforms = ["linux-64", "osx-arm64"]
+
+[feature.cpu.tasks]
+test-cpu = {cmd = "python dev.py test -b all", cwd = "scipy"}
+
+[feature.cuda]
+platforms = ["linux-64"]
+system-requirements = {cuda = "12"}
+
+[feature.cuda.tasks]
+test-cuda = {cmd = "python dev.py test -b all", cwd = "scipy"}
+
+
+# Array libraries we have support for
+[feature.pytorch]
+platforms = ["linux-64", "osx-arm64"]
+
+[feature.pytorch.dependencies]
+pytorch = "*"
+
+[feature.pytorch.tasks]
+test-torch = {cmd = "python dev.py test -b pytorch", cwd = "scipy"}
+
+[feature.cupy]
+platforms = ["linux-64"]
+
+[feature.cupy.dependencies]
+cupy = "*"
+
+[feature.cupy.tasks]
+test-cupy = {cmd = "python dev.py test -b cupy", cwd = "scipy"}
+
+[feature.jax]
+platforms = ["linux-64", "osx-arm64"]
+
+[feature.jax.dependencies]
+jax = "*"
+
+[feature.jax.tasks]
+test-jax = {cmd = "python dev.py test -b jax.numpy", cwd = "scipy"}
+
+[feature.array_api_strict]
+platforms = ["linux-64", "osx-arm64"]
+
+[feature.array_api_strict.dependencies]
+array-api-strict = "*"
+
+[feature.array_api_strict.tasks]
+test-strict = {cmd = "python dev.py test -b array_api_strict", cwd = "scipy"}
+
+
 [environments]
 test = ["test"]
 lint = ["lint"]
+dev = ["test", "lint"]
+default = ["test"]
+pytorch = ["pytorch", "test"]
+cupy = ["cupy", "test"]
+jax = ["jax", "test"]
+array-api-strict = ["array_api_strict", "test"]
+array-api = ["cpu", "pytorch", "jax", "array_api_strict", "test"]
+array-api-cuda = ["cuda", "pytorch", "jax", "cupy", "array_api_strict", "test"]
