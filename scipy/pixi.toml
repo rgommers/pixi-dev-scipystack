@@ -10,6 +10,8 @@ platforms = ["osx-arm64", "linux-64"]
 build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy" }
 wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
 ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
+profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
+check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = ["build"], cwd = "scipy" }
 
 [dependencies]
 compilers = ">=1.7.0,<2"
