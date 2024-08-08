@@ -116,6 +116,13 @@ array-api-strict = "*"
 [feature.array_api_strict.tasks]
 test-strict = {cmd = "python dev.py test -b array_api_strict", cwd = "scipy"}
 
+[feature.mlx]
+platforms = ["osx-arm64"]
+system-requirements = {macos = "13.5"}
+
+[feature.mlx.dependencies]
+mlx = "*"
+
 
 [environments]
 test = ["test"]
@@ -126,6 +133,7 @@ mkl = ["mkl", "test"]
 pytorch = ["pytorch", "mkl", "test"]
 cupy = ["cupy", "test"]
 jax = ["jax", "test"]
+mlx = ["mlx"]
 array-api-strict = ["array_api_strict", "test"]
 array-api = ["cpu", "mkl", "pytorch", "jax", "array_api_strict", "test"]
 array-api-cuda = ["cuda", "mkl", "pytorch", "jax", "cupy", "array_api_strict", "test"]
