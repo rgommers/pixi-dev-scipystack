@@ -1,8 +1,7 @@
 mkdir builddir
 
-# Note: changed `$PYTHON` to `python` here
-python -m build -w -n -x \
-    -Cbuilddir=builddir \
+$PYTHON -m build -w -n -x \
+    -Cbuild-dir=builddir \
     -Csetup-args=-Dblas=blas \
     -Csetup-args=-Dlapack=lapack
 

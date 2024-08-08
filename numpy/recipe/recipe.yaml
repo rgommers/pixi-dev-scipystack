@@ -1,0 +1,62 @@
+context:
+  version: 2.2.0.dev0
+
+package:
+  name: numpy
+  version: ${{ version }}
+
+# source:
+#  - url: https://github.com/numpy/numpy/releases/download/v${{ version }}/numpy-${{ version }}.tar.gz
+#    sha256: 485b87235796410c3519a699cfe1faab097e509e90ebb05dcd098db2ae87e7b3
+
+source:
+  path: ../numpy
+  use_gitignore: false 
+
+build:
+  python:
+    entry_points:
+      - f2py = numpy.f2py.f2py2e:main  # [win]
+      - numpy-config = 'numpy._configtool:main'
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ninja
+    # TODO: most `host` dependencies should be in `build` instead, this can be fixed once
+    #       we have proper cross-compilation without `crossenv` set up.
+  host:
+    # note: variant is injected here!
+    - python
+    - cython
+    - python-build
+    - meson-python
+    - pkg-config
+    - pip
+    - libblas
+    - libcblas
+    - liblapack
+  run:
+    - python
+  run_exports:
+    - ${{ pin_subpackage("numpy", lower_bound="1.21", upper_bound="3.0.0a0") }}
+
+tests:
+  - python:
+      imports:
+        - numpy
+        - numpy.fft
+        - numpy.linalg
+        - numpy.ctypeslib
+
+  - script:
+    - f2py -v
+
+about:
+  homepage: http://numpy.org/
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  summary: The fundamental package for scientific computing with Python.
+  documentation: https://numpy.org/doc/stable/
+  repository: https://github.com/numpy/numpy

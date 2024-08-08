@@ -9,7 +9,7 @@ platforms = ["osx-arm64"]
 [tasks]
 build = {cmd = "spin build", cwd = "numpy"}
 ipython = {cmd = "spin ipython", cwd = "numpy"}
-wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "numpy"}
+wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && mv dist/*.whl ../../wheelhouse/", cwd = "numpy"}
 
 [dependencies]
 compilers = ">=1.7.0,<2"
