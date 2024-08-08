@@ -7,7 +7,7 @@ channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
-build = {cmd = "python dev.py build", cwd = "scipy"}
+build = {cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy"}
 wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy"}
 
 [dependencies]
@@ -16,9 +16,9 @@ pkg-config = ">=0.29.2,<0.30"
 ninja = ">=1.12.1,<2"
 meson = ">=1.5.1,<2"
 meson-python = ">=0.16.0"
-openblas = ">=0.3.27,<0.4"
 cython = ">=3.0.10,<4"
 build = "*"
+blas-devel = "*"
 numpy = ">=2.0.0"
 pybind11 = ">=2.13.1"
 pythran = ">=0.15.0"
@@ -52,6 +52,16 @@ mypy = {cmd = "python dev.py mypy", cwd = "scipy"}
 
 [feature.lint.tasks]
 lint = {cmd = "python dev.py lint", cwd = "scipy"}
+
+
+# BLAS/LAPACK features
+[feature.openblas.dependencies]
+libblas = "*=*openblas"
+openblas = ">=0.3.27,<0.4"
+
+[feature.mkl.target.linux-64.dependencies]
+libblas = "*=*mkl"
+mkl = ">=2023.2.0,<2025"
 
 
 # CPU/CUDA features
@@ -111,10 +121,11 @@ test-strict = {cmd = "python dev.py test -b array_api_strict", cwd = "scipy"}
 test = ["test"]
 lint = ["lint"]
 dev = ["test", "lint"]
-default = ["test"]
-pytorch = ["pytorch", "test"]
+default = ["test", "openblas"]
+mkl = ["mkl", "test"]
+pytorch = ["pytorch", "mkl", "test"]
 cupy = ["cupy", "test"]
 jax = ["jax", "test"]
 array-api-strict = ["array_api_strict", "test"]
-array-api = ["cpu", "pytorch", "jax", "array_api_strict", "test"]
-array-api-cuda = ["cuda", "pytorch", "jax", "cupy", "array_api_strict", "test"]
+array-api = ["cpu", "mkl", "pytorch", "jax", "array_api_strict", "test"]
+array-api-cuda = ["cuda", "mkl", "pytorch", "jax", "cupy", "array_api_strict", "test"]
