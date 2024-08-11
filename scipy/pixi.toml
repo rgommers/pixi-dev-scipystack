@@ -57,6 +57,16 @@ mypy = { cmd = "python dev.py mypy", cwd = "scipy" }
 [feature.lint.tasks]
 lint = { cmd = "python dev.py lint", cwd = "scipy" }
 
+[feature.bldcheck]
+platforms = ["linux-64", "osx-arm64"]
+
+[feature.bldcheck.dependencies]
+graphviz = "*"
+mkdocs = "*"
+
+[feature.bldcheck.activation]
+scripts = ["activate_graphviz.sh"]
+
 
 # BLAS/LAPACK features
 [feature.openblas.dependencies]
@@ -129,10 +139,11 @@ mlx = "*"
 
 
 [environments]
+default = ["test", "openblas"]
 test = ["test"]
 lint = ["lint"]
 dev = ["test", "lint"]
-default = ["test", "openblas"]
+bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
 pytorch = ["pytorch", "mkl", "test"]
 cupy = ["cupy", "test"]
