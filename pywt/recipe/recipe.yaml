@@ -1,0 +1,49 @@
+context:
+  version: 1.8.0.dev0
+
+package:
+  name: pywavelets
+  version: ${{ version }}
+
+#source:
+#  - url: https://github.com/PyWavelets/pywt/releases/download/v${{ version }}/pywavelets-${{ version }}.tar.gz
+#    sha256: b47250e5bb853e37db5db423bafc82847f4cde0ffdf7aebb06336a993bc174f6
+
+source:
+  path: ../pywt
+  use_gitignore: false
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    # note: variant is injected here!
+    - python >=3.10
+    - cython >=3.0.4
+    - numpy >1.23,<3
+    - python-build
+    - meson-python >=0.16.0
+    - pip
+  run:
+    - python
+    - numpy >1.23,<3
+
+tests:
+  - python:
+      imports:
+        - pywt
+
+  - script:
+      - pytest --pyargs pywt -m "not slow" --durations 10
+    requirements:
+      run:
+        - pytest
+
+about:
+  homepage: https://github.com/PyWavelets/pywt
+  license: MIT
+  license_file: LICENSE
+  summary: Discrete Wavelet Transforms in Python
+  documentation: https://pywavelets.readthedocs.io
+  repository: https://github.com/PyWavelets/pywt
