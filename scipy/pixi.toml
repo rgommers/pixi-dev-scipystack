@@ -95,6 +95,15 @@ openblas = ">=0.3.27,<0.4"
 libblas = { version = "*", build = "*mkl" }
 mkl = ">=2023.2.0,<2025"
 
+[feature.netlib.dependencies]
+libblas = { version = "*", build = "*netlib" }
+
+[feature.blis]
+platforms = ["linux-64"]
+
+[feature.blis.dependencies]
+libblas = { version = "*", build = "*blis" }
+
 
 # CPU/CUDA features
 [feature.cpu]
@@ -164,6 +173,8 @@ doc = ["doc"]
 dev = ["test", "lint"]
 bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
+netlib = ["netlib", "test"]
+blis = ["blis", "test"]
 pytorch = ["pytorch", "mkl", "test"]
 cupy = ["cupy", "test"]
 jax = ["jax", "test"]
