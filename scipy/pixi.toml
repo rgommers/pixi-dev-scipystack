@@ -67,6 +67,7 @@ jupyterlite-pyodide-kernel = "*"
 [feature.test.tasks]
 test = { cmd = "python dev.py test", cwd = "scipy" }
 mypy = { cmd = "python dev.py mypy", cwd = "scipy" }
+bench = { cmd = "python dev.py bench", cwd = "scipy" }
 
 [feature.lint.tasks]
 lint = { cmd = "python dev.py lint", cwd = "scipy" }
