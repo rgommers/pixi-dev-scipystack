@@ -4,12 +4,12 @@ version = "0.1.0"
 description = "Add a short description here"
 authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 channels = ["conda-forge"]
-platforms = ["osx-arm64"]
+platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
-build = {cmd = "spin build", cwd = "numpy"}
-ipython = {cmd = "spin ipython", cwd = "numpy"}
-wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && mv dist/*.whl ../../wheelhouse/", cwd = "numpy"}
+build = { cmd = "spin build", cwd = "numpy" }
+ipython = { cmd = "spin ipython", cwd = "numpy" }
+wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && mv dist/*.whl ../../wheelhouse/", cwd = "numpy" }
 
 [dependencies]
 compilers = ">=1.7.0,<2"
@@ -37,12 +37,12 @@ gitpython = ">=3.1.30"
 
 
 [feature.test.tasks]
-test = {cmd = "spin test", cwd = "numpy"}
-bench = {cmd = "spin bench", cwd = "numpy"}
-mypy = {cmd = "spin mypy", cwd = "numpy"}
+test = { cmd = "spin test", cwd = "numpy" }
+bench = { cmd = "spin bench", cwd = "numpy" }
+mypy = { cmd = "spin mypy", cwd = "numpy" }
 
 [feature.lint.tasks]
-lint = {cmd = "spin lint", cwd = "numpy"}
+lint = { cmd = "spin lint", cwd = "numpy" }
 
 
 [environments]
