@@ -20,7 +20,7 @@ meson-python = ">=0.16.0,<0.17"
 openblas = ">=0.3.27,<0.4"
 spin = ">=0.11,<0.12"
 cython = ">=3.0.10,<4"
-build = "*"
+python-build = "*"
 ipython = "*"
 
 [feature.test.dependencies]
