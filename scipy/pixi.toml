@@ -87,9 +87,6 @@ lint = { cmd = "python dev.py lint", cwd = "scipy" }
 doc = { cmd = "python dev.py doc", cwd = "scipy" }
 
 
-[feature.bldcheck]
-platforms = ["linux-64", "osx-arm64", "win-64"]
-
 [feature.bldcheck.dependencies]
 graphviz = "*"
 mkdocs = "*"
@@ -118,9 +115,6 @@ libblas = { version = "*", build = "*blis" }
 
 
 # CPU/CUDA features
-[feature.cpu]
-platforms = ["linux-64", "osx-arm64", "win-64"]
-
 [feature.cpu.tasks]
 test-cpu = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
