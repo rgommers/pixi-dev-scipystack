@@ -27,6 +27,7 @@ ipython = "*"
 pytest = "*"
 hypothesis = "*"
 pytest-xdist = "*"
+asv = "*"
 mypy = "1.10.*"
 
 [feature.lint.dependencies]
@@ -37,6 +38,7 @@ gitpython = ">=3.1.30"
 
 [feature.test.tasks]
 test = {cmd = "spin test", cwd = "numpy"}
+bench = {cmd = "spin bench", cwd = "numpy"}
 mypy = {cmd = "spin mypy", cwd = "numpy"}
 
 [feature.lint.tasks]
