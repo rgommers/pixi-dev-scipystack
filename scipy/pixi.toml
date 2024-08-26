@@ -6,13 +6,6 @@ authors = ["SciPy Developers <scipy-dev@python.org>"]
 channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
 
-[tasks]
-build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy" }
-wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
-ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
-profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
-check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = ["build"], cwd = "scipy" }
-
 [dependencies]
 compilers = ">=1.7.0,<2"
 pkg-config = ">=0.29.2,<0.30"
@@ -28,21 +21,25 @@ pythran = ">=0.15.0"
 rich-click = "*"
 pydevtool = "*"
 ipython = "*"
-
-[feature.test.dependencies]
+# Add test dependencies to default list of dependencies so they show up in every
+# environment without having to also see the test task in those other envs
 pytest = "*"
 hypothesis = "*"
 pytest-cov = "*"
 pytest-timeout = "*"
 pytest-xdist = "*"
-asv = "*"
 threadpoolctl = "*"
 pooch = "*"
 mpmath = "*"
 gmpy2 = "*"
+
+[feature.typing.dependencies]
 mypy = "1.10.*"
 typing_extensions = "*"
 types-psutil = "*"
+
+[feature.bench.dependencies]
+asv = "*"
 
 [feature.lint.dependencies]
 ruff = "*"
@@ -63,10 +60,24 @@ pooch = "*"
 jupyterlite-sphinx = ">=0.16.2"
 jupyterlite-pyodide-kernel = "*"
 
+[tasks]
+ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
+
+[feature.build.tasks]
+build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy" }
+wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
+profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
+check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
+    "build",
+], cwd = "scipy" }
 
 [feature.test.tasks]
 test = { cmd = "python dev.py test", cwd = "scipy" }
+
+[feature.typing.tasks]
 mypy = { cmd = "python dev.py mypy", cwd = "scipy" }
+
+[feature.bench.tasks]
 bench = { cmd = "python dev.py bench", cwd = "scipy" }
 
 [feature.lint.tasks]
@@ -111,14 +122,14 @@ libblas = { version = "*", build = "*blis" }
 platforms = ["linux-64", "osx-arm64", "win-64"]
 
 [feature.cpu.tasks]
-test-cpu = { cmd = "python dev.py test -b all", cwd = "scipy" }
+test-cpu = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
 [feature.cuda]
 platforms = ["linux-64"]
 system-requirements = { cuda = "12" }
 
 [feature.cuda.tasks]
-test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy" }
+test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_ARRAY_API = "1", SCIPY_DEVICE = "cuda" } }
 
 
 # Array libraries we have support for
@@ -131,7 +142,7 @@ platforms = ["linux-64", "osx-arm64"]
 pytorch = "*"
 
 [feature.pytorch.tasks]
-test-torch = { cmd = "python dev.py test -b pytorch", cwd = "scipy" }
+test-torch = { cmd = "python dev.py test -b pytorch", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
 [feature.cupy]
 platforms = ["linux-64"]
@@ -140,7 +151,7 @@ platforms = ["linux-64"]
 cupy = "*"
 
 [feature.cupy.tasks]
-test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy" }
+test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
 [feature.jax]
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
@@ -150,13 +161,14 @@ platforms = ["linux-64", "osx-arm64"]
 jax = "=0.4.28"
 
 [feature.jax.tasks]
-test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy" }
+test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
 [feature.array_api_strict.dependencies]
 array-api-strict = "*"
 
 [feature.array_api_strict.tasks]
-test-strict = { cmd = "python dev.py test -b array_api_strict", cwd = "scipy" }
+test-strict = { cmd = "python dev.py test -b array_api_strict", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+
 
 [feature.mlx]
 platforms = ["osx-arm64"]
@@ -167,27 +179,25 @@ mlx = "*"
 
 
 [environments]
-default = ["test", "openblas"]
-test = ["test"]
+default = ["build", "test", "typing", "bench", "openblas"]
 lint = ["lint"]
 doc = ["doc"]
-dev = ["test", "lint"]
 bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-pytorch = ["pytorch", "mkl", "test"]
-cupy = ["cupy", "test"]
-jax = ["jax", "test"]
+pytorch = ["pytorch", "mkl"] # FIXME: add env var
+cupy = ["cupy"]
+jax = ["jax"]
 mlx = ["mlx"]
-array-api-strict = ["array_api_strict", "test"]
-array-api = ["cpu", "mkl", "pytorch", "jax", "array_api_strict", "test"]
+array-api-strict = ["array_api_strict"]
+array-api = ["cpu", "array_api_strict", "jax", "mkl", "pytorch"]
 array-api-cuda = [
     "cuda",
+    "array_api_strict",
+    "cupy",
+    "jax",
     "mkl",
     "pytorch",
-    "jax",
-    "cupy",
-    "array_api_strict",
     "test",
 ]
