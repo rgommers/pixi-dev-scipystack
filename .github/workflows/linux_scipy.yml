@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - ci-scipy
     paths:
       - "scipy/**"
       - ".github/workflows/*_scipy.yml"
