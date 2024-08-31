@@ -152,7 +152,7 @@ test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy", env = { SCIPY_A
 platforms = ["linux-64", "osx-arm64"]
 
 [feature.jax.dependencies]
-jax = "=0.4.28"
+jax = "*"
 
 [feature.jax.tasks]
 test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
