@@ -473,7 +473,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-14.1.0-hc0a3c3a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/libstdcxx-devel_linux-64-12.4.0-ha4f9413_101.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-ng-14.1.0-h4852527_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/libtorch-2.4.0-cuda120_h2b0da52_301.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/libtorch-2.4.0-cuda120_h2b0da52_300.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuuid-2.38.1-h0b41bf4_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libuv-1.48.0-hd590300_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libxcrypt-4.4.36-hd590300_1.conda
@@ -529,7 +529,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-build-1.2.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/python_abi-3.12-5_cp312.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pythran-0.16.1-py312hc39e661_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.4.0-cuda120_py312h26b3cf7_301.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.4.0-cuda120_py312h26b3cf7_300.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pytorch-gpu-2.4.0-cuda120py312hdceea4b_300.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/re2-2023.09.01-h7f4b329_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.2-h8228510_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/requests-2.32.3-pyhd8ed1ab_0.conda
@@ -13407,12 +13408,12 @@ packages:
 - kind: conda
   name: libtorch
   version: 2.4.0
-  build: cuda120_h2b0da52_301
-  build_number: 301
+  build: cuda120_h2b0da52_300
+  build_number: 300
   subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/libtorch-2.4.0-cuda120_h2b0da52_301.conda
-  sha256: 7df05f9be4bdbf2ba9848dffdf8db5441f699e9f85f85fa7db472f7f5c4b1fcf
-  md5: fc36ae8edefdcc2b72d5207d37d97c7c
+  url: https://conda.anaconda.org/conda-forge/linux-64/libtorch-2.4.0-cuda120_h2b0da52_300.conda
+  sha256: 2f7afec502ccde5df724ff2f22fdc52c3a50c65a1e5f3e0960255e29a509490f
+  md5: 527448362d05c6fd378c25ccdfa33e2f
   depends:
   - __glibc >=2.17,<3.0.a0
   - _openmp_mutex >=4.5
@@ -13429,25 +13430,23 @@ packages:
   - libcurand >=10.3.1.50,<11.0a0
   - libcusolver >=11.4.2.57,<12.0a0
   - libcusparse >=12.0.0.76,<13.0a0
-  - libgcc
   - libgcc-ng >=12
   - libmagma >=2.8.0,<2.8.1.0a0
   - libmagma_sparse >=2.8.0,<2.8.1.0a0
   - libprotobuf >=4.25.3,<4.25.4.0a0
-  - libstdcxx
   - libstdcxx-ng >=12
   - libuv >=1.48.0,<2.0a0
   - mkl >=2023.2.0,<2024.0a0
   - nccl >=2.22.3.1,<3.0a0
   - sleef >=3.6.1,<4.0a0
   constrains:
+  - pytorch 2.4.0 cuda120_*_300
   - pytorch-gpu ==2.4.0
   - pytorch-cpu ==99999999
-  - pytorch 2.4.0 cuda120_*_301
   license: BSD-3-Clause
   license_family: BSD
-  size: 515679445
-  timestamp: 1724924925822
+  size: 515578281
+  timestamp: 1724404246445
 - kind: conda
   name: libuuid
   version: 2.38.1
@@ -16858,12 +16857,12 @@ packages:
 - kind: conda
   name: pytorch
   version: 2.4.0
-  build: cuda120_py312h26b3cf7_301
-  build_number: 301
+  build: cuda120_py312h26b3cf7_300
+  build_number: 300
   subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.4.0-cuda120_py312h26b3cf7_301.conda
-  sha256: a57c961dcac4ac0047bcfa57657a8f9d95577419ab6f4ea24be6113d79cee162
-  md5: 2a2aa9bd28f4b391977f73cdfccf185b
+  url: https://conda.anaconda.org/conda-forge/linux-64/pytorch-2.4.0-cuda120_py312h26b3cf7_300.conda
+  sha256: 23997cec6ec0385c7c56dd7e77fb0d6f61c65ec3bf521473adbea22bdea8ee1e
+  md5: ec4e5cdeef0e42b3791c1303b5543cbf
   depends:
   - __cuda
   - __glibc >=2.17,<3.0.a0
@@ -16884,12 +16883,10 @@ packages:
   - libcurand >=10.3.1.50,<11.0a0
   - libcusolver >=11.4.2.57,<12.0a0
   - libcusparse >=12.0.0.76,<13.0a0
-  - libgcc
   - libgcc-ng >=12
   - libmagma >=2.8.0,<2.8.1.0a0
   - libmagma_sparse >=2.8.0,<2.8.1.0a0
   - libprotobuf >=4.25.3,<4.25.4.0a0
-  - libstdcxx
   - libstdcxx-ng >=12
   - libtorch 2.4.0.*
   - libuv >=1.48.0,<2.0a0
@@ -16907,8 +16904,23 @@ packages:
   - pytorch-cpu ==99999999
   license: BSD-3-Clause
   license_family: BSD
-  size: 25801282
-  timestamp: 1724927484593
+  size: 26029649
+  timestamp: 1724410178485
+- kind: conda
+  name: pytorch-gpu
+  version: 2.4.0
+  build: cuda120py312hdceea4b_300
+  build_number: 300
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/pytorch-gpu-2.4.0-cuda120py312hdceea4b_300.conda
+  sha256: 23a1264e0ee0257e2f7ad867b7360770ba5c3a1d8fb030ed24f34bd07f5d962e
+  md5: 8d7cbdccb56663437cd1985019ec883b
+  depends:
+  - pytorch 2.4.0 cuda120_py312h26b3cf7_300
+  license: BSD-3-Clause
+  license_family: BSD
+  size: 22168
+  timestamp: 1724410267959
 - kind: conda
   name: pytz
   version: '2024.1'
