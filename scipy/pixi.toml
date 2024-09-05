@@ -127,15 +127,21 @@ test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_AR
 
 
 # Array libraries we have support for
-[feature.pytorch]
+[feature.pytorch-cpu]
 # Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
 #                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
 platforms = ["linux-64", "osx-arm64"]
 
-[feature.pytorch.dependencies]
+[feature.pytorch-cpu.dependencies]
 pytorch = "*"
 
-[feature.pytorch.tasks]
+[feature.pytorch-cuda]
+platforms = ["linux-64"]
+
+[feature.pytorch-cuda.dependencies]
+pytorch-gpu = "*"
+
+[feature.pytorch-base.tasks]
 test-torch = { cmd = "python dev.py test -b pytorch", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
 [feature.cupy]
@@ -147,14 +153,21 @@ cupy = "*"
 [feature.cupy.tasks]
 test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
-[feature.jax]
+[feature.jax-cpu]
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
 platforms = ["linux-64", "osx-arm64"]
 
-[feature.jax.dependencies]
-jax = "=0.4.28"
+[feature.jax-cpu.dependencies]
+jax = "*"
 
-[feature.jax.tasks]
+[feature.jax-cuda]
+platforms = ["linux-64"]
+
+[feature.jax-cuda.dependencies]
+jax = "*"
+jaxlib = { version = "*", build = "*cuda*" }
+
+[feature.jax-base.tasks]
 test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
 [feature.array_api_strict.dependencies]
@@ -180,18 +193,27 @@ bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-pytorch = ["pytorch", "mkl"] # FIXME: add env var
+pytorch = ["pytorch-base", "pytorch-cpu", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
-jax = ["jax"]
+jax = ["jax-base", "jax-cpu"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
-array-api = ["cpu", "array_api_strict", "jax", "mkl", "pytorch"]
+array-api = [
+    "cpu",
+    "array_api_strict",
+    "jax-base",
+    "jax-cpu",
+    "mkl",
+    "pytorch-base",
+    "pytorch-cpu",
+]
 array-api-cuda = [
     "cuda",
     "array_api_strict",
     "cupy",
-    "jax",
+    "jax-base",
+    "jax-cuda",
     "mkl",
-    "pytorch",
-    "test",
+    "pytorch-base",
+    "pytorch-cuda",
 ]
