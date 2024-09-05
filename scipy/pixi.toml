@@ -147,12 +147,19 @@ cupy = "*"
 [feature.cupy.tasks]
 test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
-[feature.jax]
+[feature.jax-cpu]
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
 platforms = ["linux-64", "osx-arm64"]
 
-[feature.jax.dependencies]
+[feature.jax-cpu.dependencies]
 jax = "*"
+
+[feature.jax-cuda]
+platforms = ["linux-64"]
+
+[feature.jax-cuda.dependencies]
+jax = "*"
+jaxlib = { version = "*", build = "*cuda*" }
 
 [feature.jax.tasks]
 test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
@@ -182,15 +189,16 @@ netlib = ["netlib", "test"]
 blis = ["blis", "test"]
 pytorch = ["pytorch", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
-jax = ["jax"]
+jax = ["jax", "jax-cpu"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
-array-api = ["cpu", "array_api_strict", "jax", "mkl", "pytorch"]
+array-api = ["cpu", "array_api_strict", "jax", "jax-cpu", "mkl", "pytorch"]
 array-api-cuda = [
     "cuda",
     "array_api_strict",
     "cupy",
     "jax",
+    "jax-cuda",
     "mkl",
     "pytorch",
     "test",
