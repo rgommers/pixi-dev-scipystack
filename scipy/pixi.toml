@@ -62,6 +62,7 @@ jupyterlite-pyodide-kernel = "*"
 
 [tasks]
 ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
+submodules = { cmd = "git submodule update --init", cwd = "scipy" }
 
 [feature.build.tasks]
 build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy" }
