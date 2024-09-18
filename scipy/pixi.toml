@@ -127,16 +127,16 @@ test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_AR
 
 
 # Array libraries we have support for
-[feature.pytorch]
+[feature.torch]
 # Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
 #                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
 platforms = ["linux-64", "osx-arm64"]
 
-[feature.pytorch.dependencies]
+[feature.torch.dependencies]
 pytorch = "*"
 
-[feature.pytorch.tasks]
-test-torch = { cmd = "python dev.py test -b pytorch", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+[feature.torch.tasks]
+test-torch = { cmd = "python dev.py test -b torch", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
 
 [feature.cupy]
 platforms = ["linux-64"]
@@ -180,18 +180,18 @@ bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-pytorch = ["pytorch", "mkl"] # FIXME: add env var
+torch = ["torch", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
 jax = ["jax"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
-array-api = ["cpu", "array_api_strict", "jax", "mkl", "pytorch"]
+array-api = ["cpu", "array_api_strict", "jax", "mkl", "torch"]
 array-api-cuda = [
     "cuda",
     "array_api_strict",
     "cupy",
     "jax",
     "mkl",
-    "pytorch",
+    "torch",
     "test",
 ]
