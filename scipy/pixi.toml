@@ -173,7 +173,7 @@ mlx = "*"
 
 
 [environments]
-default = ["build", "test", "typing", "bench", "openblas"]
+default = ["build", "test", "typing", "bench", "openblas", "lint"]
 lint = ["lint"]
 doc = ["doc"]
 bldcheck = ["bldcheck"]
