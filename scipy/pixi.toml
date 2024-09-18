@@ -185,7 +185,7 @@ cupy = ["cupy"]
 jax = ["jax"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
-array-api = ["cpu", "array_api_strict", "jax", "mkl", "pytorch"]
+array-api = ["cpu", "array_api_strict", "jax", "mkl", "pytorch", "test"]
 array-api-cuda = [
     "cuda",
     "array_api_strict",
