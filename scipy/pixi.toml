@@ -116,14 +116,14 @@ libblas = { version = "*", build = "*blis" }
 
 # CPU/CUDA features
 [feature.cpu.tasks]
-test-cpu = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+test-cpu = { cmd = "python dev.py test -b all", cwd = "scipy" }
 
 [feature.cuda]
 platforms = ["linux-64"]
 system-requirements = { cuda = "12" }
 
 [feature.cuda.tasks]
-test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_ARRAY_API = "1", SCIPY_DEVICE = "cuda" } }
+test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 
 # Array libraries we have support for
@@ -136,7 +136,7 @@ platforms = ["linux-64", "osx-arm64"]
 pytorch = "*"
 
 [feature.pytorch.tasks]
-test-torch = { cmd = "python dev.py test -b pytorch", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+test-torch = { cmd = "python dev.py test -b pytorch", cwd = "scipy" }
 
 [feature.cupy]
 platforms = ["linux-64"]
@@ -145,7 +145,7 @@ platforms = ["linux-64"]
 cupy = "*"
 
 [feature.cupy.tasks]
-test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy" }
 
 [feature.jax]
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
@@ -155,13 +155,13 @@ platforms = ["linux-64", "osx-arm64"]
 jax = "=0.4.28"
 
 [feature.jax.tasks]
-test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy" }
 
 [feature.array_api_strict.dependencies]
 array-api-strict = "*"
 
 [feature.array_api_strict.tasks]
-test-strict = { cmd = "python dev.py test -b array_api_strict", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+test-strict = { cmd = "python dev.py test -b array_api_strict", cwd = "scipy" }
 
 
 [feature.mlx]
