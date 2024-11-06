@@ -1,0 +1,99 @@
+context:
+  version: 1.15.0.dev0
+
+package:
+  name: scipy
+  version: ${{ version }}
+
+#source:
+#  - url: https://github.com/scipy/scipy/releases/download/v${{ version }}/scipy-${{ version }}.tar.gz
+#    sha256: 485b87235796410c3519a699cfe1faab097e509e90ebb05dcd098db2ae87e7b3
+
+source:
+  path: ../scipy
+  use_gitignore: false
+
+build:
+  number: 0
+  ignore_run_exports:
+    - if: win
+      then: libflang
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('fortran') }}
+    # note: some `host` dependencies that run at build time (e.g., `cython`, `meson-python`)
+    #       should ideally be in `build` instead, this can be fixed once we
+    #       have proper cross-compilation without `crossenv` set up.
+  host:
+    # note: variant is injected here!
+    - python
+    - cython
+    - python-build
+    - meson-python
+    - pkg-config
+    - pip
+    - libblas
+    - libcblas
+    - liblapack
+    - blas-devel
+    - pybind11
+    - pythran
+    - numpy
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - scipy
+        # reference for public API is effectively
+        # https://github.com/scipy/scipy/blob/main/scipy/_lib/tests/test_public_api.py
+        - scipy.cluster
+        - scipy.cluster.hierarchy
+        - scipy.cluster.vq
+        - scipy.constants
+        - scipy.datasets
+        - scipy.fft
+        - scipy.fftpack
+        - scipy.integrate
+        - scipy.interpolate
+        - scipy.io
+        - scipy.io.arff
+        - scipy.io.matlab
+        - scipy.io.wavfile
+        - scipy.linalg
+        - scipy.linalg.blas
+        - scipy.linalg.cython_blas
+        - scipy.linalg.cython_lapack
+        - scipy.linalg.interpolative
+        - scipy.linalg.lapack
+        - scipy.misc
+        - scipy.ndimage
+        - scipy.odr
+        - scipy.optimize
+        - scipy.signal
+        - scipy.signal.windows
+        - scipy.sparse
+        - scipy.sparse.csgraph
+        - scipy.sparse.linalg
+        - scipy.spatial
+        - scipy.spatial.distance
+        - scipy.spatial.transform
+        - scipy.special
+        - scipy.stats
+        - scipy.stats.contingency
+        - scipy.stats.distributions
+        - scipy.stats.mstats
+        - scipy.stats.qmc
+        - scipy.stats.sampling
+
+about:
+  homepage: http://www.scipy.org/
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  summary: Scientific Library for Python
+  documentation: http://www.scipy.org/docs.html
+  repository: https://github.com/scipy/scipy
