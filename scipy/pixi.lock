@@ -3391,6 +3391,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-2_gnu.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/attrs-24.2.0-pyh71513ae_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/beniget-0.4.2.post1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/binutils-2.43-h4852527_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/binutils_impl_linux-64-2.43-h4bf12b8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/binutils_linux-64-2.43-h4852527_2.conda
@@ -3406,13 +3407,16 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/click-8.1.7-unix_pyh707e725_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cloudpickle-3.1.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.6-pyhd8ed1ab_0.tar.bz2
+      - conda: https://conda.anaconda.org/conda-forge/noarch/colorlog-6.9.0-pyh707e725_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/compilers-1.8.0-ha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cpython-3.13.0-py313hd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/cxx-compiler-1.8.0-h1a2810e_1.conda
       - conda: https://conda.anaconda.org/conda-forge/label/cython_dev/noarch/cython-3.1.0a1-pyhc363336_100.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/decorator-5.1.1-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/doit-0.36.0-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/exceptiongroup-1.2.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/fortran-compiler-1.8.0-h36df796_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/gast-0.5.5-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gcc-13.3.0-h9576a4e_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gcc_impl_linux-64-13.3.0-hfea6d02_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gcc_linux-64-13.3.0-hc28eda2_7.conda
@@ -3467,6 +3471,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pkg-config-0.29.2-h4bc722e_1009.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.6-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pluggy-1.5.0-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/ply-3.11-pyhd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pooch-1.8.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pybind11-2.13.6-pyh1ec8472_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pybind11-global-2.13.6-pyh415d2e4_2.conda
@@ -3480,6 +3485,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-build-1.2.2.post1-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-freethreading-3.13.0-h92d6c8b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/python_abi-3.13-5_cp313t.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pythran-0.17.0-pyh47d16e9_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.2-h8228510_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/requests-2.32.3-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/rich-13.9.4-pyhd8ed1ab_0.conda
@@ -3496,13 +3502,10 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/xz-5.2.6-h166bdaf_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-3.21.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.6-ha6fb4c9_0.conda
-      - pypi: https://files.pythonhosted.org/packages/44/e4/6e8731d4d10dd09942a6f5015b2148ae612bf13e49629f33f9fade3c8253/beniget-0.4.2.post1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/a3/61/8001b38461d751cd1a0c3a6ae84346796a5758123f3ed97a1b121dfbf4f3/gast-0.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/a3/58/35da89ee790598a0700ea49b2a66594140f44dec458c07e8e3d4979137fc/ply-3.11-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/fc/29/9df63c86a73a10a2f1e15bd0ae24c19899ab9745514999751aec248c9afa/pytest_run_parallel-0.2.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/65/0a/557cef9d89cd21d7a4850c31701b7cfa78f6cc8b09249df678d174b6e6ca/pythran-0.17.0-py3-none-any.whl
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/attrs-24.2.0-pyh71513ae_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/beniget-0.4.2.post1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/blas-devel-3.9.0-25_osxarm64_openblas.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/brotli-1.1.0-hd74edd7_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/brotli-bin-1.1.0-hd74edd7_2.conda
@@ -3524,15 +3527,18 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/click-8.1.7-unix_pyh707e725_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cloudpickle-3.1.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.6-pyhd8ed1ab_0.tar.bz2
+      - conda: https://conda.anaconda.org/conda-forge/noarch/colorlog-6.9.0-pyh707e725_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/compiler-rt-17.0.6-h856b3c1_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/compiler-rt_osx-arm64-17.0.6-h832e737_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/compilers-1.8.0-hce30654_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cpython-3.13.0-py313hd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/cxx-compiler-1.8.0-h18dbf2f_1.conda
       - conda: https://conda.anaconda.org/conda-forge/label/cython_dev/noarch/cython-3.1.0a1-pyhc363336_100.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/decorator-5.1.1-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/doit-0.36.0-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/exceptiongroup-1.2.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/fortran-compiler-1.8.0-hc3477c4_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/gast-0.5.5-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gfortran-13.2.0-h1ca8e4b_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gfortran_impl_osx-arm64-13.2.0-h252ada1_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gfortran_osx-arm64-13.2.0-h57527a5_1.conda
@@ -3587,6 +3593,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pkg-config-0.29.2-hde07d2e_1009.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.6-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pluggy-1.5.0-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/ply-3.11-pyhd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pooch-1.8.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pybind11-2.13.6-pyh1ec8472_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pybind11-global-2.13.6-pyh415d2e4_2.conda
@@ -3600,6 +3607,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-build-1.2.2.post1-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-freethreading-3.13.0-h92d6c8b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/python_abi-3.13-5_cp313t.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pythran-0.17.0-pyh27800b7_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/readline-8.2-h92ec313_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/requests-2.32.3-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/rich-13.9.4-pyhd8ed1ab_0.conda
@@ -3618,13 +3626,10 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-3.21.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zlib-1.3.1-h8359307_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.6-hb46c0d2_0.conda
-      - pypi: https://files.pythonhosted.org/packages/44/e4/6e8731d4d10dd09942a6f5015b2148ae612bf13e49629f33f9fade3c8253/beniget-0.4.2.post1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/a3/61/8001b38461d751cd1a0c3a6ae84346796a5758123f3ed97a1b121dfbf4f3/gast-0.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/a3/58/35da89ee790598a0700ea49b2a66594140f44dec458c07e8e3d4979137fc/ply-3.11-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/fc/29/9df63c86a73a10a2f1e15bd0ae24c19899ab9745514999751aec248c9afa/pytest_run_parallel-0.2.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/65/0a/557cef9d89cd21d7a4850c31701b7cfa78f6cc8b09249df678d174b6e6ca/pythran-0.17.0-py3-none-any.whl
       win-64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/attrs-24.2.0-pyh71513ae_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/beniget-0.4.2.post1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/blas-devel-3.9.0-25_win64_mkl.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/brotli-1.1.0-h2466b09_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/brotli-bin-1.1.0-h2466b09_2.conda
@@ -3636,21 +3641,25 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/charset-normalizer-3.4.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/clang-19-19.1.3-default_hec7ea82_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/clang-19.1.3-default_hec7ea82_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/clangxx-19.1.3-default_hec7ea82_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/click-8.1.7-win_pyh7428d3b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cloudpickle-3.1.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.6-pyhd8ed1ab_0.tar.bz2
+      - conda: https://conda.anaconda.org/conda-forge/noarch/colorlog-6.9.0-pyh7428d3b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/compiler-rt-19.1.3-hc790b64_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/compiler-rt_win-64-19.1.3-hc790b64_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/compilers-1.8.0-h57928b3_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cpython-3.13.0-py313hd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/cxx-compiler-1.8.0-h91493d7_1.conda
       - conda: https://conda.anaconda.org/conda-forge/label/cython_dev/noarch/cython-3.1.0a1-pyhc363336_100.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/decorator-5.1.1-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/doit-0.36.0-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/exceptiongroup-1.2.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/flang-19.1.3-hbeecb71_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/flang_impl_win-64-19.1.3-h719f0c7_5.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/flang_win-64-19.1.3-h719f0c7_5.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/fortran-compiler-1.8.0-h95e3450_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/gast-0.5.5-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/hypothesis-6.47.1-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/idna-3.10-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-8.5.0-pyha770c72_0.conda
@@ -3693,6 +3702,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/pkg-config-0.29.2-h88c491f_1009.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.6-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pluggy-1.5.0-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/ply-3.11-pyhd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pooch-1.8.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/pthreads-win32-2.9.1-h2466b09_4.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pybind11-2.13.6-pyh1ec8472_2.conda
@@ -3707,6 +3717,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-build-1.2.2.post1-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-freethreading-3.13.0-h92d6c8b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/python_abi-3.13-5_cp313t.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pythran-0.17.0-pyhf1ceabd_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/requests-2.32.3-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/rich-13.9.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/rich-click-1.8.3-pyhd8ed1ab_0.conda
@@ -3729,11 +3740,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/xz-5.2.6-h8d14728_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-3.21.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/zstd-1.5.6-h0ea2cb4_0.conda
-      - pypi: https://files.pythonhosted.org/packages/44/e4/6e8731d4d10dd09942a6f5015b2148ae612bf13e49629f33f9fade3c8253/beniget-0.4.2.post1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/a3/61/8001b38461d751cd1a0c3a6ae84346796a5758123f3ed97a1b121dfbf4f3/gast-0.6.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/a3/58/35da89ee790598a0700ea49b2a66594140f44dec458c07e8e3d4979137fc/ply-3.11-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/fc/29/9df63c86a73a10a2f1e15bd0ae24c19899ab9745514999751aec248c9afa/pytest_run_parallel-0.2.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/65/0a/557cef9d89cd21d7a4850c31701b7cfa78f6cc8b09249df678d174b6e6ca/pythran-0.17.0-py3-none-any.whl
   jax:
     channels:
     - url: https://conda.anaconda.org/conda-forge/
@@ -5928,14 +5935,6 @@ packages:
   license_family: MIT
   size: 118200
   timestamp: 1705564819537
-- kind: pypi
-  name: beniget
-  version: 0.4.2.post1
-  url: https://files.pythonhosted.org/packages/44/e4/6e8731d4d10dd09942a6f5015b2148ae612bf13e49629f33f9fade3c8253/beniget-0.4.2.post1-py3-none-any.whl
-  sha256: e1b336e7b5f2ae201e6cc21f533486669f1b9eccba018dcff5969cd52f1c20ba
-  requires_dist:
-  - gast>=0.5.0
-  requires_python: '>=3.6'
 - kind: conda
   name: beniget
   version: 0.4.2.post1
@@ -5950,6 +5949,24 @@ packages:
   - python >=3.6
   license: BSD-3-Clause
   license_family: BSD
+  size: 21751
+  timestamp: 1719581627778
+- kind: conda
+  name: beniget
+  version: 0.4.2.post1
+  build: pyhd8ed1ab_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/beniget-0.4.2.post1-pyhd8ed1ab_0.conda
+  sha256: f2e980548fa8d8f0131e7b4e4066041ab3bb14b517da5cf8d5ce1120e5bdace7
+  md5: 8199fd723399ee4d59c2f35c5de0a078
+  depends:
+  - gast >=0.5.0,<0.6.0
+  - python >=3.6
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/beniget?source=hash-mapping
   size: 21751
   timestamp: 1719581627778
 - kind: conda
@@ -7758,6 +7775,26 @@ packages:
   size: 32549613
   timestamp: 1723282104855
 - kind: conda
+  name: clangxx
+  version: 19.1.3
+  build: default_hec7ea82_0
+  subdir: win-64
+  url: https://conda.anaconda.org/conda-forge/win-64/clangxx-19.1.3-default_hec7ea82_0.conda
+  sha256: b99173d45c871ab28942941bb4bca45548ff0c0073365407031af32168e2308f
+  md5: c2e3158fc9bffdd11e71d79bfe474739
+  depends:
+  - clang 19.1.3 default_hec7ea82_0
+  - libzlib >=1.3.1,<2.0a0
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  - zstd >=1.5.6,<1.6.0a0
+  license: Apache-2.0 WITH LLVM-exception
+  license_family: Apache
+  purls: []
+  size: 34147080
+  timestamp: 1730355543302
+- kind: conda
   name: clangxx_impl_osx-arm64
   version: 16.0.6
   build: hcd7bac0_19
@@ -8028,6 +8065,43 @@ packages:
   license_family: MIT
   size: 23270
   timestamp: 1724959849383
+- kind: conda
+  name: colorlog
+  version: 6.9.0
+  build: pyh707e725_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/colorlog-6.9.0-pyh707e725_0.conda
+  sha256: a3b3b2d8d2c9fd32a5b2d8e08d0931ae38afe49ace9ae09e25ae101eb4617635
+  md5: 17346e41a3248fec4e6385f275c46971
+  depends:
+  - __unix
+  - python >=3.6
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/colorlog?source=hash-mapping
+  size: 15559
+  timestamp: 1730249875
+- kind: conda
+  name: colorlog
+  version: 6.9.0
+  build: pyh7428d3b_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/colorlog-6.9.0-pyh7428d3b_0.conda
+  sha256: 46913c096e834165c426ae953e2ae34c39f5a59beb92d354f69746f19aa525ec
+  md5: 27fbfb13ea7ebcafd942dd8743133b09
+  depends:
+  - __win
+  - colorama
+  - python >=3.6
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/colorlog?source=hash-mapping
+  size: 16122
+  timestamp: 1730249896676
 - kind: conda
   name: comm
   version: 0.2.2
@@ -9256,6 +9330,23 @@ packages:
   size: 12072
   timestamp: 1641555714315
 - kind: conda
+  name: decorator
+  version: 5.1.1
+  build: pyhd8ed1ab_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/decorator-5.1.1-pyhd8ed1ab_0.tar.bz2
+  sha256: 328a6a379f9bdfd0230e51de291ce858e6479411ea4b0545fb377c71662ef3e2
+  md5: 43afe5ab04e35e17ba28649471dd7364
+  depends:
+  - python >=3.5
+  license: BSD-2-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/decorator?source=hash-mapping
+  size: 12072
+  timestamp: 1641555714315
+- kind: conda
   name: defusedxml
   version: 0.7.1
   build: pyhd8ed1ab_0
@@ -10083,12 +10174,6 @@ packages:
   license_family: BSD
   size: 134378
   timestamp: 1725543368393
-- kind: pypi
-  name: gast
-  version: 0.6.0
-  url: https://files.pythonhosted.org/packages/a3/61/8001b38461d751cd1a0c3a6ae84346796a5758123f3ed97a1b121dfbf4f3/gast-0.6.0-py3-none-any.whl
-  sha256: 52b182313f7330389f72b069ba00f174cfe2a06411099547288839c6cbafbd54
-  requires_python: '>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*'
 - kind: conda
   name: gast
   version: 0.5.5
@@ -10104,6 +10189,25 @@ packages:
   - pythran >=0.12.2
   license: BSD-3-Clause
   license_family: BSD
+  size: 24016
+  timestamp: 1719403213917
+- kind: conda
+  name: gast
+  version: 0.5.5
+  build: pyhd8ed1ab_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/gast-0.5.5-pyhd8ed1ab_0.conda
+  sha256: b0527039bb19aeb5636ecb1512378e4109b945bc99f409977bda3022485c526f
+  md5: ebc1dc871c48673a0a922023a2e1eee2
+  depends:
+  - python >=3.4
+  constrains:
+  - pythran >=0.12.2
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/gast?source=hash-mapping
   size: 24016
   timestamp: 1719403213917
 - kind: conda
@@ -19670,11 +19774,6 @@ packages:
   - pkg:pypi/pluggy?source=hash-mapping
   size: 23815
   timestamp: 1713667175451
-- kind: pypi
-  name: ply
-  version: '3.11'
-  url: https://files.pythonhosted.org/packages/a3/58/35da89ee790598a0700ea49b2a66594140f44dec458c07e8e3d4979137fc/ply-3.11-py2.py3-none-any.whl
-  sha256: 096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce
 - kind: conda
   name: ply
   version: '3.11'
@@ -19689,6 +19788,24 @@ packages:
   - python >=2.6
   license: BSD-3-Clause
   license_family: BSD
+  size: 49196
+  timestamp: 1712243121626
+- kind: conda
+  name: ply
+  version: '3.11'
+  build: pyhd8ed1ab_2
+  build_number: 2
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/ply-3.11-pyhd8ed1ab_2.conda
+  sha256: d8faaf4dcc13caed560fa32956523b35928a70499a2d08c51320947d637e3a41
+  md5: 18c6deb6f9602e32446398203c8f0e91
+  depends:
+  - python >=2.6
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/ply?source=hash-mapping
   size: 49196
   timestamp: 1712243121626
 - kind: conda
@@ -21040,29 +21157,6 @@ packages:
   purls: []
   size: 6682
   timestamp: 1723823193324
-- kind: pypi
-  name: pythran
-  version: 0.17.0
-  url: https://files.pythonhosted.org/packages/65/0a/557cef9d89cd21d7a4850c31701b7cfa78f6cc8b09249df678d174b6e6ca/pythran-0.17.0-py3-none-any.whl
-  sha256: be569cc2817b625ccd2c8f74fa3c93806f245c65fadc282c26a9f546ebd34cfa
-  requires_dist:
-  - ply>=3.4
-  - setuptools
-  - gast~=0.6.0
-  - numpy
-  - beniget~=0.4.0
-  - numpy ; extra == 'doc'
-  - nbsphinx ; extra == 'doc'
-  - scipy ; extra == 'doc'
-  - guzzle-sphinx-theme ; extra == 'doc'
-  - ipython ; extra == 'test'
-  - nbval ; extra == 'test'
-  - cython ; extra == 'test'
-  - wheel ; extra == 'test'
-  - packaging ; extra == 'test'
-  - ninja ; extra == 'test'
-  - meson ; extra == 'test'
-  requires_python: '>=3.7'
 - kind: conda
   name: pythran
   version: 0.16.1
@@ -21195,6 +21289,84 @@ packages:
   license_family: BSD
   size: 2385685
   timestamp: 1716925289388
+- kind: conda
+  name: pythran
+  version: 0.17.0
+  build: pyh27800b7_1
+  build_number: 1
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/pythran-0.17.0-pyh27800b7_1.conda
+  sha256: a4564fbe8f25d35f04b93c6e5abcf40d60350a07ba8c4d2906f921b202722a8b
+  md5: 1d8bc13da44879ab9a638949daa72797
+  depends:
+  - __osx
+  - beniget 0.4.*
+  - clangxx
+  - colorlog
+  - decorator
+  - gast 0.5.*
+  - numpy
+  - ply >=3.4
+  - python >=3.9
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/pythran?source=hash-mapping
+  size: 1973991
+  timestamp: 1732322435443
+- kind: conda
+  name: pythran
+  version: 0.17.0
+  build: pyh47d16e9_1
+  build_number: 1
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/pythran-0.17.0-pyh47d16e9_1.conda
+  sha256: 80abbf25ed5a7f3a45e62b174d02cd9c72566161bacc385796a58e511eb3a6ee
+  md5: 97a9ef430424566db8115934440a99d0
+  depends:
+  - __linux
+  - beniget 0.4.*
+  - colorlog
+  - decorator
+  - gast 0.5.*
+  - gxx
+  - numpy
+  - ply >=3.4
+  - python >=3.9
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/pythran?source=hash-mapping
+  size: 1948748
+  timestamp: 1732322355621
+- kind: conda
+  name: pythran
+  version: 0.17.0
+  build: pyhf1ceabd_1
+  build_number: 1
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/pythran-0.17.0-pyhf1ceabd_1.conda
+  sha256: 9e76818e3c9a971986fca5230c7e8addc07efe09a46b332f04f3033376c434d4
+  md5: e8e9711857b2d80f11032ecc3004dae7
+  depends:
+  - __win
+  - beniget 0.4.*
+  - clangxx
+  - colorlog
+  - decorator
+  - gast 0.5.*
+  - numpy
+  - ply >=3.4
+  - python >=3.9
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/pythran?source=hash-mapping
+  size: 1949475
+  timestamp: 1732322907133
 - kind: conda
   name: pytorch
   version: 2.4.0

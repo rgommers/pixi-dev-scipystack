@@ -38,6 +38,7 @@ tests:
       - pytest --pyargs pywt -m "not slow" --durations 10
     requirements:
       run:
+        - python
         - pytest
 
 about:
