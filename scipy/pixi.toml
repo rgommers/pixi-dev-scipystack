@@ -197,8 +197,6 @@ pytest = "*"
 hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
-
-[feature.free-threading.pypi-dependencies]
 pytest-run-parallel = "*"
 
 [feature.free-threading.tasks]

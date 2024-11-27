@@ -3420,8 +3420,6 @@ environments:
     channels:
     - url: https://conda.anaconda.org/conda-forge/label/cython_dev/
     - url: https://conda.anaconda.org/conda-forge/
-    indexes:
-    - https://pypi.org/simple
     packages:
       linux-64:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
@@ -3519,6 +3517,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.2.0-pyh7850678_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pysocks-1.7.1-pyha2e5f31_6.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/pytest-8.3.3-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pytest-run-parallel-0.2.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/python-3.13.0-h6355ac2_0_cp313t.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-build-1.2.2.post1-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-freethreading-3.13.0-h92d6c8b_0.conda
@@ -3540,7 +3539,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/xz-5.2.6-h166bdaf_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-3.21.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.6-ha6fb4c9_0.conda
-      - pypi: https://files.pythonhosted.org/packages/fc/29/9df63c86a73a10a2f1e15bd0ae24c19899ab9745514999751aec248c9afa/pytest_run_parallel-0.2.0-py3-none-any.whl
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/attrs-24.2.0-pyh71513ae_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/beniget-0.4.2.post1-pyhd8ed1ab_0.conda
@@ -3642,6 +3640,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.2.0-pyh7850678_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pysocks-1.7.1-pyha2e5f31_6.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/pytest-8.3.3-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pytest-run-parallel-0.2.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/python-3.13.0-hf5be2b4_0_cp313t.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-build-1.2.2.post1-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-freethreading-3.13.0-h92d6c8b_0.conda
@@ -3665,7 +3664,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-3.21.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zlib-1.3.1-h8359307_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.6-hb46c0d2_0.conda
-      - pypi: https://files.pythonhosted.org/packages/fc/29/9df63c86a73a10a2f1e15bd0ae24c19899ab9745514999751aec248c9afa/pytest_run_parallel-0.2.0-py3-none-any.whl
       win-64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/attrs-24.2.0-pyh71513ae_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/beniget-0.4.2.post1-pyhd8ed1ab_0.conda
@@ -3745,6 +3743,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.2.0-pyh7850678_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pysocks-1.7.1-pyh0701188_6.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/pytest-8.3.3-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pytest-run-parallel-0.2.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/python-3.13.0-h4077693_0_cp313t.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-build-1.2.2.post1-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python-freethreading-3.13.0-h92d6c8b_0.conda
@@ -3771,7 +3770,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/xz-5.2.6-h8d14728_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-3.21.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/zstd-1.5.6-h0ea2cb4_0.conda
-      - pypi: https://files.pythonhosted.org/packages/fc/29/9df63c86a73a10a2f1e15bd0ae24c19899ab9745514999751aec248c9afa/pytest_run_parallel-0.2.0-py3-none-any.whl
   jax:
     channels:
     - url: https://conda.anaconda.org/conda-forge/
@@ -20488,14 +20486,22 @@ packages:
   license_family: MIT
   size: 25507
   timestamp: 1711411153367
-- kind: pypi
+- kind: conda
   name: pytest-run-parallel
   version: 0.2.0
-  url: https://files.pythonhosted.org/packages/fc/29/9df63c86a73a10a2f1e15bd0ae24c19899ab9745514999751aec248c9afa/pytest_run_parallel-0.2.0-py3-none-any.whl
-  sha256: 562d312e4351b0975c9520fc8783dbc8513dacf61ff767cbc78f3782a34493b7
-  requires_dist:
-  - pytest>=6.2.0
-  requires_python: '>=3.8'
+  build: pyhd8ed1ab_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/pytest-run-parallel-0.2.0-pyhd8ed1ab_0.conda
+  sha256: aedfc3c1f3cc4009020aa669bf659f9a42bd28e913f86cd3ef104bb7f6c0a3cb
+  md5: eeca03f127a287cfdc24c69a552e3ba4
+  depends:
+  - pytest >=6.2.0
+  - python >=3.9
+  license: MIT
+  license_family: MIT
+  size: 12249
+  timestamp: 1732718618381
 - kind: conda
   name: pytest-timeout
   version: 2.3.1
