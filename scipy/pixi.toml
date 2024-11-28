@@ -49,7 +49,7 @@ pycodestyle = "*"
 cython-lint = ">=0.12.2"
 
 [feature.doc.dependencies]
-sphinx = "~=7"
+sphinx = ">=7.0,<8"
 intersphinx-registry = "*"
 pydata-sphinx-theme = ">=0.15.2"
 sphinx-copybutton = "*"
@@ -86,7 +86,7 @@ bench = { cmd = "python dev.py bench", cwd = "scipy" }
 lint = { cmd = "python dev.py lint", cwd = "scipy" }
 
 [feature.doc.tasks]
-doc = { cmd = "python dev.py doc", cwd = "scipy" }
+doc = { cmd = "python dev.py doc -j6", cwd = "scipy" }
 
 
 [feature.bldcheck.dependencies]
