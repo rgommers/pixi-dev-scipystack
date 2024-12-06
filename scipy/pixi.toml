@@ -212,6 +212,41 @@ build-nogil = { cmd = "python dev.py --build-dir=build-nogil build -C-Dblas=blas
 test-nogil = { cmd = "python -Xgil=0 dev.py --build-dir=build-nogil test", cwd = "scipy" }
 
 
+# For testing OpenBLAS built from source and directly folded into SciPy
+[feature.openblas-src]
+platforms = ["linux-64", "osx-arm64"]
+
+[feature.openblas-src.dependencies]
+compilers = ">=1.7.0,<2"
+pkg-config = ">=0.29.2,<0.30"
+ninja = ">=1.12.1,<2"
+meson = ">=1.5.1,<2"
+meson-python = ">=0.16.0"
+cython = ">=3.0.10,<4"
+python-build = "*"
+pip = "*"
+pybind11 = ">=2.13.1"
+rich-click = "*"
+pydevtool = "*"
+pytest = "*"
+hypothesis = "*"
+pytest-xdist = "*"
+threadpoolctl = "*"
+pooch = "*"
+ccache = ">=4.10.1,<5"
+
+[feature.openblas-src.pypi-dependencies]
+# In order to have no BLAS library in the conda env at all
+numpy = ">=2.2.0.rc0"  # hack, force install from PyPI
+pythran = ">=0.17.0"
+
+[feature.openblas-src.tasks]
+build-openblas-src = { cmd = "python dev.py --build-dir build-openblas build -C-Dblas=openblas-src -C-Dbuildtype=release", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test-openblas-src = { cmd = "python dev.py --build-dir build-openblas test", cwd = "scipy" }
+wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy.cluster as s; s.test()'", cwd = "scipy/tools" }
+
+
 [environments]
 default = ["build", "test", "typing", "bench", "openblas", "lint"]
 doc = ["doc"]
@@ -243,3 +278,4 @@ array-api-cuda = [
     "test",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
+openblas-src = { features = ["openblas-src"], no-default-feature = true }
