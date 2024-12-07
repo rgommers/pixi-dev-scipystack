@@ -132,16 +132,19 @@ test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_DE
 
 
 # Array libraries we have support for
-[feature.torch]
+[feature.torch-base]
 # Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
 #                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
 platforms = ["linux-64", "osx-arm64"]
 
-[feature.torch.dependencies]
-pytorch = "*"
-
-[feature.torch.tasks]
+[feature.torch-base.tasks]
 test-torch = { cmd = "python dev.py test -b torch", cwd = "scipy" }
+
+[feature.torch-cpu.dependencies]
+pytorch-cpu = "*"
+
+[feature.torch-cuda.dependencies]
+pytorch-gpu = "*"
 
 [feature.cupy]
 platforms = ["linux-64"]
@@ -257,7 +260,7 @@ bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-torch = ["torch", "mkl"] # FIXME: add env var
+torch = ["torch-base", "torch-cpu", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
 jax = ["jax-base", "jax-cpu"]
 mlx = ["mlx"]
@@ -268,7 +271,8 @@ array-api = [
     "jax-base",
     "jax-cpu",
     "mkl",
-    "torch",
+    "torch-base",
+    "torch-cpu",
 ]
 array-api-cuda = [
     "cuda",
@@ -277,8 +281,8 @@ array-api-cuda = [
     "jax-base",
     "jax-cuda",
     "mkl",
-    "torch",
-    "test",
+    "torch-base",
+    "torch-cuda",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
 openblas-src = { features = ["openblas-src"], no-default-feature = true }
