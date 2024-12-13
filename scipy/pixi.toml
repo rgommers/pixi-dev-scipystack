@@ -244,7 +244,7 @@ pythran = ">=0.17.0"
 build-openblas-src = { cmd = "python dev.py --build-dir build-openblas build -C-Dblas=openblas-src -C-Dbuildtype=release", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 test-openblas-src = { cmd = "python dev.py --build-dir build-openblas test", cwd = "scipy" }
 wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy.cluster as s; s.test()'", cwd = "scipy/tools" }
+test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }
 
 
 [environments]

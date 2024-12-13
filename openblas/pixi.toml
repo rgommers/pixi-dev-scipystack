@@ -27,7 +27,8 @@ build-cmake = { cmd = [
 install-cmake = { cmd = "cmake --install build-cmake --prefix $PWD/install-cmake", cwd = "OpenBLAS", depends-on = "build-cmake" }
 ctest-cmake = { cmd = "ctest", cwd = "OpenBLAS/build-cmake" }
 
-configure-meson = { cmd = "meson setup build-meson -Dbuild_testing=true --prefix=$PWD/install-meson", cwd = "OpenBLAS", env = { CC = "ccache $CC", FC = "ccache $FC" } }
+configure-meson = { cmd = "meson setup build-meson -Dbuild_without_lapack=true -Dbuild_testing=true --prefix=$PWD/install-meson", cwd = "OpenBLAS", env = { CC = "ccache $CC", FC = "ccache $FC" } }
+#TODO: add lapack properly inside libopenblas.so (not wired up yet)
 build-meson = { cmd = "ninja -C build-meson", cwd = "OpenBLAS", depends-on = "configure-meson" }
 install-meson = { cmd = "meson install -C build-meson", cwd = "OpenBLAS", depends-on = "build-meson" }
 test-meson = { cmd = "meson test -C build-meson", cwd = "OpenBLAS" }
