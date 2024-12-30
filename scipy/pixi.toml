@@ -67,12 +67,20 @@ jupyterlite-pyodide-kernel = "*"
 ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
 
 [feature.build.tasks]
-build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
-profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
-check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
-    "build",
-], cwd = "scipy" }
+# build
+build.cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true"
+build.cwd = "scipy"
+build.env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+# wheel
+wheel.cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/"
+wheel.cwd = "scipy"
+# profile-build
+profile-build.cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json"
+profile-build.cwd = "scipy"
+# check-missingdeps
+check-missingdeps.cmd = "ninja -C build -t missingdeps"
+check-missingdeps.depends-on = "build"
+check-missingdeps.cwd = "scipy"
 
 [feature.test.tasks]
 test = { cmd = "python dev.py test", cwd = "scipy" }
@@ -128,8 +136,11 @@ system-requirements = { cuda = "12" }
 [feature.cuda.dependencies]
 cuda-version = ">=12.0,<13"
 
-[feature.cuda.tasks]
-test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
+[feature.cuda.tasks.test-cuda]
+cmd = "python dev.py test -b all"
+cwd = "scipy"
+env.SCIPY_DEVICE = "cuda"
+depends-on = "build"
 
 
 # Array libraries we have support for
@@ -138,8 +149,10 @@ test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_DE
 #                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
 platforms = ["linux-64", "osx-arm64"]
 
-[feature.torch-base.tasks]
-test-torch = { cmd = "python dev.py test -b torch", cwd = "scipy" }
+[feature.torch-base.tasks.test-torch]
+cmd = "python dev.py test -b torch"
+cwd = "scipy"
+depends-on = "build"
 
 [feature.torch-cpu.dependencies]
 pytorch-cpu = "*"
@@ -153,8 +166,10 @@ platforms = ["linux-64"]
 [feature.cupy.dependencies]
 cupy = "*"
 
-[feature.cupy.tasks]
-test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy" }
+[feature.cupy.tasks.test-cupy]
+cmd = "python dev.py test -b cupy"
+cwd = "scipy"
+depends-on = "build"
 
 [feature.jax-cpu]
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
@@ -171,14 +186,18 @@ platforms = ["linux-64"]
 jax = "*"
 jaxlib = { version = "*", build = "*cuda*" }
 
-[feature.jax-base.tasks]
-test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy" }
+[feature.jax-base.tasks.test-jax]
+cmd = "python dev.py test -b jax.numpy"
+cwd = "scipy"
+depends-on = "build"
 
 [feature.array_api_strict.dependencies]
 array-api-strict = "*"
 
-[feature.array_api_strict.tasks]
-test-strict = { cmd = "python dev.py test -b array_api_strict", cwd = "scipy" }
+[feature.array_api_strict.tasks.test-strict]
+cmd = "python dev.py test -b array_api_strict"
+cwd = "scipy"
+depends-on = "build"
 
 
 [feature.mlx]
@@ -215,8 +234,14 @@ pooch = "*"
 pytest-run-parallel = "*"
 
 [feature.free-threading.tasks]
-build-nogil = { cmd = "python dev.py --build-dir=build-nogil build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-nogil = { cmd = "python -Xgil=0 dev.py --build-dir=build-nogil test", cwd = "scipy" }
+# build
+build-nogil.cmd = "python dev.py --build-dir=build-nogil build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true"
+build-nogil.cwd = "scipy"
+build-nogil.env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+# test
+test-nogil.cmd = "python -Xgil=0 dev.py --build-dir=build-nogil test"
+test-nogil.cwd = "scipy"
+test-nogil.depends-on = "build-nogil"
 
 
 # For testing OpenBLAS built from source and directly folded into SciPy
@@ -248,10 +273,22 @@ numpy = ">=2.2.0.rc0"  # hack, force install from PyPI
 pythran = ">=0.17.0"
 
 [feature.openblas-src.tasks]
-build-openblas-src = { cmd = "python dev.py --build-dir build-openblas build -C-Dblas=openblas-src -C-Dbuildtype=release", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-openblas-src = { cmd = "python dev.py --build-dir build-openblas test", cwd = "scipy" }
-wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }
+# build
+build-openblas-src.cmd = "python dev.py --build-dir build-openblas build -C-Dblas=openblas-src -C-Dbuildtype=release"
+build-openblas-src.cwd = "scipy"
+build-openblas-src.env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+# test
+test-openblas-src.cmd = "python dev.py --build-dir build-openblas test"
+test-openblas-src.cwd = "scipy"
+test-openblas-src.depends-on = "build-openblas-src"
+# wheel
+wheel-openblas-src.cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src"
+wheel-openblas-src.cwd = "scipy"
+wheel-openblas-src.env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+# test-wheel
+test-openblas-src-wheel.cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'"
+test-openblas-src-wheel.cwd = "scipy/tools"
+test-openblas-src-wheel.depends-on = "wheel-openblas-src"
 
 
 [environments]
