@@ -3,7 +3,7 @@ name = "scipy"
 version = "1.15.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
-channels = ["conda-forge"]
+channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
 
 [dependencies]
@@ -208,7 +208,7 @@ test-dask = { cmd = "python dev.py test -b dask.array", cwd = "scipy" }
 
 
 [feature.free-threading]
-channels = ["conda-forge/label/cython_dev", "conda-forge"]
+channels = ["conda-forge/label/cython_dev", "https://prefix.dev/conda-forge"]
 
 [feature.free-threading.dependencies]
 python-freethreading = ">=3.13.0,<3.14"

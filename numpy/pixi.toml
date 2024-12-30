@@ -3,7 +3,7 @@ name = "numpy"
 version = "2.2.0.dev0"
 description = "Fundamental package for array computing in Python"
 authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
-channels = ["conda-forge"]
+channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
 
 [tasks]
@@ -15,24 +15,24 @@ wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && mv dist/*.whl ../
 #CC = "ccache $CC"
 
 [dependencies]
-compilers = ">=1.7.0,<2"
+compilers = ">=1.9.0,<2"
 pkg-config = ">=0.29.2,<0.30"
 ninja = ">=1.12.1,<2"
-meson = ">=1.5.1,<2"
-meson-python = ">=0.16.0,<0.17"
-openblas = ">=0.3.27,<0.4"
+meson = ">=1.7.1,<2"
+meson-python = ">=0.17.1,<0.18"
+openblas = ">=0.3.29,<0.4"
 spin = ">=0.13,<0.14"
-cython = ">=3.0.10,<4"
-python-build = "*"
-ipython = "*"
-ccache = ">=4.10.1,<5"
+cython = ">=3.0.12,<4"
+python-build = ">=1.2.2.post1,<2"
+ipython = ">=9.1.0,<10"
+ccache = ">=4.11.2,<5"
 
 [feature.test.dependencies]
 pytest = "*"
 hypothesis = "*"
 pytest-xdist = "*"
 asv = "*"
-mypy = "1.10.*"
+mypy = "==1.15.0"
 
 [feature.lint.dependencies]
 ruff = "*"
