@@ -199,7 +199,7 @@ ninja = ">=1.12.1,<2"
 ccache = ">=4.10.1,<5"
 meson = ">=1.6.0,<2"
 meson-python = ">=0.16.0"
-cython = ">=3.1.0a0,<4"
+cython = ">3.1.0a1,<4"
 pythran = ">=0.17.0"
 python-build = "*"
 pip = "*"
@@ -212,7 +212,7 @@ pytest = "*"
 hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
-pytest-run-parallel = "*"
+pytest-run-parallel = ">=0.3.0"
 
 [feature.free-threading.tasks]
 build-nogil = { cmd = "python dev.py --build-dir=build-nogil build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
