@@ -62,6 +62,7 @@ jupytext = "*"
 pooch = "*"
 jupyterlite-sphinx = ">=0.16.2"
 jupyterlite-pyodide-kernel = "*"
+scipy-doctest = "*"
 
 [tasks]
 ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
@@ -88,6 +89,7 @@ lint = { cmd = "python dev.py lint", cwd = "scipy" }
 
 [feature.doc.tasks]
 doc = { cmd = "python dev.py doc -j6", cwd = "scipy" }
+smoke-docs = { cmd = "python dev.py smoke-docs", cwd = "scipy" }
 
 
 [feature.bldcheck.dependencies]
