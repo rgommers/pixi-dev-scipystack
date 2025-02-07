@@ -1,39 +1,52 @@
-[project]
+[workspace]
+preview = ["pixi-build"]
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["osx-arm64", "linux-64", "win-64"]
+
+[workspace.build-variants]
+python = ["3.12.*"]
+
+[package]
 name = "scipy"
 version = "1.15.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
-channels = ["conda-forge"]
-platforms = ["osx-arm64", "linux-64", "win-64"]
+
+[package.build]
+backend = { name = "pixi-build-rattler-build", version = "*" }
+channels = [
+    "https://prefix.dev/pixi-build-backends",
+    "https://prefix.dev/conda-forge",
+]
 
 [dependencies]
-compilers = ">=1.7.0,<2"
+compilers = ">=1.9.0,<2"
 pkg-config = ">=0.29.2,<0.30"
 ninja = ">=1.12.1,<2"
-meson = ">=1.5.1,<2"
-python = ">=3.12.0,<3.13"
-meson-python = ">=0.16.0"
-cython = ">=3.0.10,<4"
-python-build = "*"
-pip = "*"
-blas-devel = "*"
-numpy = ">=2.0.0"
-pybind11 = ">=2.13.1"
-pythran = ">=0.15.0"
-rich-click = "*"
-pydevtool = "*"
-ipython = "*"
+meson = ">=1.6.1,<2"
+python = ">=3.12.8,<3.14"
+meson-python = ">=0.17.1,<0.18"
+cython = ">=3.0.11,<4"
+python-build = ">=1.2.2.post1,<2"
+pip = ">=24.3.1,<25"
+blas-devel = ">=3.9.0,<4"
+numpy = ">=2.2.2,<3"
+pybind11 = ">=2.13.6,<3"
+pythran = ">=0.17.0,<0.18"
+rich-click = ">=1.8.5,<2"
+pydevtool = ">=0.3.0,<0.4"
+ipython = ">=8.31.0,<9"
 # Add test dependencies to default list of dependencies so they show up in every
 # environment without having to also see the test task in those other envs
-pytest = "*"
-hypothesis = "*"
-pytest-cov = "*"
-pytest-timeout = "*"
-pytest-xdist = "*"
-threadpoolctl = "*"
-pooch = "*"
-mpmath = "*"
-gmpy2 = "*"
+pytest = ">=8.3.4,<9"
+hypothesis = ">=6.124.4,<7"
+pytest-cov = ">=6.0.0,<7"
+pytest-timeout = ">=2.3.1,<3"
+pytest-xdist = ">=3.6.1,<4"
+threadpoolctl = ">=3.5.0,<4"
+pooch = ">=1.8.2,<2"
+mpmath = ">=1.3.0,<2"
+gmpy2 = ">=2.1.5,<3"
 ccache = ">=4.10.1,<5"
 
 [feature.typing.dependencies]
@@ -244,7 +257,7 @@ ccache = ">=4.10.1,<5"
 
 [feature.openblas-src.pypi-dependencies]
 # In order to have no BLAS library in the conda env at all
-numpy = ">=2.2.0.rc0"  # hack, force install from PyPI
+numpy = ">=2.2.0.rc0" # hack, force install from PyPI
 pythran = ">=0.17.0"
 
 [feature.openblas-src.tasks]
