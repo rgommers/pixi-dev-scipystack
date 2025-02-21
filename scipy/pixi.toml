@@ -190,6 +190,13 @@ system-requirements = { macos = "13.5" }
 [feature.mlx.dependencies]
 mlx = "*"
 
+[feature.dask.dependencies]
+dask = "*"
+
+[feature.dask.tasks]
+test-dask = { cmd = "python dev.py test -b dask.array", cwd = "scipy" }
+
+
 [feature.free-threading]
 channels = ["conda-forge/label/cython_dev", "conda-forge"]
 
@@ -271,6 +278,7 @@ array-api-strict = ["array_api_strict"]
 array-api = [
     "cpu",
     "array_api_strict",
+    "dask",
     "jax-base",
     "jax-cpu",
     "mkl",
