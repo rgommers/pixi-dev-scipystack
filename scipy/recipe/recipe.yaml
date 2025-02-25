@@ -15,11 +15,12 @@ source:
 
 build:
   number: 0
-  ignore_run_exports:
-    - if: win
-      then: libflang
 
 requirements:
+  ignore_run_exports:
+    by_name:
+      - if: win
+        then: libflang
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
