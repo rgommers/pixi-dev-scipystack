@@ -1,0 +1,28 @@
+[workspace]
+channels = [
+  "https://prefix.dev/pixi-build-backends",
+  "https://prefix.dev/conda-forge",
+]
+platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+preview = ["pixi-build"]
+
+[dependencies]
+meson = { path = "meson" }
+ninja = "*"
+
+[tasks]
+help = { cmd = "meson --help" }
+
+[package]
+name = "meson"
+version = "1.7.99"
+
+[package.build]
+backend = { name = "pixi-build-rattler-build", version = "*" }
+
+[package.host-dependencies]
+setuptools = "75.8.*"
+
+[package.run-dependencies]
+python = "*"
+ninja = "*"
