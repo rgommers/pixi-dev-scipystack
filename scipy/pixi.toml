@@ -3,7 +3,7 @@ name = "scipy"
 version = "1.15.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
-channels = ["conda-forge"]
+channels = ["https://prefix.dev/conda-forge", "conda-forge"]
 # platforms = ["osx-arm64", "linux-64", "win-64"]
 platforms = ["linux-64"]
 
@@ -266,9 +266,21 @@ test-openblas-src = { cmd = "spin test --build-dir build-openblas", cwd = "scipy
 wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }
 
+[feature.cov.dependencies]
+gcc = "*"
+gxx = "*"
+
+[feature.cov.pypi-dependencies]
+scipy-openblas32 = "*"
+
+[feature.cov.tasks]
+build-cov = { cmd = "spin build --gcov --with-scipy-openblas", cwd = "scipy" }
+test-cov = { cmd = "spin test --coverage -j2 --mode full -- --cov --cov-report term-missing", cwd = "scipy", env = { OPENBLAS_NUM_THREADS = "1" } }
+
 
 [environments]
 default = ["build", "test", "typing", "bench", "openblas", "lint"]
+cov = ["cov"]
 doc = ["doc"]
 bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
