@@ -109,6 +109,15 @@ openblas = ">=0.3.27,<0.4"
 libblas = { version = "*", build = "*mkl" }
 mkl = ">=2023.2.0,<2025"
 
+[feature.accelerate]
+platforms = ["osx-arm64"]
+
+[feature.accelerate.dependencies]
+libblas = { version = "*", build = "*accelerate" }
+
+[feature.accelerate.tasks]
+build = { cmd = "python dev.py build --with-accelerate -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+
 [feature.netlib.dependencies]
 libblas = { version = "*", build = "*netlib" }
 
@@ -253,7 +262,7 @@ ccache = ">=4.10.1,<5"
 
 [feature.openblas-src.pypi-dependencies]
 # In order to have no BLAS library in the conda env at all
-numpy = ">=2.2.0.rc0"  # hack, force install from PyPI
+numpy = ">=2.2.0.rc0" # hack, force install from PyPI
 pythran = ">=0.17.0"
 
 [feature.openblas-src.tasks]
@@ -268,6 +277,7 @@ default = ["build", "test", "typing", "bench", "openblas", "lint"]
 doc = ["doc"]
 bldcheck = ["bldcheck"]
 mkl = ["mkl", "test"]
+accelerate = ["accelerate", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
 torch = ["torch-base", "torch-cpu", "mkl"] # FIXME: add env var
