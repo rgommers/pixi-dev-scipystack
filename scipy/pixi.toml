@@ -116,7 +116,7 @@ platforms = ["osx-arm64"]
 libblas = { version = "*", build = "*accelerate" }
 
 [feature.accelerate.tasks]
-build = { cmd = "python dev.py build --with-accelerate -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+build-accelerate = { cmd = "python dev.py build --with-accelerate -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 
 [feature.netlib.dependencies]
 libblas = { version = "*", build = "*netlib" }
