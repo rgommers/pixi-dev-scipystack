@@ -4,15 +4,15 @@ version = "0.3.28.dev"
 description = "OpenBLAS is an optimized BLAS library based on GotoBLAS2 1.13 BSD version."
 authors = ["Martin Kroeker", "Xianyi Zhang"]
 channels = ["conda-forge"]
-platforms = ["osx-arm64", "linux-64", "win-64"]
+platforms = ["osx-arm64", "osx-64", "linux-64", "win-64"]
 
 [tasks]
 build-make = { cmd = "make -j$(nproc)", cwd = "OpenBLAS", env = { CC = "ccache $CC", FC = "ccache $FC" } }
 install-make = { cmd = "make install PREFIX=$PWD/install-make", cwd = "OpenBLAS", env = { CC = "ccache $CC", FC = "ccache $FC" }, depends-on = "build-make" }
 test-make = { cmd = "make -C test", cwd = "OpenBLAS" }
 ctest-make = { cmd = "make -C ctest", cwd = "OpenBLAS" }
-utest-make = { cmd = "make -C utest", cwd = "OpenBLAS"}
-lapack-test-make = { cmd = "make lapack-test", cwd = "OpenBLAS"}
+utest-make = { cmd = "make -C utest", cwd = "OpenBLAS" }
+lapack-test-make = { cmd = "make lapack-test", cwd = "OpenBLAS" }
 testall-make = { depends-on = ["test-make", "ctest-make", "utest-make", "lapack-test-make"] }
 
 build-cmake = { cmd = [

@@ -4,7 +4,7 @@ version = "1.15.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
 channels = ["conda-forge"]
-platforms = ["osx-arm64", "linux-64", "win-64"]
+platforms = ["osx-arm64", "osx-64", "linux-64", "win-64"]
 
 [dependencies]
 compilers = ">=1.7.0,<2"
@@ -72,7 +72,7 @@ build = { cmd = "python dev.py build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77
 wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
 profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
 check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
-    "build",
+  "build",
 ], cwd = "scipy" }
 
 [feature.test.tasks]
@@ -138,7 +138,7 @@ test-cuda = { cmd = "python dev.py test -b all", cwd = "scipy", env = { SCIPY_DE
 [feature.torch-base]
 # Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
 #                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "osx-arm64", "osx-64"]
 
 [feature.torch-base.tasks]
 test-torch = { cmd = "python dev.py test -b torch", cwd = "scipy" }
@@ -160,7 +160,7 @@ test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy" }
 
 [feature.jax-cpu]
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "osx-arm64", "osx-64"]
 
 [feature.jax-cpu.dependencies]
 jax = "*"
@@ -230,7 +230,7 @@ test-nogil = { cmd = "python -Xgil=0 dev.py --build-dir=build-nogil test", cwd =
 
 # For testing OpenBLAS built from source and directly folded into SciPy
 [feature.openblas-src]
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "osx-arm64", "osx-64"]
 
 [feature.openblas-src.dependencies]
 compilers = ">=1.7.0,<2"
@@ -253,7 +253,7 @@ ccache = ">=4.10.1,<5"
 
 [feature.openblas-src.pypi-dependencies]
 # In order to have no BLAS library in the conda env at all
-numpy = ">=2.2.0.rc0"  # hack, force install from PyPI
+numpy = ">=2.2.0.rc0" # hack, force install from PyPI
 pythran = ">=0.17.0"
 
 [feature.openblas-src.tasks]
@@ -276,24 +276,24 @@ jax = ["jax-base", "jax-cpu"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
 array-api = [
-    "cpu",
-    "array_api_strict",
-    "dask",
-    "jax-base",
-    "jax-cpu",
-    "mkl",
-    "torch-base",
-    "torch-cpu",
+  "cpu",
+  "array_api_strict",
+  "dask",
+  "jax-base",
+  "jax-cpu",
+  "mkl",
+  "torch-base",
+  "torch-cpu",
 ]
 array-api-cuda = [
-    "cuda",
-    "array_api_strict",
-    "cupy",
-    "jax-base",
-    "jax-cuda",
-    "mkl",
-    "torch-base",
-    "torch-cuda",
+  "cuda",
+  "array_api_strict",
+  "cupy",
+  "jax-base",
+  "jax-cuda",
+  "mkl",
+  "torch-base",
+  "torch-cuda",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
 openblas-src = { features = ["openblas-src"], no-default-feature = true }
