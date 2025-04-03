@@ -68,7 +68,7 @@ linkify-it-py = "*"
 ipython = { cmd = "spin ipython", cwd = "scipy" }
 
 [feature.build.tasks]
-build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "clang-cl", CXX = "clang-cl", FC = "flang" } }
 wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
 profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
 check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
@@ -101,9 +101,16 @@ scripts = ["activate_graphviz.sh"]
 
 
 # BLAS/LAPACK features
-[feature.openblas.dependencies]
+[feature.openblas.target.osx-arm64.dependencies]
 libblas = { version = "*", build = "*openblas" }
 openblas = ">=0.3.27,<0.4"
+
+[feature.openblas.target.linux-64.dependencies]
+libblas = { version = "*", build = "*openblas" }
+openblas = ">=0.3.27,<0.4"
+
+[feature.openblas.target.win-64.dependencies]
+libblas = { version = "*", build = "*netlib" }
 
 [feature.mkl.target.linux-64.dependencies]
 libblas = { version = "*", build = "*mkl" }
@@ -145,11 +152,6 @@ test-cuda = { cmd = "spin test -b all", cwd = "scipy", env = { SCIPY_DEVICE = "c
 
 
 # Array libraries we have support for
-[feature.torch-base]
-# Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
-#                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
-platforms = ["linux-64", "osx-arm64"]
-
 [feature.torch-base.tasks]
 test-torch = { cmd = "spin test -b torch", cwd = "scipy" }
 
