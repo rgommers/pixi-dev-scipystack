@@ -39,6 +39,20 @@ ruff = "*"
 pycodestyle = "2.8.*"
 gitpython = ">=3.1.30"
 
+[feature.docs.dependencies]
+towncrier = "*"
+sphinx = "==7.2.6"
+numpydoc = "==1.4"
+matplotlib = ">=3.10.1,<4"
+sphinx-copybutton = ">=0.5.2,<0.6"
+sphinx-design = ">=0.6.1,<0.7"
+jupyterlite-sphinx = ">=0.19.1,<0.20"
+jupyterlite-pyodide-kernel = "==0.5.2"
+pydata-sphinx-theme = ">=0.16.1,<0.17"
+scipy = ">=1.15.2,<2"
+breathe = ">=4.36.0,<5"
+doxygen = ">=1.13.2,<2"
+
 
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "numpy" }
@@ -48,7 +62,11 @@ mypy = { cmd = "spin mypy", cwd = "numpy" }
 [feature.lint.tasks]
 lint = { cmd = "spin lint", cwd = "numpy" }
 
+[feature.docs.tasks]
+docs = { cmd = "spin docs", cwd = "numpy" }
+open-docs = { cmd = "open index.html", cwd = "numpy/doc/build/html" }
 
 [environments]
 test = ["test"]
 lint = ["lint"]
+docs = ["docs"]
