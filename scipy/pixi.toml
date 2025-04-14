@@ -173,15 +173,17 @@ test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy" }
 platforms = ["linux-64", "osx-arm64"]
 
 [feature.jax-cpu.dependencies]
-jax = "*"
-jaxlib = { version = "*", build = "*cpu*" }
+# 0.5.1-2 are broken, wait for 0.5.3 (conda-forge/jaxlib-feedstock#308)
+# see rgommers/pixi-dev-scipystack/pull/14 for more details
+jax = "0.5.0"
+jaxlib = { version = "0.5.0", build = "*cpu*" }
 
 [feature.jax-cuda]
 platforms = ["linux-64"]
 
 [feature.jax-cuda.dependencies]
-jax = "*"
-jaxlib = { version = "*", build = "*cuda*" }
+jax = "0.5.0"
+jaxlib = { version = "0.5.0", build = "*cuda*" }
 
 [feature.jax-base.tasks]
 test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy" }
