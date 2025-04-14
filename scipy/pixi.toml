@@ -3,7 +3,7 @@ name = "scipy"
 version = "1.15.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
-channels = ["conda-forge"]
+channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
 
 [dependencies]
@@ -173,15 +173,17 @@ test-cupy = { cmd = "python dev.py test -b cupy", cwd = "scipy" }
 platforms = ["linux-64", "osx-arm64"]
 
 [feature.jax-cpu.dependencies]
-jax = "*"
-jaxlib = { version = "*", build = "*cpu*" }
+# 0.5.1-2 are broken, wait for 0.5.3 (conda-forge/jaxlib-feedstock#308)
+# see rgommers/pixi-dev-scipystack/pull/14 for more details
+jax = "0.5.0"
+jaxlib = { version = "0.5.0", build = "*cpu*" }
 
 [feature.jax-cuda]
 platforms = ["linux-64"]
 
 [feature.jax-cuda.dependencies]
-jax = "*"
-jaxlib = { version = "*", build = "*cuda*" }
+jax = "0.5.0"
+jaxlib = { version = "0.5.0", build = "*cuda*" }
 
 [feature.jax-base.tasks]
 test-jax = { cmd = "python dev.py test -b jax.numpy", cwd = "scipy" }
@@ -208,7 +210,7 @@ test-dask = { cmd = "python dev.py test -b dask.array", cwd = "scipy" }
 
 
 [feature.free-threading]
-channels = ["conda-forge/label/cython_dev", "conda-forge"]
+channels = ["conda-forge/label/cython_dev", "https://prefix.dev/conda-forge"]
 
 [feature.free-threading.dependencies]
 python-freethreading = ">=3.13.0,<3.14"
