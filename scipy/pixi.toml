@@ -63,6 +63,7 @@ pooch = "*"
 jupyterlite-sphinx = ">=0.16.2"
 jupyterlite-pyodide-kernel = "*"
 scipy-doctest = "*"
+linkify-it-py = "*"
 
 [tasks]
 ipython = { cmd = "python dev.py ipython", cwd = "scipy" }
