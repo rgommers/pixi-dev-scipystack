@@ -20,8 +20,6 @@ blas-devel = "*"
 numpy = ">=2.0.0"
 pybind11 = ">=2.13.1"
 pythran = ">=0.15.0"
-rich-click = "*"
-pydevtool = "*"
 ipython = "*"
 # Add test dependencies to default list of dependencies so they show up in every
 # environment without having to also see the test task in those other envs
@@ -229,8 +227,7 @@ pip = "*"
 blas-devel = "*"
 numpy = ">=2.1.3"
 pybind11 = ">=2.13.1"
-rich-click = "*"
-pydevtool = "*"
+spin = "*"
 pytest = "*"
 hypothesis = "*"
 threadpoolctl = "*"
@@ -239,7 +236,7 @@ pytest-run-parallel = ">=0.3.0"
 
 [feature.free-threading.tasks]
 build-nogil = { cmd = "spin build --build-dir=build-nogil -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-nogil = { cmd = "python -Xgil=0 dev.py --build-dir=build-nogil test", cwd = "scipy" }
+test-nogil = { cmd = "PYTHON_GIL=0 spin test --build-dir=build-nogil", cwd = "scipy" }
 
 
 # For testing OpenBLAS built from source and directly folded into SciPy
@@ -256,8 +253,7 @@ cython = ">=3.0.10,<4"
 python-build = "*"
 pip = "*"
 pybind11 = ">=2.13.1"
-rich-click = "*"
-pydevtool = "*"
+spin = "*"
 pytest = "*"
 hypothesis = "*"
 pytest-xdist = "*"
