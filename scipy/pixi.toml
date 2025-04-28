@@ -273,6 +273,14 @@ wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openbla
 test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }
 
 
+[feature.editable.tasks]
+build-editable = { cmd = "spin install -- -Cbuild-dir=build-editable -Csetup-args=-Dblas=blas -Csetup-args=-Dlapack=lapack -Csetup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test-editable = { cmd = "spin test --build-dir=build-editable", cwd = "scipy" }
+doc-editable = { cmd = "spin docs --build-dir=build-editable -j6", cwd = "scipy" }
+smoke-docs = { cmd = "spin smoke-docs --build-dir=build-editable", cwd = "scipy" }
+smoke-tutorials = { cmd = "spin smoke-tutorials --build-dir=build-editable", cwd = "scipy" }
+refguide-check = { cmd = "spin refguide-check --build-dir=build-editable", cwd = "scipy" }
+
 [environments]
 default = ["build", "test", "typing", "bench", "openblas", "lint"]
 doc = ["doc"]
@@ -308,3 +316,4 @@ array-api-cuda = [
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
 openblas-src = { features = ["openblas-src"], no-default-feature = true }
+editable = { features = ["editable", "doc"] }
