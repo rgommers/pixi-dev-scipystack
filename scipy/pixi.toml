@@ -68,7 +68,7 @@ linkify-it-py = "*"
 ipython = { cmd = "spin ipython", cwd = "scipy" }
 
 [feature.build.tasks]
-build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "clang-cl", CXX = "clang-cl", FC = "flang-new" } }
+build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "clang-cl", CXX = "clang-cl", FC = "flang-new", FC_LD = "lld-link" } }
 wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
 profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
 check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
