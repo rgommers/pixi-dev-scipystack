@@ -104,9 +104,16 @@ scripts = ["activate_graphviz.sh"]
 
 
 # BLAS/LAPACK features
-[feature.openblas.dependencies]
+[feature.openblas.target.osx-arm64.dependencies]
 libblas = { version = "*", build = "*openblas" }
 openblas = ">=0.3.27,<0.4"
+
+[feature.openblas.target.linux-64.dependencies]
+libblas = { version = "*", build = "*openblas" }
+openblas = ">=0.3.27,<0.4"
+
+[feature.openblas.target.win-64.dependencies]
+libblas = { version = "*", build = "*netlib" }
 
 [feature.mkl.target.linux-64.dependencies]
 libblas = { version = "*", build = "*mkl" }
