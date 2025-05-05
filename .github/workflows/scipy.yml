@@ -48,6 +48,9 @@ jobs:
       - name: Build SciPy
         working-directory: ./scipy
         run: pixi run build -j2
+      - name: Run some array API tests
+        working-directory: ./scipy
+        run: pixi run test-cpu -s cluster
       - name: Run linalg tests (fast)
         working-directory: ./scipy
         run: pixi run test -s linalg
