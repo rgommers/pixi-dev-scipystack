@@ -76,7 +76,7 @@ check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
 ], cwd = "scipy" }
 
 [feature.build.target.win-64.tasks]
-build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC" } }
+build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
 
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "scipy" }
