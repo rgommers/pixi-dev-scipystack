@@ -142,6 +142,7 @@ cuda-version = ">=12.0,<13"
 
 [feature.cuda.tasks]
 test-cuda = { cmd = "spin test -b all", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
+test-jax-cuda = { cmd = "spin test -b jax.numpy", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 
 # Array libraries we have support for
@@ -232,7 +233,7 @@ pytest = "*"
 hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
-pytest-run-parallel = ">=0.3.0"
+pytest-run-parallel = ">=0.4.3"
 
 [feature.free-threading.pypi-dependencies]
 pythran = ">=0.18.0"  # FIXME conda 0.18.0 build not available yet
