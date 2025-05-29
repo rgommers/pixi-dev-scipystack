@@ -130,7 +130,7 @@ libblas = { version = "*", build = "*blis" }
 
 # CPU/CUDA features
 [feature.cpu.tasks]
-test-cpu = { cmd = "spin test -b all", cwd = "scipy" }
+test-cpu = { cmd = "spin test -b all -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.cuda]
 platforms = ["linux-64"]
@@ -140,9 +140,7 @@ system-requirements = { cuda = "12" }
 cuda-version = ">=12.0,<13"
 
 [feature.cuda.tasks]
-test-cuda = { cmd = "spin test -b all", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
-test-jax-cuda = { cmd = "spin test -b jax.numpy", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
-
+test-cuda = { cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 # Array libraries we have support for
 [feature.torch-base]
@@ -150,14 +148,17 @@ test-jax-cuda = { cmd = "spin test -b jax.numpy", cwd = "scipy", env = { SCIPY_D
 #                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
 platforms = ["linux-64", "osx-arm64"]
 
-[feature.torch-base.tasks]
-test-torch = { cmd = "spin test -b torch", cwd = "scipy" }
-
 [feature.torch-cpu.dependencies]
 pytorch-cpu = "*"
 
 [feature.torch-cuda.dependencies]
 pytorch-gpu = "*"
+
+[feature.torch-cpu.tasks]
+test-torch = { cmd = "spin test -b torch -m 'array_api_backends and not slow'", cwd = "scipy" }
+
+[feature.torch-cuda.tasks]
+test-torch-cuda = { cmd = "spin test -b torch -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 [feature.cupy]
 platforms = ["linux-64"]
@@ -166,7 +167,7 @@ platforms = ["linux-64"]
 cupy = "*"
 
 [feature.cupy.tasks]
-test-cupy = { cmd = "spin test -b cupy", cwd = "scipy" }
+test-cupy = { cmd = "spin test -b cupy -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.jax-cpu]
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
@@ -185,15 +186,17 @@ platforms = ["linux-64"]
 jax = "==0.5.0"
 jaxlib = { version = "==0.5.0", build = "*cuda*" }
 
-[feature.jax-base.tasks]
-test-jax = { cmd = "spin test -b jax.numpy", cwd = "scipy" }
+[feature.jax-cpu.tasks]
+test-jax = { cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy" }
+
+[feature.jax-cuda.tasks]
+test-jax-cuda = { cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 [feature.array_api_strict.dependencies]
 array-api-strict = "*"
 
 [feature.array_api_strict.tasks]
-test-strict = { cmd = "spin test -b array_api_strict", cwd = "scipy" }
-
+test-strict = { cmd = "spin test -b array_api_strict -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.mlx]
 platforms = ["osx-arm64"]
@@ -206,8 +209,7 @@ mlx = "*"
 dask = "*"
 
 [feature.dask.tasks]
-test-dask = { cmd = "spin test -b dask.array", cwd = "scipy" }
-
+test-dask = { cmd = "spin test -b dask.array -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.free-threading]
 channels = ["conda-forge/label/cython_dev", "https://prefix.dev/conda-forge"]
@@ -296,15 +298,16 @@ accelerate = ["accelerate", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
 torch = ["torch-base", "torch-cpu", "mkl"] # FIXME: add env var
+torch-cuda = ["cuda", "torch-base", "torch-cuda", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
-jax = ["jax-base", "jax-cpu"]
+jax = ["jax-cpu"]
+jax-cuda = ["cuda", "jax-cuda"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
 array-api = [
   "cpu",
   "array_api_strict",
   "dask",
-  "jax-base",
   "jax-cpu",
   "mkl",
   "torch-base",
@@ -314,7 +317,6 @@ array-api-cuda = [
   "cuda",
   "array_api_strict",
   "cupy",
-  "jax-base",
   "jax-cuda",
   "mkl",
   "torch-base",
