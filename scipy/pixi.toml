@@ -71,9 +71,7 @@ ipython = { cmd = "spin ipython", cwd = "scipy" }
 build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
 profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
-check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
-  "build",
-], cwd = "scipy" }
+check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = ["build"], cwd = "scipy" }
 
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "scipy" }
@@ -88,7 +86,7 @@ bench = { cmd = "spin bench", cwd = "scipy" }
 lint = { cmd = "spin lint", cwd = "scipy" }
 
 [feature.doc.tasks]
-doc = { cmd = "spin docs -j6", cwd = "scipy" }
+doc = { cmd = "spin docs -j$(nproc)", cwd = "scipy" }
 smoke-docs = { cmd = "spin smoke-docs", cwd = "scipy" }
 
 
@@ -116,8 +114,9 @@ platforms = ["osx-arm64"]
 libblas = { version = "*", build = "*accelerate" }
 
 [feature.accelerate.tasks]
-build-accelerate = { cmd = "spin build --build-dir=build-accelerate --with-accelerate", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-accelerate = { cmd = "spin test --build-dir=build-accelerate", cwd = "scipy", depends-on = "build-accelerate" }
+build = { cmd = "spin build --build-dir=build-accelerate --with-accelerate -j$(nproc)", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test = { cmd = "spin test --build-dir=build-accelerate", cwd = "scipy" }
+ipython = { cmd = "spin ipython --build-dir=build-accelerate", cwd = "scipy" }
 
 [feature.netlib.dependencies]
 libblas = { version = "*", build = "*netlib" }
@@ -234,14 +233,15 @@ hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
 pytest-run-parallel = ">=0.4.3"
+ipython = "*"
 
 [feature.free-threading.pypi-dependencies]
 pythran = ">=0.18.0"  # FIXME conda 0.18.0 build not available yet
 
 [feature.free-threading.tasks]
-build-nogil = { cmd = "spin build --build-dir=build-nogil -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-nogil = { cmd = "spin test --build-dir=build-nogil", cwd = "scipy" }
-
+build = { cmd = "spin build --build-dir=build-nogil -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true -j$(nproc)", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test = { cmd = "spin test --build-dir=build-nogil", cwd = "scipy" }
+ipython = { cmd = "spin ipython --build-dir=build-nogil", cwd = "scipy" }
 
 # For testing OpenBLAS built from source and directly folded into SciPy
 [feature.openblas-src]
@@ -264,6 +264,7 @@ pytest-xdist = "*"
 threadpoolctl = "*"
 pooch = "*"
 ccache = ">=4.10.1,<5"
+ipython = "*"
 
 [feature.openblas-src.pypi-dependencies]
 # In order to have no BLAS library in the conda env at all
@@ -271,19 +272,20 @@ numpy = ">=2.2.0.rc0" # hack, force install from PyPI
 pythran = ">=0.17.0"
 
 [feature.openblas-src.tasks]
-build-openblas-src = { cmd = "spin build --build-dir build-openblas -C-Dblas=openblas-src -C-Dbuildtype=release", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-openblas-src = { cmd = "spin test --build-dir build-openblas", cwd = "scipy" }
-wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }
-
+build = { cmd = "spin build --build-dir=build-openblas -C-Dblas=openblas-src -C-Dbuildtype=release -j$(nproc)", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test = { cmd = "spin test --build-dir=build-openblas", cwd = "scipy" }
+wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }
+ipython = { cmd = "spin ipython --build-dir=build-openblas", cwd = "scipy" }
 
 [feature.editable.tasks]
-build-editable = { cmd = "spin install -- -Cbuild-dir=build-editable -Csetup-args=-Dblas=blas -Csetup-args=-Dlapack=lapack -Csetup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-editable = { cmd = "spin test --build-dir=build-editable", cwd = "scipy" }
-doc-editable = { cmd = "spin docs --build-dir=build-editable -j6", cwd = "scipy" }
+build = { cmd = "spin install -- -Cbuild-dir=build-editable -Csetup-args=-Dblas=blas -Csetup-args=-Dlapack=lapack -Csetup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+test = { cmd = "spin test --build-dir=build-editable", cwd = "scipy" }
+doc = { cmd = "spin docs --build-dir=build-editable -j$(nproc)", cwd = "scipy" }
 smoke-docs = { cmd = "spin smoke-docs --build-dir=build-editable", cwd = "scipy" }
 smoke-tutorials = { cmd = "spin smoke-tutorials --build-dir=build-editable", cwd = "scipy" }
 refguide-check = { cmd = "spin refguide-check --build-dir=build-editable", cwd = "scipy" }
+ipython = { cmd = "spin ipython --build-dir=build-editable", cwd = "scipy" }
 
 [environments]
 default = ["build", "test", "typing", "bench", "openblas", "lint"]

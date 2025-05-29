@@ -25,7 +25,19 @@ jobs:
   test:
     # To enable this job and subsequent jobs on a fork, comment out:
     if: github.repository == 'rgommers/pixi-dev-scipystack'
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        pixi-env:
+          - default
+          - editable
+          - free-threading
+          # - openblas-src  # TODO
+        include:
+          - os: macos-latest
+            pixi-env: accelerate
+      fail-fast: false
     steps:
       - name: Checkout pixi-dev-scipystack
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -43,7 +55,10 @@ jobs:
           #cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       - name: Build SciPy
         working-directory: ./scipy
-        run: pixi run build -j2
+        run: pixi run -e ${{ matrix.pixi-env }} build
+      - name: Smoke test iPython
+        working-directory: ./scipy
+        run: pixi run -e ${{ matrix.pixi-env }} ipython -- -c 'print("Hello world")'
       - name: Run linalg tests (fast)
         working-directory: ./scipy
-        run: pixi run test -s linalg
+        run: pixi run -e ${{ matrix.pixi-env }} test -s linalg
