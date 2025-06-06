@@ -207,7 +207,7 @@ system-requirements = { macos = "13.5" }
 mlx = "*"
 
 [feature.dask.dependencies]
-dask = "*"
+dask-core = "*"  # Don't install distributed, tornado, etc.
 
 [feature.dask.tasks]
 test-dask = { cmd = "spin test -b dask.array -m 'array_api_backends and not slow'", cwd = "scipy" }
