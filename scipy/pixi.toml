@@ -147,11 +147,6 @@ cuda-version = ">=12.0,<13"
 test-cuda = { cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 # Array libraries we have support for
-[feature.torch-base]
-# Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
-#                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
-platforms = ["linux-64", "osx-arm64"]
-
 [feature.torch-cpu.dependencies]
 pytorch-cpu = "*"
 
@@ -298,8 +293,8 @@ mkl = ["mkl", "test"]
 accelerate = ["accelerate", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-torch = ["torch-base", "torch-cpu", "mkl"] # FIXME: add env var
-torch-cuda = ["cuda", "torch-base", "torch-cuda", "mkl"] # FIXME: add env var
+torch = ["torch-cpu", "mkl"] # FIXME: add env var
+torch-cuda = ["cuda", "torch-cuda", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
 jax = ["jax-cpu"]
 jax-cuda = ["cuda", "jax-cuda"]
@@ -311,7 +306,6 @@ array-api = [
   "dask",
   "jax-cpu",
   "mkl",
-  "torch-base",
   "torch-cpu",
 ]
 array-api-cuda = [
@@ -320,7 +314,6 @@ array-api-cuda = [
   "cupy",
   "jax-cuda",
   "mkl",
-  "torch-base",
   "torch-cuda",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
