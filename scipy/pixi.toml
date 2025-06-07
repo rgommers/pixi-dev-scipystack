@@ -107,16 +107,6 @@ scripts = ["activate_graphviz.sh"]
 [feature.openblas.dependencies]
 libblas = { version = "*", build = "*openblas" }
 openblas = ">=0.3.27,<0.4"
-# [feature.openblas.target.osx-arm64.dependencies]
-# libblas = { version = "*", build = "*openblas" }
-# openblas = ">=0.3.27,<0.4"
-
-# [feature.openblas.target.linux-64.dependencies]
-# libblas = { version = "*", build = "*openblas" }
-# openblas = ">=0.3.27,<0.4"
-
-# [feature.openblas.target.win-64.dependencies]
-# libblas = { version = "*", build = "*netlib" }
 
 [feature.mkl.target.linux-64.dependencies]
 libblas = { version = "*", build = "*mkl" }
@@ -161,9 +151,6 @@ test-cuda = { cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backe
 # Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
 #                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
 platforms = ["linux-64", "osx-arm64"]
-
-[feature.torch-base.tasks]
-test-torch = { cmd = "spin test -b torch", cwd = "scipy" }
 
 [feature.torch-cpu.dependencies]
 pytorch-cpu = "*"
@@ -322,8 +309,7 @@ array-api = [
   "cpu",
   "array_api_strict",
   "dask",
-  #   "jax-base",
-  #   "jax-cpu",
+  "jax-cpu",
   "mkl",
   "torch-base",
   "torch-cpu",
