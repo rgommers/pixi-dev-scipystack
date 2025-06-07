@@ -12,9 +12,9 @@ subdirectory for the project containing `pixi.toml`. For example:
 
 ```zsh
 % git clone https://github.com/rgommers/pixi-dev-scipystack.git
-% cd scipy
+% cd pixi-dev-scipystack/scipy
 % git clone https://github.com/scipy/scipy.git
-% (cd scipy && git submodule update --init --recursive)
+% cd scipy && git submodule update --init --recursive && cd ..
 ```
 
 After that, you will be able to build and test SciPy (plus other dev tasks,
