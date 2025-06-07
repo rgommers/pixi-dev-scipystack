@@ -304,7 +304,7 @@ array-api = [
   "cpu",
   "array_api_strict",
   "dask",
-  "jax-cpu",
+  # "jax-cpu",
   "mkl",
   "torch-cpu",
 ]
