@@ -175,17 +175,15 @@ test-cupy = { cmd = "spin test -b cupy -m 'array_api_backends and not slow'", cw
 platforms = ["linux-64", "osx-arm64"]
 
 [feature.jax-cpu.dependencies]
-# 0.5.1-2 are broken, wait for 0.5.3 (conda-forge/jaxlib-feedstock#308)
-# see rgommers/pixi-dev-scipystack/pull/14 for more details
-jax = "==0.5.0"
-jaxlib = { version = "==0.5.0", build = "*cpu*" }
+jax = "*"
+jaxlib = { version = "*", build = "*cpu*" }
 
 [feature.jax-cuda]
 platforms = ["linux-64"]
 
 [feature.jax-cuda.dependencies]
-jax = "==0.5.0"
-jaxlib = { version = "==0.5.0", build = "*cuda*" }
+jax = "*"
+jaxlib = { version = "*", build = "*cuda*" }
 
 [feature.jax-cpu.tasks]
 test-jax = { cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy" }
