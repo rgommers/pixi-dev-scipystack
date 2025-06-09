@@ -4543,7 +4543,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/noarch/meson-python-0.17.1-pyh70fd9c4_1.conda
       - conda: https://prefix.dev/conda-forge/linux-64/ncurses-6.5-h2d0b736_3.conda
       - conda: https://prefix.dev/conda-forge/linux-64/ninja-1.12.1-h297d8ca_0.conda
-      - conda: https://prefix.dev/conda-forge/linux-64/numpy-2.2.4-py313h103f029_0.conda
+      - conda: https://prefix.dev/conda-forge/linux-64/numpy-2.3.0-py313h103f029_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/openblas-0.3.29-pthreads_h6ec200e_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/openssl-3.5.0-h7b32b05_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/packaging-24.2-pyhd8ed1ab_2.conda
@@ -4656,7 +4656,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/osx-arm64/mpfr-4.2.1-hb693164_3.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/ncurses-6.5-h5e97a16_3.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/ninja-1.12.1-h420ef59_0.conda
-      - conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.2.4-py313h991d4a7_0.conda
+      - conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.3.0-py313h991d4a7_0.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/openblas-0.3.29-openmp_hea878ba_0.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/openssl-3.5.0-h81ee809_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/packaging-24.2-pyhd8ed1ab_2.conda
@@ -4757,7 +4757,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/win-64/mkl-devel-2024.2.2-h57928b3_15.conda
       - conda: https://prefix.dev/conda-forge/win-64/mkl-include-2024.2.2-h66d3029_15.conda
       - conda: https://prefix.dev/conda-forge/win-64/ninja-1.12.1-hc790b64_0.conda
-      - conda: https://prefix.dev/conda-forge/win-64/numpy-2.2.4-py313hd96daed_0.conda
+      - conda: https://prefix.dev/conda-forge/win-64/numpy-2.3.0-py313hd96daed_0.conda
       - conda: https://prefix.dev/conda-forge/win-64/openssl-3.5.0-ha4e3fda_0.conda
       - conda: https://prefix.dev/conda-forge/noarch/packaging-24.2-pyhd8ed1ab_2.conda
       - conda: https://prefix.dev/conda-forge/win-64/pcre2-10.44-h3d7b363_2.conda
@@ -16019,26 +16019,6 @@ packages:
   license_family: BSD
   size: 8424727
   timestamp: 1742255434709
-- conda: https://prefix.dev/conda-forge/linux-64/numpy-2.2.4-py313h103f029_0.conda
-  sha256: 221d2e42555cfaa52e1d8af8b4da116b69a36a53264caeadd7e2809fd65a8adf
-  md5: cb377445eaf9e539629c8249bbf324f4
-  depends:
-  - __glibc >=2.17,<3.0.a0
-  - libblas >=3.9.0,<4.0a0
-  - libcblas >=3.9.0,<4.0a0
-  - libgcc >=13
-  - liblapack >=3.9.0,<4.0a0
-  - libstdcxx >=13
-  - python >=3.13,<3.14.0a0
-  - python_abi 3.13.* *_cp313t
-  constrains:
-  - numpy-base <0a0
-  license: BSD-3-Clause
-  license_family: BSD
-  purls:
-  - pkg:pypi/numpy?source=hash-mapping
-  size: 8513654
-  timestamp: 1742255344526
 - conda: https://prefix.dev/conda-forge/linux-64/numpy-2.2.5-py312h72c5963_0.conda
   sha256: af293ba6f715983f71543ed0111e6bb77423d409c1d13062474601257c2eebca
   md5: 505bcfc142b97010c162863c38d90016
@@ -16075,6 +16055,25 @@ packages:
   license_family: BSD
   size: 8490501
   timestamp: 1747545073507
+- conda: https://prefix.dev/conda-forge/linux-64/numpy-2.3.0-py313h103f029_0.conda
+  sha256: a646e7e284dff94e1ef2dc816a5a61ac069907ea97192159da32ee190c56f64a
+  md5: d24d95f39ffa3c70827df0183b01df04
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - libblas >=3.9.0,<4.0a0
+  - libcblas >=3.9.0,<4.0a0
+  - libgcc >=13
+  - liblapack >=3.9.0,<4.0a0
+  - libstdcxx >=13
+  - python >=3.13,<3.14.0a0
+  - python_abi 3.13.* *_cp313t
+  constrains:
+  - numpy-base <0a0
+  license: BSD-3-Clause
+  purls:
+  - pkg:pypi/numpy?source=hash-mapping
+  size: 8503297
+  timestamp: 1749430966275
 - conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.2.4-py312h7c1f314_0.conda
   sha256: 68eafd2b7beca8467fe84a8a03767680be686d601a0771d3414c7019f3302ee0
   md5: 001a57e8f4cc0c12841d341b94ef8787
@@ -16093,26 +16092,6 @@ packages:
   license_family: BSD
   size: 6559671
   timestamp: 1742255398662
-- conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.2.4-py313h991d4a7_0.conda
-  sha256: b0725f6008fbcc48a55b8d70ea693dcad4198e344659d97d62ab5f4f18681b41
-  md5: f75bb48a9076197e44fd91862ad377c8
-  depends:
-  - __osx >=11.0
-  - libblas >=3.9.0,<4.0a0
-  - libcblas >=3.9.0,<4.0a0
-  - libcxx >=18
-  - liblapack >=3.9.0,<4.0a0
-  - python >=3.13,<3.14.0a0
-  - python >=3.13,<3.14.0a0 *_cp313t
-  - python_abi 3.13.* *_cp313t
-  constrains:
-  - numpy-base <0a0
-  license: BSD-3-Clause
-  license_family: BSD
-  purls:
-  - pkg:pypi/numpy?source=hash-mapping
-  size: 7980514
-  timestamp: 1742255475730
 - conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.2.5-py312h7c1f314_0.conda
   sha256: 982aed7df71ae0ca8bc396ae25d43fd9a4f2b15d18faca15d6c27e9efb3955be
   md5: 24a41dacf9d624b069d54a6e92594540
@@ -16131,6 +16110,25 @@ packages:
   license_family: BSD
   size: 6498553
   timestamp: 1745119367238
+- conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.3.0-py313h991d4a7_0.conda
+  sha256: 0dea09495c653c75e2ffda698a5be0aca81667b9f663d9631a95c00eddd88969
+  md5: 0d2ceb567a45d4dfe3eb9f2accb982ea
+  depends:
+  - __osx >=11.0
+  - libblas >=3.9.0,<4.0a0
+  - libcblas >=3.9.0,<4.0a0
+  - libcxx >=18
+  - liblapack >=3.9.0,<4.0a0
+  - python >=3.13,<3.14.0a0
+  - python >=3.13,<3.14.0a0 *_cp313t
+  - python_abi 3.13.* *_cp313t
+  constrains:
+  - numpy-base <0a0
+  license: BSD-3-Clause
+  purls:
+  - pkg:pypi/numpy?source=hash-mapping
+  size: 8127568
+  timestamp: 1749431087698
 - conda: https://prefix.dev/conda-forge/win-64/numpy-2.2.4-py312h3150e54_0.conda
   sha256: 477bd925070dd7122c3d2d8be57e06338f1e946c403a1044908aaf68a5e27cdf
   md5: e668b8543944b4d80aaa9c904f3821ee
@@ -16149,26 +16147,6 @@ packages:
   license_family: BSD
   size: 7058478
   timestamp: 1742255793694
-- conda: https://prefix.dev/conda-forge/win-64/numpy-2.2.4-py313hd96daed_0.conda
-  sha256: 8b7387395a983271ec527d5e7bfff8a13a2aa3a3e4941a57153db6bb7cd75b06
-  md5: aa17cc36dc8bac6a25354af7886e1b3e
-  depends:
-  - libblas >=3.9.0,<4.0a0
-  - libcblas >=3.9.0,<4.0a0
-  - liblapack >=3.9.0,<4.0a0
-  - python >=3.13,<3.14.0a0
-  - python_abi 3.13.* *_cp313t
-  - ucrt >=10.0.20348.0
-  - vc >=14.2,<15
-  - vc14_runtime >=14.29.30139
-  constrains:
-  - numpy-base <0a0
-  license: BSD-3-Clause
-  license_family: BSD
-  purls:
-  - pkg:pypi/numpy?source=hash-mapping
-  size: 7255817
-  timestamp: 1742255779645
 - conda: https://prefix.dev/conda-forge/win-64/numpy-2.2.5-py312h3150e54_0.conda
   sha256: c497607b3e7e0946b8a2566b6587152c7cb376625559addbf606494f5bbe41dd
   md5: 00c3b00c9091b7f76faba85795350c7e
@@ -16187,6 +16165,25 @@ packages:
   license_family: BSD
   size: 7132354
   timestamp: 1745119803660
+- conda: https://prefix.dev/conda-forge/win-64/numpy-2.3.0-py313hd96daed_0.conda
+  sha256: 4e720b130b947705c3149256f5ee3391c77d4f8e089d0780fc956116b61789a9
+  md5: 87b9d2d5ec66618019cd7ff8d856cce1
+  depends:
+  - libblas >=3.9.0,<4.0a0
+  - libcblas >=3.9.0,<4.0a0
+  - liblapack >=3.9.0,<4.0a0
+  - python >=3.13,<3.14.0a0
+  - python_abi 3.13.* *_cp313t
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  constrains:
+  - numpy-base <0a0
+  license: BSD-3-Clause
+  purls:
+  - pkg:pypi/numpy?source=hash-mapping
+  size: 6763262
+  timestamp: 1749431105515
 - conda: https://prefix.dev/conda-forge/noarch/numpydoc-1.8.0-pyhd8ed1ab_1.conda
   sha256: d836860163b027622cb59b96b92824dd75196a37d599e8ae69733b31769989a9
   md5: 5af206d64d18d6c8dfb3122b4d9e643b
