@@ -75,6 +75,9 @@ check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
   "build",
 ], cwd = "scipy" }
 
+[feature.build.target.win-64.tasks]
+build = { cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
+
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "scipy" }
 
@@ -144,11 +147,6 @@ cuda-version = ">=12.0,<13"
 test-cuda = { cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 # Array libraries we have support for
-[feature.torch-base]
-# Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
-#                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
-platforms = ["linux-64", "osx-arm64"]
-
 [feature.torch-cpu.dependencies]
 pytorch-cpu = "*"
 
@@ -207,7 +205,7 @@ system-requirements = { macos = "13.5" }
 mlx = "*"
 
 [feature.dask.dependencies]
-dask-core = "*"  # Don't install distributed, tornado, etc.
+dask-core = "*" # Don't install distributed, tornado, etc.
 
 [feature.dask.tasks]
 test-dask = { cmd = "spin test -b dask.array -m 'array_api_backends and not slow'", cwd = "scipy" }
@@ -238,7 +236,7 @@ pooch = "*"
 pytest-run-parallel = ">=0.4.3"
 
 [feature.free-threading.pypi-dependencies]
-pythran = ">=0.18.0"  # FIXME conda 0.18.0 build not available yet
+pythran = ">=0.18.0" # FIXME conda 0.18.0 build not available yet
 
 [feature.free-threading.tasks]
 build-nogil = { cmd = "spin build --build-dir=build-nogil --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
@@ -295,8 +293,8 @@ mkl = ["mkl", "test"]
 accelerate = ["accelerate", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-torch = ["torch-base", "torch-cpu", "mkl"] # FIXME: add env var
-torch-cuda = ["cuda", "torch-base", "torch-cuda", "mkl"] # FIXME: add env var
+torch = ["torch-cpu", "mkl"] # FIXME: add env var
+torch-cuda = ["cuda", "torch-cuda", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
 jax = ["jax-cpu"]
 jax-cuda = ["cuda", "jax-cuda"]
@@ -306,9 +304,8 @@ array-api = [
   "cpu",
   "array_api_strict",
   "dask",
-  "jax-cpu",
+  # "jax-cpu",
   "mkl",
-  "torch-base",
   "torch-cpu",
 ]
 array-api-cuda = [
@@ -317,7 +314,6 @@ array-api-cuda = [
   "cupy",
   "jax-cuda",
   "mkl",
-  "torch-base",
   "torch-cuda",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }

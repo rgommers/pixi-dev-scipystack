@@ -1,4 +1,4 @@
-name: Linux SciPy
+name: SciPy
 
 on:
   push:
@@ -25,16 +25,22 @@ jobs:
   test:
     # To enable this job and subsequent jobs on a fork, comment out:
     if: github.repository == 'rgommers/pixi-dev-scipystack'
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runs-on }}
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, macos-latest, windows-latest]
+      fail-fast: false
+
     steps:
       - name: Checkout pixi-dev-scipystack
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: Checkout scipy repo
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
-          repository: scipy/scipy
+          repository: lucascolley/scipy
           path: ./scipy/scipy
           submodules: recursive
+          ref: win-dll
       - uses: prefix-dev/setup-pixi@v0.8.1
         with:
           pixi-version: v0.39.0
@@ -44,6 +50,9 @@ jobs:
       - name: Build SciPy
         working-directory: ./scipy
         run: pixi run build -j2
+      - name: Run some array API tests
+        working-directory: ./scipy
+        run: pixi run test-cpu -s cluster
       - name: Run linalg tests (fast)
         working-directory: ./scipy
         run: pixi run test -s linalg
