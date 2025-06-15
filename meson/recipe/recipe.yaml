@@ -1,0 +1,41 @@
+context:
+  version: 1.7.99
+
+package:
+  name: meson
+  version: ${{ version }}
+
+source:
+  path: ../meson
+  use_gitignore: false
+
+build:
+  noarch: python
+  script: pip install . -v --no-build-isolation
+  python:
+    entry_points:
+      - meson = mesonbuild.mesonmain:main
+
+requirements:
+  build:
+    - ninja
+  host:
+    - python
+    - python-build
+    - pip
+    - setuptools
+  run:
+    - python
+    - ninja
+
+tests:
+  - script:
+      - meson --help
+
+about:
+  homepage: https://mesonbuild.com
+  license: Apache-2.0
+  license_file: COPYING
+  summary: The Meson Build System
+  documentation: https://mesonbuild.com
+  repository: https://github.com/mesonbuild/meson
