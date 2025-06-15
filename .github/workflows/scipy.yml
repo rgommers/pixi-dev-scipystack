@@ -37,9 +37,10 @@ jobs:
       - name: Checkout scipy repo
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
-          repository: scipy/scipy
+          repository: lucascolley/scipy
           path: ./scipy/scipy
           submodules: recursive
+          ref: win-dll
       - uses: prefix-dev/setup-pixi@v0.8.1
         with:
           pixi-version: v0.39.0
