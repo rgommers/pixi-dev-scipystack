@@ -68,7 +68,7 @@ linkify-it-py = "*"
 ipython = { cmd = "spin ipython", cwd = "scipy" }
 
 [feature.build.tasks]
-build = { cmd = "spin build -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+build = { cmd = "spin build --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
 profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
 check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
@@ -205,7 +205,7 @@ system-requirements = { macos = "13.5" }
 mlx = "*"
 
 [feature.dask.dependencies]
-dask = "*"
+dask-core = "*"  # Don't install distributed, tornado, etc.
 
 [feature.dask.tasks]
 test-dask = { cmd = "spin test -b dask.array -m 'array_api_backends and not slow'", cwd = "scipy" }
@@ -226,7 +226,7 @@ cython = ">=3.1.0,<4"
 python-build = "*"
 pip = "*"
 blas-devel = "*"
-numpy = ">=2.1.3"
+numpy = ">=2.3.0"
 pybind11 = ">=2.13.1"
 spin = "*"
 pytest = "*"
@@ -239,7 +239,7 @@ pytest-run-parallel = ">=0.4.3"
 pythran = ">=0.18.0" # FIXME conda 0.18.0 build not available yet
 
 [feature.free-threading.tasks]
-build-nogil = { cmd = "spin build --build-dir=build-nogil -C-Dblas=blas -C-Dlapack=lapack -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+build-nogil = { cmd = "spin build --build-dir=build-nogil --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 test-nogil = { cmd = "spin test --build-dir=build-nogil", cwd = "scipy" }
 
 
@@ -271,7 +271,7 @@ numpy = ">=2.2.0.rc0" # hack, force install from PyPI
 pythran = ">=0.17.0"
 
 [feature.openblas-src.tasks]
-build-openblas-src = { cmd = "spin build --build-dir build-openblas -C-Dblas=openblas-src -C-Dbuildtype=release", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
+build-openblas-src = { cmd = "spin build --build-dir build-openblas --setup-args=-Dblas=openblas-src --setup-args=-Dbuildtype=release", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 test-openblas-src = { cmd = "spin test --build-dir build-openblas", cwd = "scipy" }
 wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
 test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }

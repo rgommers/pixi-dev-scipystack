@@ -21,7 +21,7 @@ ninja = ">=1.12.1,<2"
 meson = ">=1.7.1,<2"
 meson-python = ">=0.17.1,<0.18"
 openblas = ">=0.3.29,<0.4"
-spin = ">=0.13,<0.14"
+spin = ">=0.14,<0.15"
 cython = ">=3.0.12,<4"
 python-build = ">=1.2.2.post1,<2"
 ipython = ">=9.1.0,<10"
@@ -33,6 +33,13 @@ hypothesis = "*"
 pytest-xdist = "*"
 asv = "*"
 mypy = "==1.15.0"
+
+[feature.free-threading.dependencies]
+pytest = "*"
+hypothesis = "*"
+python-freethreading = ">=3.13.0,<3.14"
+cython = ">=3.1.0,<4"
+pytest-run-parallel = ">=0.4.3"
 
 [feature.lint.dependencies]
 ruff = "*"
@@ -53,11 +60,15 @@ scipy = ">=1.15.2,<2"
 breathe = ">=4.36.0,<5"
 doxygen = ">=1.13.2,<2"
 
-
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "numpy" }
 bench = { cmd = "spin bench", cwd = "numpy" }
 mypy = { cmd = "spin mypy", cwd = "numpy" }
+
+[feature.free-threading.tasks]
+build-nogil = { cmd = "spin build --build-dir=build-nogil", cwd = "numpy", env = { CC = "ccache $CC", CXX = "ccache $CXX" } }
+test-nogil = { cmd = "spin test --build-dir=build-nogil", cwd = "numpy" }
+ipython-nogil = { cmd = "spin ipython --build-dir=build-nogil", cwd = "numpy" }
 
 [feature.lint.tasks]
 lint = { cmd = "spin lint", cwd = "numpy" }
@@ -70,3 +81,4 @@ open-docs = { cmd = "open index.html", cwd = "numpy/doc/build/html" }
 test = ["test"]
 lint = ["lint"]
 docs = ["docs"]
+free-threading = ["free-threading"]
