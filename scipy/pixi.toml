@@ -76,7 +76,7 @@ check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = [
 ], cwd = "scipy" }
 
 [feature.build.target.win-64.tasks]
-build = { cmd = "spin build -C-Dblas=openblas -C-Dlapack=openblas -C-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
+build = { cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
 
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "scipy" }
@@ -205,7 +205,7 @@ system-requirements = { macos = "13.5" }
 mlx = "*"
 
 [feature.dask.dependencies]
-dask-core = "*"  # Don't install distributed, tornado, etc.
+dask-core = "*" # Don't install distributed, tornado, etc.
 
 [feature.dask.tasks]
 test-dask = { cmd = "spin test -b dask.array -m 'array_api_backends and not slow'", cwd = "scipy" }
