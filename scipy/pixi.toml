@@ -156,6 +156,11 @@ cmd = "spin test --build-dir=build-accelerate"
 cwd = "scipy"
 depends-on = "build-accelerate"
 
+[feature.accelerate.tasks.ipython-accelerate]
+cmd = "spin ipython --build-dir=build-accelerate"
+cwd = "scipy"
+depends-on = "build-accelerate"
+
 [feature.netlib.dependencies]
 libblas = { version = "*", build = "*netlib" }
 
@@ -227,17 +232,15 @@ depends-on = "build"
 platforms = ["linux-64", "osx-arm64"]
 
 [feature.jax-cpu.dependencies]
-# 0.5.1-2 are broken, wait for 0.5.3 (conda-forge/jaxlib-feedstock#308)
-# see rgommers/pixi-dev-scipystack/pull/14 for more details
-jax = "==0.5.0"
-jaxlib = { version = "==0.5.0", build = "*cpu*" }
+jax = ">=0.6.0"
+jaxlib = { version = "*", build = "*cpu*" }
 
 [feature.jax-cuda]
 platforms = ["linux-64"]
 
 [feature.jax-cuda.dependencies]
-jax = "==0.5.0"
-jaxlib = { version = "==0.5.0", build = "*cuda*" }
+jax = ">=0.6.0"
+jaxlib = { version = "*", build = "*cuda*" }
 
 [feature.jax-cpu.tasks.test-jax]
 cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'"
@@ -301,6 +304,7 @@ hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
 pytest-run-parallel = ">=0.4.3"
+ipython = "*"
 
 [feature.free-threading.pypi-dependencies]
 pythran = ">=0.18.0" # FIXME conda 0.18.0 build not available yet
@@ -312,6 +316,11 @@ env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
 [feature.free-threading.tasks.test-nogil]
 cmd = "spin test --build-dir=build-nogil"
+cwd = "scipy"
+depends-on = "build-nogil"
+
+[feature.free-threading.tasks.ipython-nogil]
+cmd = "spin ipython --build-dir=build-nogil"
 cwd = "scipy"
 depends-on = "build-nogil"
 
@@ -337,6 +346,7 @@ pytest-xdist = "*"
 threadpoolctl = "*"
 pooch = "*"
 ccache = ">=4.10.1,<5"
+ipython = "*"
 
 [feature.openblas-src.pypi-dependencies]
 # In order to have no BLAS library in the conda env at all
@@ -350,6 +360,11 @@ env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
 [feature.openblas-src.tasks.test-openblas-src]
 cmd = "spin test --build-dir build-openblas"
+cwd = "scipy"
+depends-on = "build-openblas-src"
+
+[feature.openblas-src.tasks.ipython-openblas-src]
+cmd = "spin ipython --build-dir build-openblas"
 cwd = "scipy"
 depends-on = "build-openblas-src"
 
@@ -371,6 +386,11 @@ env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
 [feature.editable.tasks.test-editable]
 cmd = "spin test --build-dir=build-editable"
+cwd = "scipy"
+depends-on = "build-editable"
+
+[feature.editable.tasks.ipython-editable]
+cmd = "spin ipython --build-dir=build-editable"
 cwd = "scipy"
 depends-on = "build-editable"
 
