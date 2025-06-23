@@ -3224,17 +3224,17 @@ packages:
   subdir: osx-arm64
   depends:
   - python
-  - libcxx >=20
   - libgfortran 5.*
   - libgfortran5 >=14.2.0
-  - libblas >=3.9.0,<4.0a0
+  - libcxx >=20
   - liblapack >=3.9.0,<3.10.0a0
-  - libcblas >=3.9.0,<4.0a0
-  - python_abi 3.13.* *_cp313
+  - libblas >=3.9.0,<4.0a0
   - numpy >=1.23,<3
+  - python_abi 3.13.* *_cp313
+  - libcblas >=3.9.0,<4.0a0
   license: BSD-3-Clause
   input:
-    hash: cf70f571b359a86fc6b851874f15ef0a6d36091ecb81b8831038b7fe00ee5b08
+    hash: 30707025aac620e34f0cb63a74b59a668a1919c8f72f51ad4bfd35e28929651d
     globs:
     - pixi.toml
     - recipe/recipe.yaml
@@ -3245,20 +3245,20 @@ packages:
   subdir: win-64
   depends:
   - python
-  - vc >=14.1,<15
-  - vc14_runtime >=14.16.27033
   - libgfortran5 >=15.1.0
   - libgfortran
   - libgcc >=15
   - ucrt >=10.0.20348.0
-  - libblas >=3.9.0,<4.0a0
-  - liblapack >=3.9.0,<3.10.0a0
+  - vc >=14.1,<15
+  - vc14_runtime >=14.16.27033
   - libcblas >=3.9.0,<4.0a0
-  - numpy >=1.23,<3
   - python_abi 3.13.* *_cp313
+  - numpy >=1.23,<3
+  - liblapack >=3.9.0,<3.10.0a0
+  - libblas >=3.9.0,<4.0a0
   license: BSD-3-Clause
   input:
-    hash: cf70f571b359a86fc6b851874f15ef0a6d36091ecb81b8831038b7fe00ee5b08
+    hash: 30707025aac620e34f0cb63a74b59a668a1919c8f72f51ad4bfd35e28929651d
     globs:
     - pixi.toml
     - recipe/recipe.yaml
@@ -3269,20 +3269,20 @@ packages:
   subdir: linux-64
   depends:
   - python
+  - libstdcxx >=15
+  - libgcc >=15
   - libgfortran5 >=15.1.0
   - libgfortran
   - libgcc >=15
-  - libstdcxx >=15
   - libgcc >=15
-  - libgcc >=15
-  - libcblas >=3.9.0,<4.0a0
-  - libblas >=3.9.0,<4.0a0
-  - python_abi 3.13.* *_cp313
-  - liblapack >=3.9.0,<3.10.0a0
   - numpy >=1.23,<3
+  - liblapack >=3.9.0,<3.10.0a0
+  - libcblas >=3.9.0,<4.0a0
+  - python_abi 3.13.* *_cp313
+  - libblas >=3.9.0,<4.0a0
   license: BSD-3-Clause
   input:
-    hash: cf70f571b359a86fc6b851874f15ef0a6d36091ecb81b8831038b7fe00ee5b08
+    hash: 30707025aac620e34f0cb63a74b59a668a1919c8f72f51ad4bfd35e28929651d
     globs:
     - pixi.toml
     - recipe/recipe.yaml
