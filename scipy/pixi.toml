@@ -21,7 +21,8 @@ channels = [
 compilers = ">=1.7.0,<2"
 pkg-config = ">=0.29.2,<0.30"
 ninja = ">=1.12.1,<2"
-meson = { path = "../meson" }
+# meson = { path = "../meson" }
+meson = ">=1.5.1,<2"
 python = ">=3.12.0,<3.13"
 meson-python = ">=0.16.0"
 cython = ">=3.0.10,<4"
