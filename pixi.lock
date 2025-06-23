@@ -80,7 +80,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/linux-64/libpciaccess-0.18-hb9d3cd8_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/libpng-1.6.49-h943b412_0.conda
       - conda: https://prefix.dev/conda-forge/linux-64/libpq-17.5-h27ae623_0.conda
-      - conda: https://prefix.dev/conda-forge/linux-64/libsqlite-3.50.1-h6cd9bfd_5.conda
+      - conda: https://prefix.dev/conda-forge/linux-64/libsqlite-3.50.1-h6cd9bfd_6.conda
       - conda: https://prefix.dev/conda-forge/linux-64/libstdcxx-15.1.0-h8f9b012_2.conda
       - conda: https://prefix.dev/conda-forge/linux-64/libstdcxx-ng-15.1.0-h4852527_2.conda
       - conda: https://prefix.dev/conda-forge/linux-64/libtiff-4.7.0-hf01ce69_5.conda
@@ -195,7 +195,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/osx-arm64/libmpdec-4.0.0-h5505292_0.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/libopenblas-0.3.30-openmp_hf332438_0.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/libpng-1.6.49-h3783ad8_0.conda
-      - conda: https://prefix.dev/conda-forge/osx-arm64/libsqlite-3.50.1-h6fb428d_5.conda
+      - conda: https://prefix.dev/conda-forge/osx-arm64/libsqlite-3.50.1-h6fb428d_6.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/libtiff-4.7.0-h2f21f7c_5.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/libwebp-base-1.5.0-h2471fea_0.conda
       - conda: https://prefix.dev/conda-forge/osx-arm64/libxcb-1.17.0-hdb1d25a_0.conda
@@ -299,7 +299,7 @@ environments:
       - conda: https://prefix.dev/conda-forge/win-64/liblzma-5.8.1-h2466b09_2.conda
       - conda: https://prefix.dev/conda-forge/win-64/libmpdec-4.0.0-h2466b09_0.conda
       - conda: https://prefix.dev/conda-forge/win-64/libpng-1.6.49-h7a4582a_0.conda
-      - conda: https://prefix.dev/conda-forge/win-64/libsqlite-3.50.1-hf5d6505_5.conda
+      - conda: https://prefix.dev/conda-forge/win-64/libsqlite-3.50.1-hf5d6505_6.conda
       - conda: https://prefix.dev/conda-forge/win-64/libtiff-4.7.0-h05922d8_5.conda
       - conda: https://prefix.dev/conda-forge/win-64/libwebp-base-1.5.0-h3b0e114_0.conda
       - conda: https://prefix.dev/conda-forge/win-64/libwinpthread-12.0.0.r4.gg4f2fc60ca-h57928b3_9.conda
@@ -2066,35 +2066,35 @@ packages:
   license: PostgreSQL
   size: 2680582
   timestamp: 1746743259857
-- conda: https://prefix.dev/conda-forge/linux-64/libsqlite-3.50.1-h6cd9bfd_5.conda
-  sha256: a95373e9564e72f0dd920c99a32c253faddca87a44d25f7941ffcf8600f802f9
-  md5: 5be3ab2bce386efbf1b85ee01cf4700a
+- conda: https://prefix.dev/conda-forge/linux-64/libsqlite-3.50.1-h6cd9bfd_6.conda
+  sha256: 0ef71429958415129e6ae1d675006e2a6c13346d1c757665db780e4e7413d7ae
+  md5: a5ea64ea2bd58803ea85e3769a659829
   depends:
   - __glibc >=2.17,<3.0.a0
   - libgcc >=13
   - libzlib >=1.3.1,<2.0a0
   license: Unlicense
-  size: 919640
-  timestamp: 1750679439853
-- conda: https://prefix.dev/conda-forge/osx-arm64/libsqlite-3.50.1-h6fb428d_5.conda
-  sha256: 81a856796babdc123430ca9f718bf2cd38984edd2ff11216a71d6ddc762afe18
-  md5: eee8db9b85c6441a5045f9f735a11b26
+  size: 919463
+  timestamp: 1750689098065
+- conda: https://prefix.dev/conda-forge/osx-arm64/libsqlite-3.50.1-h6fb428d_6.conda
+  sha256: d387ae97b2223e2bd350a1046d9471b86bdfce5b2ff1aef09ceece1171c544ab
+  md5: ef49edd0ec42a5de40ed95bf5ee2f246
   depends:
   - __osx >=11.0
   - libzlib >=1.3.1,<2.0a0
   license: Unlicense
-  size: 901568
-  timestamp: 1750679569524
-- conda: https://prefix.dev/conda-forge/win-64/libsqlite-3.50.1-hf5d6505_5.conda
-  sha256: 20aa18c3962b3732a087f462436c311e772bf958a05c442370051f0a6763a308
-  md5: b512d35d086b93ce7202d47df964c6df
+  size: 901338
+  timestamp: 1750689172113
+- conda: https://prefix.dev/conda-forge/win-64/libsqlite-3.50.1-hf5d6505_6.conda
+  sha256: 56b8ba674b8dec6d169ee39434e68c8654e4327fd5705594fcc19625660630ad
+  md5: c01fd2d0873bdc8d35bfa3c6eb2f54e5
   depends:
   - ucrt >=10.0.20348.0
   - vc >=14.3,<15
   - vc14_runtime >=14.44.35208
   license: Unlicense
-  size: 1287288
-  timestamp: 1750679876798
+  size: 1291823
+  timestamp: 1750689395515
 - conda: https://prefix.dev/conda-forge/linux-64/libstdcxx-15.1.0-h8f9b012_2.conda
   sha256: 6ae3d153e78f6069d503d9309f2cac6de5b93d067fc6433160a4c05226a5dad4
   md5: 1cb1c67961f6dd257eae9e9691b341aa
@@ -3227,14 +3227,14 @@ packages:
   - libgfortran 5.*
   - libgfortran5 >=14.2.0
   - libcxx >=20
+  - libcblas >=3.9.0,<4.0a0
   - liblapack >=3.9.0,<3.10.0a0
   - libblas >=3.9.0,<4.0a0
   - numpy >=1.23,<3
   - python_abi 3.13.* *_cp313
-  - libcblas >=3.9.0,<4.0a0
   license: BSD-3-Clause
   input:
-    hash: 30707025aac620e34f0cb63a74b59a668a1919c8f72f51ad4bfd35e28929651d
+    hash: a604af14436ea4cc5a33f8e18b61503d0cfc85513274b83337e2b51a8e5a9d80
     globs:
     - pixi.toml
     - recipe/recipe.yaml
@@ -3245,20 +3245,20 @@ packages:
   subdir: win-64
   depends:
   - python
+  - vc >=14.1,<15
+  - vc14_runtime >=14.16.27033
   - libgfortran5 >=15.1.0
   - libgfortran
   - libgcc >=15
   - ucrt >=10.0.20348.0
-  - vc >=14.1,<15
-  - vc14_runtime >=14.16.27033
   - libcblas >=3.9.0,<4.0a0
-  - python_abi 3.13.* *_cp313
   - numpy >=1.23,<3
   - liblapack >=3.9.0,<3.10.0a0
+  - python_abi 3.13.* *_cp313
   - libblas >=3.9.0,<4.0a0
   license: BSD-3-Clause
   input:
-    hash: 30707025aac620e34f0cb63a74b59a668a1919c8f72f51ad4bfd35e28929651d
+    hash: a604af14436ea4cc5a33f8e18b61503d0cfc85513274b83337e2b51a8e5a9d80
     globs:
     - pixi.toml
     - recipe/recipe.yaml
@@ -3269,20 +3269,20 @@ packages:
   subdir: linux-64
   depends:
   - python
-  - libstdcxx >=15
-  - libgcc >=15
   - libgfortran5 >=15.1.0
   - libgfortran
   - libgcc >=15
+  - libstdcxx >=15
   - libgcc >=15
+  - libgcc >=15
+  - libblas >=3.9.0,<4.0a0
   - numpy >=1.23,<3
-  - liblapack >=3.9.0,<3.10.0a0
   - libcblas >=3.9.0,<4.0a0
   - python_abi 3.13.* *_cp313
-  - libblas >=3.9.0,<4.0a0
+  - liblapack >=3.9.0,<3.10.0a0
   license: BSD-3-Clause
   input:
-    hash: 30707025aac620e34f0cb63a74b59a668a1919c8f72f51ad4bfd35e28929651d
+    hash: a604af14436ea4cc5a33f8e18b61503d0cfc85513274b83337e2b51a8e5a9d80
     globs:
     - pixi.toml
     - recipe/recipe.yaml
