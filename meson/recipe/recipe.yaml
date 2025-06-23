@@ -1,5 +1,5 @@
 context:
-  version: 1.7.99
+  version: 1.8.99
 
 package:
   name: meson
