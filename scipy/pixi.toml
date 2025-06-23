@@ -1,6 +1,6 @@
 [package]
 name = "scipy"
-version = "1.15.0.dev0"
+version = "1.17.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
 
