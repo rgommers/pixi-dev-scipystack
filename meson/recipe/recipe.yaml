@@ -10,6 +10,7 @@ source:
   use_gitignore: false
 
 build:
+  number: 0
   noarch: python
   script: pip install . -v --no-build-isolation
   python:
