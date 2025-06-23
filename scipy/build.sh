@@ -6,4 +6,4 @@ python -m build -w -n -x \
     -Csetup-args=-Dblas=blas \
     -Csetup-args=-Dlapack=lapack
 
-python -m pip install dist/numpy*.whl
+$PYTHON -m pip install dist/numpy*.whl
