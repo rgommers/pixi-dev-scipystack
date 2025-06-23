@@ -1,6 +1,7 @@
 mkdir builddir
 
-$PYTHON -m build -w -n -x \
+CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY" \
+    PYTHON -m build -w -n -x \
     -Cbuild-dir=builddir \
     -Cinstall-args=--tags=runtime,python-runtime,devel \
     -Csetup-args=-Dblas=blas \
