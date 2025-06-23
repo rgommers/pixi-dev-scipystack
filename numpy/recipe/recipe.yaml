@@ -1,5 +1,5 @@
 context:
-  version: 2.2.0.dev0
+  version: 2.3.2.dev0
   default_abi_level: 1.21
 
 package:
@@ -15,6 +15,7 @@ source:
   use_gitignore: false
 
 build:
+  number: 0
   python:
     entry_points:
       - f2py = numpy.f2py.f2py2e:main  # [win]
