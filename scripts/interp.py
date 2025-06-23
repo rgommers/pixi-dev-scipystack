@@ -3,7 +3,6 @@ from scipy.interpolate import CubicSpline
 import matplotlib.pyplot as plt
 
 def main():
-    
     x = np.linspace(0, 10, num=11)
     y = np.cos(-x**2 / 9.)
     spl = CubicSpline(x, y)
