@@ -5,6 +5,7 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 name = "numpy"
 
 [package]
+name = "numpy"
 version = "2.3.2.dev0"
 description = "Fundamental package for array computing in Python"
 authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
