@@ -14210,7 +14210,7 @@ packages:
   - python
   license: Apache-2.0
   input:
-    hash: 56ee7221d70c41c20597838b48887390d2cee26bd298c5a00fb775dd133143b6
+    hash: 22ebdfda70e971ae356566e04b1175ae7769372cc171acda5544c407d327dc95
     globs:
     - pixi.toml
     - recipe/recipe.yaml
