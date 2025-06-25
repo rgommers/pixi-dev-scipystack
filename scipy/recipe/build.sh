@@ -1,8 +1,8 @@
-mkdir builddir
+mkdir -p $SRC_DIR/../build/$PKG_NAME
 
 CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY" \
     $PYTHON -m build -w -n -x \
-    -Cbuild-dir=builddir \
+    -Cbuild-dir=$SRC_DIR/../build/$PKG_NAME \
     -Cinstall-args=--tags=runtime,python-runtime,devel \
     -Csetup-args=-Dblas=blas \
     -Csetup-args=-Dlapack=lapack \
