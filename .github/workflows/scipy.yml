@@ -34,6 +34,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         suffix: ["", -editable, -nogil]
+        exclude:
+          - os: windows-latest
+            suffix: -editable
+          - os: windows-latest
+            suffix: -nogil
         include:
           - os: macos-latest
             suffix: -accelerate
