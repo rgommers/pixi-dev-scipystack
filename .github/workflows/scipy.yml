@@ -21,6 +21,9 @@ concurrency:
 permissions:
   contents: read # to fetch code (actions/checkout)
 
+env:
+  PYTHONIOENCODING: "utf8" # https://github.com/scipy/scipy/issues/18046
+
 jobs:
   test:
     name: SciPy ${{ matrix.os }}${{ matrix.suffix }}
