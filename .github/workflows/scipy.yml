@@ -53,7 +53,7 @@ jobs:
           #cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       - name: Build SciPy
         working-directory: ./scipy
-        run: pixi run build${{ matrix.suffix }}\
+        run: pixi run build${{ matrix.suffix }}
       - name: Smoke test iPython
         working-directory: ./scipy
         run: pixi run ipython${{ matrix.suffix }} -- -c 'print("Hello world")'
