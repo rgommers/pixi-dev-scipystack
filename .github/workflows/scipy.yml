@@ -58,7 +58,7 @@ jobs:
         working-directory: ./scipy
         run: pixi run ipython${{ matrix.suffix }} -- -c 'print("Hello world")'
       - name: Run some array API tests
-        if: ${{ matrix.suffix }} == ""
+        if: ${{ matrix.suffix == '' }}
         working-directory: ./scipy
         run: pixi run test-cpu -s cluster
       - name: Run linalg tests (fast)
