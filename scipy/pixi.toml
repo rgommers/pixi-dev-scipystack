@@ -74,7 +74,7 @@ profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ni
 check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = ["build"], cwd = "scipy" }
 
 [feature.build.target.win-64.tasks]
-build = { cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
+build = { cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true && cp ../.pixi/envs/default/Library/bin/openblas.dll build-install/Lib/site-packages/scipy/linalg/openblas.dll", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
 
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "scipy" }
