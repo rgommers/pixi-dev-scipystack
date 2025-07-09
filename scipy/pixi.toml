@@ -168,10 +168,10 @@ cupy = "*"
 test-cupy = { cmd = "spin test -b cupy -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.jax-cpu]
-# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
-[feature.jax-cpu.dependencies]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.dependencies]
 jax = ">=0.6.0"
 jaxlib = { version = "*", build = "*cpu*" }
 
@@ -182,7 +182,8 @@ platforms = ["linux-64"]
 jax = ">=0.6.0"
 jaxlib = { version = "*", build = "*cuda*" }
 
-[feature.jax-cpu.tasks]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.tasks]
 test-jax = { cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.jax-cuda.tasks]
@@ -304,7 +305,7 @@ array-api = [
   "cpu",
   "array_api_strict",
   "dask",
-  # "jax-cpu",
+  "jax-cpu",
   "mkl",
   "torch-cpu",
 ]
