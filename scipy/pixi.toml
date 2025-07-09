@@ -232,7 +232,7 @@ pytest = "*"
 hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
-pytest-run-parallel = ">=0.4.3"
+pytest-run-parallel = ">=0.4.4"
 ipython = "*"
 
 [feature.free-threading.pypi-dependencies]
