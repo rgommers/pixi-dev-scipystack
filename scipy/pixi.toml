@@ -220,7 +220,7 @@ ccache = ">=4.10.1,<5"
 meson = ">=1.6.0,<2"
 meson-python = ">=0.16.0"
 cython = ">=3.1.0,<4"
-# pythran = ">=0.18.0"  # FIXME conda 0.18.0 build not available yet
+pythran = ">=0.18.0"
 python-build = "*"
 pip = "*"
 blas-devel = "*"
@@ -233,9 +233,6 @@ threadpoolctl = "*"
 pooch = "*"
 pytest-run-parallel = ">=0.4.4"
 ipython = "*"
-
-[feature.free-threading.pypi-dependencies]
-pythran = ">=0.18.0" # FIXME conda 0.18.0 build not available yet
 
 [feature.free-threading.tasks]
 build-nogil = { cmd = "spin build --build-dir=build-nogil --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
