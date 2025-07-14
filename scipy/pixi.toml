@@ -175,9 +175,6 @@ platforms = ["linux-64", "win-64"]
 [feature.blis.dependencies]
 libblas = { version = "*", build = "*blis" }
 
-[feature.array_api.tasks]
-ipython-array-api = { cmd = "spin ipython", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
-bench-array-api = { cmd = "spin bench -b all", cwd = "scipy" }
 
 # CPU/CUDA features
 [feature.cuda]
@@ -196,6 +193,18 @@ depends-on = "build"
 cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'"
 cwd = "scipy"
 env.SCIPY_DEVICE = "cuda"
+depends-on = "build"
+
+
+[feature.array_api.tasks.ipython-array-api]
+cmd = "spin ipython"
+cwd = "scipy"
+env = { SCIPY_ARRAY_API = "1" }
+depends-on = "build"
+
+[feature.array_api.tasks.bench-array-api]
+cmd = "spin bench -b all"
+cwd = "scipy"
 depends-on = "build"
 
 
