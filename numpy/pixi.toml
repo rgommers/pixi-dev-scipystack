@@ -14,7 +14,6 @@ backend = { name = "pixi-build-python", version = "*" }
 channels = [
   "https://prefix.dev/pixi-build-backends",
   "https://prefix.dev/conda-forge",
-
 ]
 
 [package.host-dependencies]
