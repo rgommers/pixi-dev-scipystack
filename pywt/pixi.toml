@@ -10,11 +10,21 @@ version = "1.9.0.dev0"
 authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 
 [package.build]
-backend = { name = "pixi-build-rattler-build", version = "*" }
+backend = { name = "pixi-build-python", version = "*" }
 channels = [
   "https://prefix.dev/pixi-build-backends",
   "https://prefix.dev/conda-forge",
 ]
+
+[package.host-dependencies]
+meson-python = "*"
+cython = "*"
+uv = "*"
+numpy = "*"
+
+[package.build.configuration]
+env = { SRC_DIR = "$PWD/pywt" }
+
 
 [tasks]
 build = { cmd = "spin build", cwd = "pywt" }
