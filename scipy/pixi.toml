@@ -199,7 +199,7 @@ depends-on = "build"
 [feature.array_api.tasks.ipython-array-api]
 cmd = "spin ipython"
 cwd = "scipy"
-env = { SCIPY_ARRAY_API = "1" }
+env.SCIPY_ARRAY_API = "1"
 depends-on = "build"
 
 [feature.array_api.tasks.bench-array-api]
@@ -223,7 +223,7 @@ depends-on = "build"
 [feature.torch-cuda.tasks.test-torch-cuda]
 cmd = "spin test -b torch -m 'array_api_backends and not slow'"
 cwd = "scipy"
-env = { SCIPY_DEVICE = "cuda" }
+env.SCIPY_DEVICE = "cuda"
 depends-on = "build"
 
 
