@@ -8,14 +8,23 @@ name = "numpy"
 name = "numpy"
 version = "2.3.2.dev0"
 description = "Fundamental package for array computing in Python"
-authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 
 [package.build]
-backend = { name = "pixi-build-rattler-build", version = "*" }
+backend = { name = "pixi-build-python", version = "*" }
 channels = [
   "https://prefix.dev/pixi-build-backends",
   "https://prefix.dev/conda-forge",
+
 ]
+
+[package.host-dependencies]
+meson-python = "*"
+cython = "*"
+uv = "*"
+
+[package.build.configuration]
+env = { SRC_DIR = "$PWD/numpy" }
+
 
 [tasks]
 build = { cmd = "spin build", cwd = "numpy", env = { CC = "ccache $CC", CXX = "ccache $CXX" } }
