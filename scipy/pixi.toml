@@ -11,11 +11,22 @@ description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
 
 [package.build]
-backend = { name = "pixi-build-rattler-build", version = "*" }
+backend = { name = "pixi-build-python", version = "*" }
 channels = [
   "https://prefix.dev/pixi-build-backends",
   "https://prefix.dev/conda-forge",
 ]
+
+[package.host-dependencies]
+meson-python = "*"
+cython = "*"
+pythran = "*"
+openblas = "*"
+pybind11 = "*"
+uv = "*"
+
+[package.build.configuration]
+env = { SRC_DIR = "$PWD/scipy" }
 
 [dependencies]
 compilers = ">=1.7.0,<2"
