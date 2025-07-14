@@ -46,6 +46,11 @@ cmd = "spin build --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-
 cwd = "scipy"
 env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
+[feature.build.target.win-64.tasks.build]
+cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true && cp ../.pixi/envs/default/Library/bin/openblas.dll build-install/Lib/site-packages/scipy/linalg/openblas.dll"
+cwd = "scipy"
+env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" }
+
 [feature.build.tasks.wheel]
 cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/"
 cwd = "scipy"
@@ -170,6 +175,9 @@ platforms = ["linux-64", "win-64"]
 [feature.blis.dependencies]
 libblas = { version = "*", build = "*blis" }
 
+[feature.array_api.tasks]
+ipython-array-api = { cmd = "spin ipython", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+bench-array-api = { cmd = "spin bench -b all", cwd = "scipy" }
 
 # CPU/CUDA features
 [feature.cuda]
@@ -192,11 +200,6 @@ depends-on = "build"
 
 
 # Array libraries we have support for
-[feature.torch-base]
-# Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
-#                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
-platforms = ["linux-64", "osx-arm64"]
-
 [feature.torch-cpu.dependencies]
 pytorch-cpu = "*"
 
@@ -228,10 +231,10 @@ depends-on = "build"
 
 
 [feature.jax-cpu]
-# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
-[feature.jax-cpu.dependencies]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.dependencies]
 jax = ">=0.6.0"
 jaxlib = { version = "*", build = "*cpu*" }
 
@@ -242,7 +245,8 @@ platforms = ["linux-64"]
 jax = ">=0.6.0"
 jaxlib = { version = "*", build = "*cuda*" }
 
-[feature.jax-cpu.tasks.test-jax]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.tasks.test-jax]
 cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'"
 cwd = "scipy"
 depends-on = "build"
@@ -292,7 +296,7 @@ ccache = ">=4.10.1,<5"
 meson = ">=1.6.0,<2"
 meson-python = ">=0.16.0"
 cython = ">=3.1.0,<4"
-# pythran = ">=0.18.0"  # FIXME conda 0.18.0 build not available yet
+pythran = ">=0.18.0"
 python-build = "*"
 pip = "*"
 blas-devel = "*"
@@ -303,11 +307,8 @@ pytest = "*"
 hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
-pytest-run-parallel = ">=0.4.3"
+pytest-run-parallel = ">=0.4.4"
 ipython = "*"
-
-[feature.free-threading.pypi-dependencies]
-pythran = ">=0.18.0" # FIXME conda 0.18.0 build not available yet
 
 [feature.free-threading.tasks.build-nogil]
 cmd = "spin build --build-dir=build-nogil --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true"
@@ -423,30 +424,33 @@ mkl = ["mkl", "test"]
 accelerate = ["accelerate", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-torch = ["torch-base", "torch-cpu", "mkl"] # FIXME: add env var
-torch-cuda = ["cuda", "torch-base", "torch-cuda", "mkl"] # FIXME: add env var
+torch = ["torch-cpu", "mkl"] # FIXME: add env var
+torch-cuda = ["cuda", "torch-cuda", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
 jax = ["jax-cpu"]
 jax-cuda = ["cuda", "jax-cuda"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
 array-api = [
-  "cpu",
-  "array_api_strict",
-  "dask",
-  "jax-cpu",
-  "mkl",
-  "torch-base",
-  "torch-cpu",
+    "array_api",
+    "bench",
+    "cpu",
+    "array_api_strict",
+    "dask",
+    "jax-cpu",
+    "mkl",
+    "torch-cpu",
 ]
 array-api-cuda = [
-  "cuda",
-  "array_api_strict",
-  "cupy",
-  "jax-cuda",
-  "mkl",
-  "torch-base",
-  "torch-cuda",
+    "array_api",
+    "bench",
+    "cuda",
+    "array_api_strict",
+    "cupy",
+    "dask",
+    "jax-cuda",
+    "mkl",
+    "torch-cuda",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
 openblas-src = { features = ["openblas-src"], no-default-feature = true }

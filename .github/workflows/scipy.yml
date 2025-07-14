@@ -1,4 +1,4 @@
-name: Linux SciPy
+name: SciPy
 
 on:
   push:
@@ -21,6 +21,9 @@ concurrency:
 permissions:
   contents: read # to fetch code (actions/checkout)
 
+env:
+  PYTHONIOENCODING: "utf8" # https://github.com/scipy/scipy/issues/18046
+
 jobs:
   test:
     name: SciPy ${{ matrix.os }}${{ matrix.suffix }}
@@ -29,8 +32,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         suffix: ["", -editable, -nogil]
+        exclude:
+          - os: windows-latest
+            suffix: -editable
+          - os: windows-latest
+            suffix: -nogil
         include:
           - os: macos-latest
             suffix: -accelerate
@@ -46,7 +54,7 @@ jobs:
           submodules: recursive
       - uses: prefix-dev/setup-pixi@v0.8.1
         with:
-          pixi-version: v0.39.0
+          pixi-version: v0.49.0
           manifest-path: scipy/pixi.toml
           #cache: true
           #cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
@@ -59,3 +67,7 @@ jobs:
       - name: Run linalg tests (fast)
         working-directory: ./scipy
         run: pixi run test${{ matrix.suffix }} -s linalg
+      - name: Run some array API tests
+        if: ${{ matrix.suffix == '' }}
+        working-directory: ./scipy
+        run: pixi run test-cpu -s cluster
