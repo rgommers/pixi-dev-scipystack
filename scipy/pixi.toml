@@ -432,25 +432,25 @@ jax-cuda = ["cuda", "jax-cuda"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
 array-api = [
-    "array_api",
-    "bench",
-    "cpu",
-    "array_api_strict",
-    "dask",
-    "jax-cpu",
-    "mkl",
-    "torch-cpu",
+  "array_api",
+  "bench",
+  "cpu",
+  "array_api_strict",
+  "dask",
+  "jax-cpu",
+  "mkl",
+  "torch-cpu",
 ]
 array-api-cuda = [
-    "array_api",
-    "bench",
-    "cuda",
-    "array_api_strict",
-    "cupy",
-    "dask",
-    "jax-cuda",
-    "mkl",
-    "torch-cuda",
+  "array_api",
+  "bench",
+  "cuda",
+  "array_api_strict",
+  "cupy",
+  "dask",
+  "jax-cuda",
+  "mkl",
+  "torch-cuda",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
 openblas-src = { features = ["openblas-src"], no-default-feature = true }
