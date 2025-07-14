@@ -53,6 +53,9 @@ mkdocs = "*"
 mkdocs-material = "*"
 mkdocs-git-revision-date-localized-plugin = "*"
 
+[feature.doc.pypi-dependencies]
+mkdocs-mermaid2-plugin = "*"
+
 [feature.doc.tasks]
 doc = { cmd = "mkdocs build", cwd = "OpenBLAS" }
 doc-serve = { cmd = "mkdocs serve", cwd = "OpenBLAS" }

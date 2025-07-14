@@ -73,6 +73,9 @@ wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../
 profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
 check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = ["build"], cwd = "scipy" }
 
+[feature.build.target.win-64.tasks]
+build = { cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true && cp ../.pixi/envs/default/Library/bin/openblas.dll build-install/Lib/site-packages/scipy/linalg/openblas.dll", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
+
 [feature.test.tasks]
 test = { cmd = "spin test", cwd = "scipy" }
 
@@ -146,11 +149,6 @@ cuda-version = ">=12.0,<13"
 test-cuda = { cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
 
 # Array libraries we have support for
-[feature.torch-base]
-# Windows support pending: https://github.com/conda-forge/pytorch-cpu-feedstock/issues/32,
-#                          https://github.com/conda-forge/pytorch-cpu-feedstock/pull/231
-platforms = ["linux-64", "osx-arm64"]
-
 [feature.torch-cpu.dependencies]
 pytorch-cpu = "*"
 
@@ -173,10 +171,10 @@ cupy = "*"
 test-cupy = { cmd = "spin test -b cupy -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.jax-cpu]
-# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
-platforms = ["linux-64", "osx-arm64"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
-[feature.jax-cpu.dependencies]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.dependencies]
 jax = ">=0.6.0"
 jaxlib = { version = "*", build = "*cpu*" }
 
@@ -187,7 +185,8 @@ platforms = ["linux-64"]
 jax = ">=0.6.0"
 jaxlib = { version = "*", build = "*cuda*" }
 
-[feature.jax-cpu.tasks]
+# Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
+[feature.jax-cpu.target.unix.tasks]
 test-jax = { cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy" }
 
 [feature.jax-cuda.tasks]
@@ -207,7 +206,7 @@ system-requirements = { macos = "13.5" }
 mlx = "*"
 
 [feature.dask.dependencies]
-dask-core = "*"  # Don't install distributed, tornado, etc.
+dask-core = "*" # Don't install distributed, tornado, etc.
 
 [feature.dask.tasks]
 test-dask = { cmd = "spin test -b dask.array -m 'array_api_backends and not slow'", cwd = "scipy" }
@@ -224,7 +223,7 @@ ccache = ">=4.10.1,<5"
 meson = ">=1.6.0,<2"
 meson-python = ">=0.16.0"
 cython = ">=3.1.0,<4"
-# pythran = ">=0.18.0"  # FIXME conda 0.18.0 build not available yet
+pythran = ">=0.18.0"
 python-build = "*"
 pip = "*"
 blas-devel = "*"
@@ -237,9 +236,6 @@ threadpoolctl = "*"
 pooch = "*"
 pytest-run-parallel = ">=0.4.4"
 ipython = "*"
-
-[feature.free-threading.pypi-dependencies]
-pythran = ">=0.18.0"  # FIXME conda 0.18.0 build not available yet
 
 [feature.free-threading.tasks]
 build-nogil = { cmd = "spin build --build-dir=build-nogil --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
@@ -298,8 +294,8 @@ mkl = ["mkl", "test"]
 accelerate = ["accelerate", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-torch = ["torch-base", "torch-cpu", "mkl"] # FIXME: add env var
-torch-cuda = ["cuda", "torch-base", "torch-cuda", "mkl"] # FIXME: add env var
+torch = ["torch-cpu", "mkl"] # FIXME: add env var
+torch-cuda = ["cuda", "torch-cuda", "mkl"] # FIXME: add env var
 cupy = ["cupy"]
 jax = ["jax-cpu"]
 jax-cuda = ["cuda", "jax-cuda"]
@@ -313,7 +309,6 @@ array-api = [
   "dask",
   "jax-cpu",
   "mkl",
-  "torch-base",
   "torch-cpu",
 ]
 array-api-cuda = [
@@ -325,7 +320,6 @@ array-api-cuda = [
   "dask",
   "jax-cuda",
   "mkl",
-  "torch-base",
   "torch-cuda",
 ]
 free-threading = { features = ["free-threading"], no-default-feature = true }
