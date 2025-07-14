@@ -18,11 +18,16 @@ name = "meson"
 version = "1.7.99"
 
 [package.build]
-backend = { name = "pixi-build-rattler-build", version = "*" }
+backend = { name = "pixi-build-python", version = "*" }
+channels = [
+  "https://prefix.dev/pixi-build-backends",
+  "https://prefix.dev/conda-forge",
+
+]
 
 [package.host-dependencies]
-setuptools = "75.8.*"
+setuptools = ">=42"
+uv = "*"
 
-[package.run-dependencies]
-python = "*"
-ninja = "*"
+[package.build.configuration]
+env = { SRC_DIR = "$PWD/meson" }
