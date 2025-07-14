@@ -130,6 +130,9 @@ platforms = ["linux-64", "win-64"]
 [feature.blis.dependencies]
 libblas = { version = "*", build = "*blis" }
 
+[feature.array_api.tasks]
+ipython-array-api = { cmd = "spin ipython", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
+bench-array-api = { cmd = "spin bench -b all", cwd = "scipy" }
 
 # CPU/CUDA features
 [feature.cpu.tasks]
@@ -299,6 +302,8 @@ jax-cuda = ["cuda", "jax-cuda"]
 mlx = ["mlx"]
 array-api-strict = ["array_api_strict"]
 array-api = [
+  "array_api",
+  "bench",
   "cpu",
   "array_api_strict",
   "dask",
@@ -307,9 +312,12 @@ array-api = [
   "torch-cpu",
 ]
 array-api-cuda = [
+  "array_api",
+  "bench",
   "cuda",
   "array_api_strict",
   "cupy",
+  "dask",
   "jax-cuda",
   "mkl",
   "torch-cuda",
