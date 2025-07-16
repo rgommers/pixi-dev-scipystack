@@ -77,7 +77,7 @@ typing_extensions = "*"
 types-psutil = "*"
 
 [feature.typing.tasks.mypy]
-cmd = "spin mypy --no-build"
+cmd = "spin mypy"
 cwd = "scipy"
 depends-on = "build"
 
@@ -415,12 +415,12 @@ cwd = "scipy"
 depends-on = "build-editable"
 
 [feature.editable.tasks.smoke-tutorials]
-cmd = "spin smoke-tutorials --no-build --build-dir=build-editable"
+cmd = "spin smoke-tutorials --build-dir=build-editable"
 cwd = "scipy"
 depends-on = "build-editable"
 
 [feature.editable.tasks.reguide-check]
-cmd = "spin refguide-check --no-build --build-dir=build-editable"
+cmd = "spin refguide-check --build-dir=build-editable"
 cwd = "scipy"
 depends-on = "build-editable"
 
