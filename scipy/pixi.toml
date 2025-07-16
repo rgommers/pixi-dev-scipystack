@@ -86,7 +86,7 @@ depends-on = "build"
 asv = "*"
 
 [feature.bench.tasks.bench]
-cmd = "spin bench --no-build"
+cmd = "spin bench"
 cwd = "scipy"
 depends-on = "build"
 
@@ -203,7 +203,7 @@ env.SCIPY_ARRAY_API = "1"
 depends-on = "build"
 
 [feature.array_api.tasks.bench-array-api]
-cmd = "spin bench --no-build -b all"
+cmd = "spin bench -b all"
 cwd = "scipy"
 depends-on = "build"
 
