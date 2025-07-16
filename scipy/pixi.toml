@@ -35,18 +35,71 @@ gmpy2 = "*"
 ccache = ">=4.10.1,<5"
 spin = "*"
 
+[tasks.ipython]
+cmd = "spin ipython --no-build"
+cwd = "scipy"
+depends-on = "build"
+
+
+[feature.build.tasks.build]
+cmd = "spin build --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true"
+cwd = "scipy"
+env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+
+[feature.build.target.win-64.tasks.build]
+cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true && cp ../.pixi/envs/default/Library/bin/openblas.dll build-install/Lib/site-packages/scipy/linalg/openblas.dll"
+cwd = "scipy"
+env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" }
+
+[feature.build.tasks.wheel]
+cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/"
+cwd = "scipy"
+
+[feature.build.tasks.profile-build]
+cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json"
+cwd = "scipy"
+
+[feature.build.tasks.check-missingdeps]
+cmd = "ninja -C build -t missingdeps"
+cwd = "scipy"
+depends-on = "build"
+
+
+[feature.test.tasks.test]
+cmd = "spin test --no-build"
+cwd = "scipy"
+depends-on = "build"
+
+
 [feature.typing.dependencies]
 mypy = "1.10.*"
 typing_extensions = "*"
 types-psutil = "*"
 
+[feature.typing.tasks.mypy]
+cmd = "spin mypy"
+cwd = "scipy"
+depends-on = "build"
+
+
 [feature.bench.dependencies]
 asv = "*"
+
+[feature.bench.tasks.bench]
+cmd = "spin bench"
+cwd = "scipy"
+depends-on = "build"
+
 
 [feature.lint.dependencies]
 ruff = "*"
 pycodestyle = "*"
 cython-lint = ">=0.12.2"
+
+[feature.lint.tasks.lint]
+cmd = "spin lint"
+cwd = "scipy"
+
 
 [feature.doc.dependencies]
 sphinx = ">=7.0,<8"
@@ -64,33 +117,15 @@ jupyterlite-pyodide-kernel = "*"
 scipy-doctest = "*"
 linkify-it-py = "*"
 
-[tasks]
-ipython = { cmd = "spin ipython", cwd = "scipy" }
+[feature.doc.tasks.doc]
+cmd = "spin docs --no-build -j6"
+cwd = "scipy"
+depends-on = "build"
 
-[feature.build.tasks]
-build = { cmd = "spin build --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "scipy" }
-profile-build = { cmd = "rm -rf build-profile && meson setup build-profile && ninja -C build-profile && python tools/ninjatracing.py build-profile/.ninja_log > build-profile/trace.json", cwd = "scipy" }
-check-missingdeps = { cmd = "ninja -C build -t missingdeps", depends-on = ["build"], cwd = "scipy" }
-
-[feature.build.target.win-64.tasks]
-build = { cmd = "spin build --setup-args=-Dblas=openblas --setup-args=-Dlapack=openblas --setup-args=-Duse-g77-abi=true && cp ../.pixi/envs/default/Library/bin/openblas.dll build-install/Lib/site-packages/scipy/linalg/openblas.dll", cwd = "scipy", env = { CC = "ccache clang-cl", CXX = "ccache clang-cl", FC = "ccache $FC", FC_LD = "lld-link" } }
-
-[feature.test.tasks]
-test = { cmd = "spin test", cwd = "scipy" }
-
-[feature.typing.tasks]
-mypy = { cmd = "spin mypy", cwd = "scipy" }
-
-[feature.bench.tasks]
-bench = { cmd = "spin bench", cwd = "scipy" }
-
-[feature.lint.tasks]
-lint = { cmd = "spin lint", cwd = "scipy" }
-
-[feature.doc.tasks]
-doc = { cmd = "spin docs -j6", cwd = "scipy" }
-smoke-docs = { cmd = "spin smoke-docs", cwd = "scipy" }
+[feature.doc.tasks.smoke-docs]
+cmd = "spin smoke-docs --no-build"
+cwd = "scipy"
+depends-on = "build"
 
 
 [feature.bldcheck.dependencies]
@@ -116,10 +151,20 @@ platforms = ["osx-arm64"]
 [feature.accelerate.dependencies]
 libblas = { version = "*", build = "*accelerate" }
 
-[feature.accelerate.tasks]
-build-accelerate = { cmd = "spin build --build-dir=build-accelerate --with-accelerate", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-accelerate = { cmd = "spin test --build-dir=build-accelerate", cwd = "scipy", depends-on = "build-accelerate" }
-ipython-accelerate = { cmd = "spin ipython --build-dir=build-accelerate", cwd = "scipy", depends-on = "build-accelerate" }
+[feature.accelerate.tasks.build-accelerate]
+cmd = "spin build --build-dir=build-accelerate --with-accelerate"
+cwd = "scipy"
+env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+
+[feature.accelerate.tasks.test-accelerate]
+cmd = "spin test --no-build --build-dir=build-accelerate"
+cwd = "scipy"
+depends-on = "build-accelerate"
+
+[feature.accelerate.tasks.ipython-accelerate]
+cmd = "spin ipython --no-build --build-dir=build-accelerate"
+cwd = "scipy"
+depends-on = "build-accelerate"
 
 [feature.netlib.dependencies]
 libblas = { version = "*", build = "*netlib" }
@@ -130,14 +175,8 @@ platforms = ["linux-64", "win-64"]
 [feature.blis.dependencies]
 libblas = { version = "*", build = "*blis" }
 
-[feature.array_api.tasks]
-ipython-array-api = { cmd = "spin ipython", cwd = "scipy", env = { SCIPY_ARRAY_API = "1" } }
-bench-array-api = { cmd = "spin bench -b all", cwd = "scipy" }
 
 # CPU/CUDA features
-[feature.cpu.tasks]
-test-cpu = { cmd = "spin test -b all -m 'array_api_backends and not slow'", cwd = "scipy" }
-
 [feature.cuda]
 platforms = ["linux-64"]
 system-requirements = { cuda = "12" }
@@ -145,8 +184,29 @@ system-requirements = { cuda = "12" }
 [feature.cuda.dependencies]
 cuda-version = ">=12.0,<13"
 
-[feature.cuda.tasks]
-test-cuda = { cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
+[feature.cpu.tasks.test-cpu]
+cmd = "spin test --no-build -b all -m 'array_api_backends and not slow'"
+cwd = "scipy"
+depends-on = "build"
+
+[feature.cuda.tasks.test-cuda]
+cmd = "spin test --no-build -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'"
+cwd = "scipy"
+env.SCIPY_DEVICE = "cuda"
+depends-on = "build"
+
+
+[feature.array_api.tasks.ipython-array-api]
+cmd = "spin ipython --no-build"
+cwd = "scipy"
+env.SCIPY_ARRAY_API = "1"
+depends-on = "build"
+
+[feature.array_api.tasks.bench-array-api]
+cmd = "spin bench -b all"
+cwd = "scipy"
+depends-on = "build"
+
 
 # Array libraries we have support for
 [feature.torch-cpu.dependencies]
@@ -155,11 +215,17 @@ pytorch-cpu = "*"
 [feature.torch-cuda.dependencies]
 pytorch-gpu = "*"
 
-[feature.torch-cpu.tasks]
-test-torch = { cmd = "spin test -b torch -m 'array_api_backends and not slow'", cwd = "scipy" }
+[feature.torch-cpu.tasks.test-torch]
+cmd = "spin test --no-build -b torch -m 'array_api_backends and not slow'"
+cwd = "scipy"
+depends-on = "build"
 
-[feature.torch-cuda.tasks]
-test-torch-cuda = { cmd = "spin test -b torch -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
+[feature.torch-cuda.tasks.test-torch-cuda]
+cmd = "spin test --no-build -b torch -m 'array_api_backends and not slow'"
+cwd = "scipy"
+env.SCIPY_DEVICE = "cuda"
+depends-on = "build"
+
 
 [feature.cupy]
 platforms = ["linux-64"]
@@ -167,8 +233,11 @@ platforms = ["linux-64"]
 [feature.cupy.dependencies]
 cupy = "*"
 
-[feature.cupy.tasks]
-test-cupy = { cmd = "spin test -b cupy -m 'array_api_backends and not slow'", cwd = "scipy" }
+[feature.cupy.tasks.test-cupy]
+cmd = "spin test --no-build -b cupy -m 'array_api_backends and not slow'"
+cwd = "scipy"
+depends-on = "build"
+
 
 [feature.jax-cpu]
 platforms = ["linux-64", "osx-arm64", "win-64"]
@@ -186,17 +255,26 @@ jax = ">=0.6.0"
 jaxlib = { version = "*", build = "*cuda*" }
 
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
-[feature.jax-cpu.target.unix.tasks]
-test-jax = { cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy" }
+[feature.jax-cpu.target.unix.tasks.test-jax]
+cmd = "spin test --no-build -b jax.numpy -m 'array_api_backends and not slow'"
+cwd = "scipy"
+depends-on = "build"
 
-[feature.jax-cuda.tasks]
-test-jax-cuda = { cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'", cwd = "scipy", env = { SCIPY_DEVICE = "cuda" } }
+[feature.jax-cuda.tasks.test-jax]
+cmd = "spin test --no-build -b jax.numpy -m 'array_api_backends and not slow'"
+cwd = "scipy"
+env.SCIPY_DEVICE = "cuda"
+depends-on = "build"
+
 
 [feature.array_api_strict.dependencies]
 array-api-strict = "*"
 
-[feature.array_api_strict.tasks]
-test-strict = { cmd = "spin test -b array_api_strict -m 'array_api_backends and not slow'", cwd = "scipy" }
+[feature.array_api_strict.tasks.test-strict]
+cmd = "spin test --no-build -b array_api_strict -m 'array_api_backends and not slow'"
+cwd = "scipy"
+depends-on = "build"
+
 
 [feature.mlx]
 platforms = ["osx-arm64"]
@@ -205,11 +283,15 @@ system-requirements = { macos = "13.5" }
 [feature.mlx.dependencies]
 mlx = "*"
 
+
 [feature.dask.dependencies]
 dask-core = "*" # Don't install distributed, tornado, etc.
 
-[feature.dask.tasks]
-test-dask = { cmd = "spin test -b dask.array -m 'array_api_backends and not slow'", cwd = "scipy" }
+[feature.dask.tasks.test-dask]
+cmd = "spin test --no-build -b dask.array -m 'array_api_backends and not slow'"
+cwd = "scipy"
+depends-on = "build"
+
 
 [feature.free-threading]
 channels = ["conda-forge/label/cython_dev", "https://prefix.dev/conda-forge"]
@@ -237,10 +319,21 @@ pooch = "*"
 pytest-run-parallel = ">=0.4.4"
 ipython = "*"
 
-[feature.free-threading.tasks]
-build-nogil = { cmd = "spin build --build-dir=build-nogil --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-nogil = { cmd = "spin test --build-dir=build-nogil", cwd = "scipy" }
-ipython-nogil = { cmd = "spin ipython --build-dir=build-nogil", cwd = "scipy" }
+[feature.free-threading.tasks.build-nogil]
+cmd = "spin build --build-dir=build-nogil --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true"
+cwd = "scipy"
+env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+
+[feature.free-threading.tasks.test-nogil]
+cmd = "spin test --no-build --build-dir=build-nogil"
+cwd = "scipy"
+depends-on = "build-nogil"
+
+[feature.free-threading.tasks.ipython-nogil]
+cmd = "spin ipython --no-build --build-dir=build-nogil"
+cwd = "scipy"
+depends-on = "build-nogil"
+
 
 # For testing OpenBLAS built from source and directly folded into SciPy
 [feature.openblas-src]
@@ -270,21 +363,67 @@ ipython = "*"
 numpy = ">=2.2.0.rc0" # hack, force install from PyPI
 pythran = ">=0.17.0"
 
-[feature.openblas-src.tasks]
-build-openblas-src = { cmd = "spin build --build-dir=build-openblas --setup-args=-Dblas=openblas-src --setup-args=-Dbuildtype=release", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-openblas-src = { cmd = "spin test --build-dir=build-openblas", cwd = "scipy" }
-wheel-openblas-src = { cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-openblas-src-wheel = { cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'", cwd = "scipy/tools" }
-ipython-openblas-src = { cmd = "spin ipython --build-dir=build-openblas", cwd = "scipy" }
+[feature.openblas-src.tasks.build-openblas-src]
+cmd = "spin build --build-dir build-openblas --setup-args=-Dblas=openblas-src --setup-args=-Dbuildtype=release"
+cwd = "scipy"
+env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
-[feature.editable.tasks]
-build-editable = { cmd = "spin install -- -Cbuild-dir=build-editable -Csetup-args=-Dblas=blas -Csetup-args=-Dlapack=lapack -Csetup-args=-Duse-g77-abi=true", cwd = "scipy", env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" } }
-test-editable = { cmd = "spin test --build-dir=build-editable", cwd = "scipy" }
-doc-editable = { cmd = "spin docs --build-dir=build-editable -j6", cwd = "scipy" }
-smoke-docs = { cmd = "spin smoke-docs --build-dir=build-editable", cwd = "scipy" }
-smoke-tutorials = { cmd = "spin smoke-tutorials --build-dir=build-editable", cwd = "scipy" }
-refguide-check = { cmd = "spin refguide-check --build-dir=build-editable", cwd = "scipy" }
-ipython-editable = { cmd = "spin ipython --build-dir=build-editable", cwd = "scipy" }
+[feature.openblas-src.tasks.test-openblas-src]
+cmd = "spin test --no-build --build-dir build-openblas"
+cwd = "scipy"
+depends-on = "build-openblas-src"
+
+[feature.openblas-src.tasks.ipython-openblas-src]
+cmd = "spin ipython --no-build --build-dir build-openblas"
+cwd = "scipy"
+depends-on = "build-openblas-src"
+
+[feature.openblas-src.tasks.wheel-openblas-src]
+cmd = "python -m build -wnx -Cbuild-dir=build-whl-openblas -Csetup-args=-Dblas=openblas-src"
+cwd = "scipy"
+env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+
+[feature.openblas-src.tasks.test-openblas-src-wheel]
+cmd = "pip install ../dist/scipy*.whl --force-reinstall && python -c 'import scipy as s; s.test()'"
+cwd = "scipy/tools"
+depends-on = "wheel-openblas-src"
+
+
+[feature.editable.tasks.build-editable]
+cmd = "spin install -- -Cbuild-dir=build-editable -Csetup-args=-Dblas=blas -Csetup-args=-Dlapack=lapack -Csetup-args=-Duse-g77-abi=true"
+cwd = "scipy"
+env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+
+[feature.editable.tasks.test-editable]
+cmd = "spin test --no-build --build-dir=build-editable"
+cwd = "scipy"
+depends-on = "build-editable"
+
+[feature.editable.tasks.ipython-editable]
+cmd = "spin ipython --no-build --build-dir=build-editable"
+cwd = "scipy"
+depends-on = "build-editable"
+
+[feature.editable.tasks.doc-editable]
+cmd = "spin docs --no-build --build-dir=build-editable -j6"
+cwd = "scipy"
+depends-on = "build-editable"
+
+[feature.editable.tasks.smoke-docs]
+cmd = "spin smoke-docs --no-build --build-dir=build-editable"
+cwd = "scipy"
+depends-on = "build-editable"
+
+[feature.editable.tasks.smoke-tutorials]
+cmd = "spin smoke-tutorials --build-dir=build-editable"
+cwd = "scipy"
+depends-on = "build-editable"
+
+[feature.editable.tasks.reguide-check]
+cmd = "spin refguide-check --build-dir=build-editable"
+cwd = "scipy"
+depends-on = "build-editable"
+
 
 [environments]
 default = ["build", "test", "typing", "bench", "openblas", "lint"]
