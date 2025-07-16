@@ -66,7 +66,7 @@ depends-on = "build"
 
 
 [feature.test.tasks.test]
-cmd = "spin test"
+cmd = "spin test --no-build"
 cwd = "scipy"
 depends-on = "build"
 
@@ -157,7 +157,7 @@ cwd = "scipy"
 env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
 [feature.accelerate.tasks.test-accelerate]
-cmd = "spin test --build-dir=build-accelerate"
+cmd = "spin test --no-build --build-dir=build-accelerate"
 cwd = "scipy"
 depends-on = "build-accelerate"
 
@@ -185,12 +185,12 @@ system-requirements = { cuda = "12" }
 cuda-version = ">=12.0,<13"
 
 [feature.cpu.tasks.test-cpu]
-cmd = "spin test -b all -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b all -m 'array_api_backends and not slow'"
 cwd = "scipy"
 depends-on = "build"
 
 [feature.cuda.tasks.test-cuda]
-cmd = "spin test -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b cupy -b torch -b jax.numpy -m 'array_api_backends and not slow'"
 cwd = "scipy"
 env.SCIPY_DEVICE = "cuda"
 depends-on = "build"
@@ -216,12 +216,12 @@ pytorch-cpu = "*"
 pytorch-gpu = "*"
 
 [feature.torch-cpu.tasks.test-torch]
-cmd = "spin test -b torch -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b torch -m 'array_api_backends and not slow'"
 cwd = "scipy"
 depends-on = "build"
 
 [feature.torch-cuda.tasks.test-torch-cuda]
-cmd = "spin test -b torch -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b torch -m 'array_api_backends and not slow'"
 cwd = "scipy"
 env.SCIPY_DEVICE = "cuda"
 depends-on = "build"
@@ -234,7 +234,7 @@ platforms = ["linux-64"]
 cupy = "*"
 
 [feature.cupy.tasks.test-cupy]
-cmd = "spin test -b cupy -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b cupy -m 'array_api_backends and not slow'"
 cwd = "scipy"
 depends-on = "build"
 
@@ -256,12 +256,12 @@ jaxlib = { version = "*", build = "*cuda*" }
 
 # Windows support pending: https://github.com/conda-forge/jaxlib-feedstock/issues/161
 [feature.jax-cpu.target.unix.tasks.test-jax]
-cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b jax.numpy -m 'array_api_backends and not slow'"
 cwd = "scipy"
 depends-on = "build"
 
 [feature.jax-cuda.tasks.test-jax]
-cmd = "spin test -b jax.numpy -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b jax.numpy -m 'array_api_backends and not slow'"
 cwd = "scipy"
 env.SCIPY_DEVICE = "cuda"
 depends-on = "build"
@@ -271,7 +271,7 @@ depends-on = "build"
 array-api-strict = "*"
 
 [feature.array_api_strict.tasks.test-strict]
-cmd = "spin test -b array_api_strict -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b array_api_strict -m 'array_api_backends and not slow'"
 cwd = "scipy"
 depends-on = "build"
 
@@ -288,7 +288,7 @@ mlx = "*"
 dask-core = "*" # Don't install distributed, tornado, etc.
 
 [feature.dask.tasks.test-dask]
-cmd = "spin test -b dask.array -m 'array_api_backends and not slow'"
+cmd = "spin test --no-build -b dask.array -m 'array_api_backends and not slow'"
 cwd = "scipy"
 depends-on = "build"
 
@@ -325,7 +325,7 @@ cwd = "scipy"
 env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
 [feature.free-threading.tasks.test-nogil]
-cmd = "spin test --build-dir=build-nogil"
+cmd = "spin test --no-build --build-dir=build-nogil"
 cwd = "scipy"
 depends-on = "build-nogil"
 
@@ -369,7 +369,7 @@ cwd = "scipy"
 env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
 [feature.openblas-src.tasks.test-openblas-src]
-cmd = "spin test --build-dir build-openblas"
+cmd = "spin test --no-build --build-dir build-openblas"
 cwd = "scipy"
 depends-on = "build-openblas-src"
 
@@ -395,7 +395,7 @@ cwd = "scipy"
 env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
 
 [feature.editable.tasks.test-editable]
-cmd = "spin test --build-dir=build-editable"
+cmd = "spin test --no-build --build-dir=build-editable"
 cwd = "scipy"
 depends-on = "build-editable"
 
