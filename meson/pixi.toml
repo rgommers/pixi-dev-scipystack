@@ -30,4 +30,4 @@ setuptools = ">=42"
 uv = "*"
 
 [package.build.configuration]
-env = { SRC_DIR = "$PWD/meson" }
+env = { SRC_DIR = "./meson" }

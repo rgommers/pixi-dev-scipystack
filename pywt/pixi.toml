@@ -20,40 +20,41 @@ channels = [
 meson-python = "*"
 cython = "*"
 uv = "*"
-numpy = "*"
+numpy = { path = "../numpy" }
 
 [package.build.configuration]
 env = { SRC_DIR = "$PWD/pywt" }
 
+# [tasks]
+# build = { cmd = "spin build", cwd = "pywt" }
+# test = { cmd = "spin test", cwd = "pywt" }
+# doc = { cmd = "spin docs", cwd = "pywt" }
+# ipython = { cmd = "spin ipython", cwd = "pywt" }
+# wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "pywt" }
 
-[tasks]
-build = { cmd = "spin build", cwd = "pywt" }
-test = { cmd = "spin test", cwd = "pywt" }
-doc = { cmd = "spin docs", cwd = "pywt" }
-ipython = { cmd = "spin ipython", cwd = "pywt" }
-wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "pywt" }
+# [dependencies]
+# compilers = ">=1.7.0,<2"
+# # numpy = ">=2.0.0,<3"
+# meson-python = "*"
+# meson = "*"
+# cython = ">=3.0.10,<4"
+# spin = ">=0.11,<0.12"
+# python-build = "*"
+# pytest = "*"
+# ipython = "*"
+# matplotlib = ">=3.8.4,<4"
 
-[dependencies]
-compilers = ">=1.7.0,<2"
-numpy = ">=2.0.0,<3"
-meson-python = "*"
-meson = "*"
-cython = ">=3.0.10,<4"
-spin = ">=0.11,<0.12"
-python-build = "*"
-pytest = "*"
-ipython = "*"
-matplotlib = ">=3.8.4,<4"
+# sphinx = ">=7.0,<8"
+# intersphinx-registry = "*"
+# pydata-sphinx-theme = ">=0.15.2"
+# sphinx-copybutton = "*"
+# sphinx-togglebutton = "*"
+# sphinx-design = ">=0.4.0"
+# myst-nb = ">=1.1.1,<2"
+# numpydoc = "*"
+# jupytext = "*"
+# pooch = "*"
+# jupyterlite-sphinx = ">=0.16.2"
+# jupyterlite-pyodide-kernel = "*"
 
-sphinx = ">=7.0,<8"
-intersphinx-registry = "*"
-pydata-sphinx-theme = ">=0.15.2"
-sphinx-copybutton = "*"
-sphinx-togglebutton = "*"
-sphinx-design = ">=0.4.0"
-myst-nb = ">=1.1.1,<2"
-numpydoc = "*"
-jupytext = "*"
-pooch = "*"
-jupyterlite-sphinx = ">=0.16.2"
-jupyterlite-pyodide-kernel = "*"
+# pywavelets = { path = "." }
