@@ -1,5 +1,5 @@
 context:
-  version: 1.8.0.dev0
+  version: 1.9.0.dev0
 
 package:
   name: pywavelets
@@ -12,6 +12,9 @@ package:
 source:
   path: ../pywt
   use_gitignore: false
+
+build:
+  number: 0
 
 requirements:
   build:
