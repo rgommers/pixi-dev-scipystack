@@ -17,8 +17,15 @@ channels = [
   "https://prefix.dev/conda-forge",
 ]
 
+[package.build-dependencies]
+c-compiler = "*"
+cxx-compiler = "*"
+fortran-compiler = "*"
+
 [package.host-dependencies]
 meson-python = "*"
+pkg-config = "*"
+python = "*"
 cython = "*"
 pythran = "*"
 openblas = "*"
@@ -26,7 +33,10 @@ pybind11 = "*"
 uv = "*"
 
 [package.build.configuration]
-env = { SRC_DIR = "$PWD/scipy" }
+noarch = false
+env.SRC_DIR = "scipy"
+env.CXX = "clang++"
+env.CXXFLAGS = "${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
 [dependencies]
 compilers = ">=1.7.0,<2"
