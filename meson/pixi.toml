@@ -24,10 +24,8 @@ channels = [
   "https://prefix.dev/conda-forge",
 
 ]
+src = { path = "meson" }
 
 [package.host-dependencies]
 setuptools = ">=42"
 uv = "*"
-
-[package.build.configuration]
-env = { SRC_DIR = "./meson" }

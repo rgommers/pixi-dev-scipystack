@@ -13,14 +13,16 @@ authors = ["SciPy Developers <scipy-dev@python.org>"]
 [package.build]
 backend = { name = "pixi-build-python", version = "*" }
 channels = [
-  "https://prefix.dev/pixi-build-backends",
+  #   "https://prefix.dev/pixi-build-backends",
   "https://prefix.dev/conda-forge",
 ]
+src = { path = "scipy" }
 
 [package.build-dependencies]
 c-compiler = "*"
 cxx-compiler = "*"
 fortran-compiler = "*"
+numpy = { path = "../numpy" }
 
 [package.host-dependencies]
 meson-python = "*"
@@ -34,7 +36,6 @@ uv = "*"
 
 [package.build.configuration]
 noarch = false
-env.SRC_DIR = "scipy"
 env.CXX = "clang++"
 env.CXXFLAGS = "${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 

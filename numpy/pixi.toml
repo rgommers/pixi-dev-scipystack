@@ -6,23 +6,24 @@
 
 [package]
 name = "numpy"
-version = "2.3.2.dev0"
+version = "2.3.99.dev0"
 description = "Fundamental package for array computing in Python"
 
 [package.build]
 backend = { name = "pixi-build-python", version = "*" }
 channels = [
-  "https://prefix.dev/pixi-build-backends",
+  #   "https://prefix.dev/pixi-build-backends",
   "https://prefix.dev/conda-forge",
 ]
+src = { path = "numpy" }
 
 [package.host-dependencies]
 meson-python = "*"
 cython = "*"
 uv = "*"
 
-[package.build.configuration]
-env = { SRC_DIR = "./numpy" }
+[package.run-dependencies]
+meson = { path = "../meson" }
 
 
 # [tasks]
