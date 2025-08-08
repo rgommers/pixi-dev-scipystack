@@ -22,7 +22,6 @@ src = { path = "scipy" }
 c-compiler = "*"
 cxx-compiler = "*"
 fortran-compiler = "*"
-numpy = { path = "../numpy" }
 
 [package.host-dependencies]
 meson-python = "*"
@@ -33,6 +32,7 @@ pythran = "*"
 openblas = "*"
 pybind11 = "*"
 uv = "*"
+numpy = { path = "../numpy" }
 
 [package.build.configuration]
 noarch = false
