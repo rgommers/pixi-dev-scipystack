@@ -12,13 +12,15 @@ description = "Fundamental package for array computing in Python"
 
 [package.build]
 backend.name = "pixi-build-python"
+backend.version = "*"
 source.path = "numpy"
 configuration.noarch = false
 
 [package.host-dependencies]
+meson = { path = "../meson" }
 meson-python = "*"
 cython = "*"
-python = "==3.12"
+python = "*"
 uv = "*"
 
 [feature.source.dependencies]

@@ -11,11 +11,12 @@ version = "1.9.0.rc2"
 
 [package.build]
 backend.name = "pixi-build-python"
+backend.version = "*"
 source.path = "meson"
 
 [package.host-dependencies]
 setuptools = ">=42"
-python = ">=3.12"
+python = "*"
 uv = "*"
 
 

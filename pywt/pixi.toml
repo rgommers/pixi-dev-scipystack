@@ -12,18 +12,19 @@ authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 
 [package.build]
 backend.name = "pixi-build-python"
+backend.version = "*"
 source.path = "pywt"
 configuration.noarch = false
 
 [package.host-dependencies]
+meson = { path = "../meson" }
 meson-python = "*"
 cython = "*"
 uv = "*"
-python = "==3.12"
-numpy = "*"
+numpy = { path = "../numpy" }
 
 [package.run-dependencies]
-numpy = "*"
+numpy = { path = "../numpy" }
 
 [feature.source.dependencies]
 pywavelets = { path = "." }

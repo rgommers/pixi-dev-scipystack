@@ -13,6 +13,7 @@ authors = ["SciPy Developers <scipy-dev@python.org>"]
 
 [package.build]
 backend.name = "pixi-build-python"
+backend.version = "*"
 source.path = "scipy"
 
 [package.build.configuration]
@@ -23,19 +24,24 @@ env.CXXFLAGS = "${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
 [package.build-dependencies]
 c-compiler = "*"
-cxx-compiler = "*"
+clangxx_osx-arm64 = "*"
 fortran-compiler = "*"
 
 [package.host-dependencies]
+meson = { path = "../meson" }
 meson-python = "*"
 pkg-config = "*"
-python = "==3.12"
+python = "*"
 cython = "*"
 pythran = "*"
 openblas = "*"
 pybind11 = "*"
-numpy = "*"
+libblas = "*"
+numpy = { path = "../numpy" }
 uv = "*"
+
+[package.run-dependencies]
+numpy = { path = "../numpy" }
 
 [feature.source.dependencies]
 scipy = { path = "." }
