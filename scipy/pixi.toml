@@ -12,7 +12,7 @@ description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
 
 [package.build]
-backend = { name = "pixi-build-python", version = "*" }
+backend.name = "pixi-build-python"
 source.path = "scipy"
 
 [package.build.configuration]
@@ -29,13 +29,17 @@ fortran-compiler = "*"
 [package.host-dependencies]
 meson-python = "*"
 pkg-config = "*"
-python = "*"
+python = "==3.12"
 cython = "*"
 pythran = "*"
 openblas = "*"
 pybind11 = "*"
 numpy = "*"
 uv = "*"
+
+[feature.source.dependencies]
+scipy = { path = "." }
+ninja = "*"
 
 
 [dependencies]
@@ -66,10 +70,6 @@ mpmath = "*"
 gmpy2 = "*"
 ccache = ">=4.10.1,<5"
 spin = "*"
-
-[feature.source.dependencies]
-scipy = { path = "." }
-ninja = "*"
 
 [tasks.ipython]
 cmd = "spin ipython --no-build"

@@ -11,14 +11,19 @@ version = "2.4.0.dev0"
 description = "Fundamental package for array computing in Python"
 
 [package.build]
-backend = { name = "pixi-build-python", version = "*" }
+backend.name = "pixi-build-python"
 source.path = "numpy"
 configuration.noarch = false
 
 [package.host-dependencies]
 meson-python = "*"
 cython = "*"
+python = "==3.12"
 uv = "*"
+
+[feature.source.dependencies]
+numpy = { path = "." }
+ninja = "*"
 
 
 [tasks]
@@ -41,10 +46,6 @@ cython = ">=3.0.12,<4"
 python-build = ">=1.2.2.post1,<2"
 ipython = ">=9.1.0,<10"
 ccache = ">=4.11.2,<5"
-
-[feature.source.dependencies]
-numpy = { path = "." }
-ninja = "*"
 
 [feature.test.dependencies]
 pytest = "*"
@@ -95,6 +96,7 @@ lint = { cmd = "spin lint", cwd = "numpy" }
 [feature.docs.tasks]
 docs = { cmd = "spin docs", cwd = "numpy" }
 open-docs = { cmd = "open index.html", cwd = "numpy/doc/build/html" }
+
 
 [environments]
 test = ["test"]

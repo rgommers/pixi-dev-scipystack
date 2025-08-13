@@ -10,16 +10,12 @@ name = { workspace = true }
 version = "1.9.0.rc2"
 
 [package.build]
-backend = { name = "pixi-build-python", version = "*" }
-channels = [
-  "https://prefix.dev/pixi-build-backends",
-  "https://prefix.dev/conda-forge",
-
-]
+backend.name = "pixi-build-python"
 source.path = "meson"
 
 [package.host-dependencies]
 setuptools = ">=42"
+python = ">=3.12"
 uv = "*"
 
 

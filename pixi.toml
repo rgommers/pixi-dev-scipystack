@@ -1,15 +1,11 @@
 [workspace]
-preview = ["pixi-build"]
+name = "scipystack"
 channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
-name = "scipystack"
+preview = ["pixi-build"]
 
 [dependencies]
-# pywavelets = { path = "./pywt" }
-numpy = { path = "./numpy" }
-# ipython = ">=9.3.0,<10"
-# pyyaml = ">=6.0.2,<7"
-# matplotlib = ">=3.10.3,<4"
+# TODO
 
 [tasks]
 start = "python scripts/interp.py"
