@@ -1,22 +1,25 @@
 [workspace]
-preview = ["pixi-build"]
+name = "scipy"
 channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64", "win-64"]
-name = "scipy"
+preview = ["pixi-build"]
+
 
 [package]
-name = "scipy"
+name = { workspace = true }
 version = "1.17.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
 
 [package.build]
 backend = { name = "pixi-build-python", version = "*" }
-channels = [
-  #   "https://prefix.dev/pixi-build-backends",
-  "https://prefix.dev/conda-forge",
-]
-src = { path = "scipy" }
+source.path = "scipy"
+
+[package.build.configuration]
+noarch = false
+env.BUILD_EDITABLE_PYTHON = "false"
+env.CXX = "clang++"
+env.CXXFLAGS = "${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
 [package.build-dependencies]
 c-compiler = "*"
@@ -31,19 +34,14 @@ cython = "*"
 pythran = "*"
 openblas = "*"
 pybind11 = "*"
+numpy = "*"
 uv = "*"
-numpy = { path = "../numpy" }
 
-[package.build.configuration]
-noarch = false
-env.CXX = "clang++"
-env.CXXFLAGS = "${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
 [dependencies]
 compilers = ">=1.7.0,<2"
 pkg-config = ">=0.29.2,<0.30"
 ninja = ">=1.12.1,<2"
-# meson = { path = "../meson" }
 meson = ">=1.5.1,<2"
 python = ">=3.12.0,<3.13"
 meson-python = ">=0.16.0"
@@ -68,6 +66,10 @@ mpmath = "*"
 gmpy2 = "*"
 ccache = ">=4.10.1,<5"
 spin = "*"
+
+[feature.source.dependencies]
+scipy = { path = "." }
+ninja = "*"
 
 [tasks.ipython]
 cmd = "spin ipython --no-build"
@@ -498,3 +500,4 @@ array-api-cuda = [
 free-threading = { features = ["free-threading"], no-default-feature = true }
 openblas-src = { features = ["openblas-src"], no-default-feature = true }
 editable = { features = ["editable", "doc"] }
+source = { features = ["source"], no-default-feature = true }
