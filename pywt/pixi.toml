@@ -22,6 +22,7 @@ meson-python = "*"
 cython = "*"
 uv = "*"
 numpy = { path = "../numpy" }
+python = { path = "../cpython" }
 
 [package.run-dependencies]
 numpy = { path = "../numpy" }

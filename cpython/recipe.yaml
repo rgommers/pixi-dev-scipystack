@@ -1,12 +1,12 @@
 context:
-  version: 3.15a0
+  version: 3.15
 
 package:
   name: python
   version: ${{ version }}
 
 source:
-  path: ../cpython
+  path: cpython
 
 build:
   number: 0

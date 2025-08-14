@@ -16,7 +16,7 @@ source.path = "meson"
 
 [package.host-dependencies]
 setuptools = ">=42"
-python = "*"
+python = { path = "../cpython" }
 uv = "*"
 
 

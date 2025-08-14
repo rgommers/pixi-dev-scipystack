@@ -5,13 +5,13 @@ platforms = ["osx-arm64"]
 preview = ["pixi-build"]
 
 [dependencies]
-ipython = ">=9.4.0,<10"
+# ipython = ">=9.4.0,<10"
 numpy = { path = "numpy" }
 pywavelets = { path = "pywt" }
+python = { path = "cpython" }
 meson = { path = "meson" }
 scipy = { path = "scipy" }
-matplotlib = ">=3.10.5,<4"
-# TODO
+# matplotlib = ">=3.10.5,<4"
 
 [tasks]
 start = "python scripts/interp.py"

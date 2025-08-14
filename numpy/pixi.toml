@@ -20,7 +20,7 @@ configuration.noarch = false
 meson = { path = "../meson" }
 meson-python = "*"
 cython = "*"
-python = "*"
+python = { path = "../cpython" }
 uv = "*"
 
 [feature.source.dependencies]
