@@ -6414,14 +6414,14 @@ packages:
   requires_python: '>=3.11'
 - conda: ../numpy
   name: numpy
-  version: 2.4.0.dev0
+  version: 2.3.1
   build: hbf21a9e_0
   subdir: osx-arm64
   depends:
   - python
-  - python_abi 3.13.* *_cp313
+  - libcxx >=20
   input:
-    hash: fb15598e0d7d89c173575be0d5b1bda94a13ec6da56c8022fa3c3ec05fe756e2
+    hash: e721ab1768f8dffc089d356375229bb5228f03e3a15153675452078d2014b2b3
     globs: []
 - conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.3.1-py313hc192f47_1.conda
   sha256: 4b94ccfc2bee9d5e966acb008b0ca7a72b0f5b321c7196619aaa8057cdc4d204
@@ -7572,17 +7572,16 @@ packages:
   timestamp: 1752783928298
 - conda: .
   name: scipy
-  version: 1.17.0.dev0
+  version: 1.16.0
   build: hbf21a9e_0
   subdir: osx-arm64
   depends:
   - numpy
   - python
   - libcxx >=19
-  - python_abi 3.13.* *_cp313
   - libblas >=3.9.0,<4.0a0
   input:
-    hash: 512250b702b1f808a940246cbc01161a4d7e24c14504176b062164bd60cfb4a1
+    hash: aeeb8d60b3df72592de8585a722bff1e04e1948290eb454f2dbcf459f8f4c24d
     globs: []
   sources:
     numpy:

@@ -8,7 +8,7 @@ preview = ["pixi-build"]
 
 [package]
 name = { workspace = true }
-version = "1.17.0.dev0"
+version = "1.16.0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
 
@@ -28,16 +28,16 @@ clangxx_osx-arm64 = "*"
 fortran-compiler = "*"
 
 [package.host-dependencies]
-meson = { path = "../meson" }
+python = { path = "../cpython" }
+# meson = { path = "../meson" }
+numpy = { path = "../numpy" }
 meson-python = "*"
 pkg-config = "*"
-python = { path = "../cpython" }
 cython = "*"
 pythran = "*"
 openblas = "*"
 pybind11 = "*"
 libblas = "*"
-numpy = { path = "../numpy" }
 uv = "*"
 
 [package.run-dependencies]

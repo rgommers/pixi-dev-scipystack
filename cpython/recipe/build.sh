@@ -14,4 +14,4 @@ fi
 touch configure-done
 
 make -j${CPU_COUNT} install
-ln -sf ${PREFIX}/bin/python3.15 ${PREFIX}/bin/python
+ln -sf ${PREFIX}/bin/python${MINOR_VERSION} ${PREFIX}/bin/python

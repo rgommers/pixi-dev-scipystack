@@ -1,13 +1,14 @@
 [workspace]
 name = "pywt"
 channels = ["https://prefix.dev/conda-forge"]
-platforms = ["osx-arm64", "linux-64", "win-64"]
+# platforms = ["osx-arm64", "linux-64", "win-64"]
+platforms = ["osx-arm64"]
 preview = ["pixi-build"]
 
 
 [package]
 name = "pywavelets"
-version = "v1.10.0.dev0"
+version = "1.9.0"
 authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 
 [package.build]
@@ -17,12 +18,11 @@ source.path = "pywt"
 configuration.noarch = false
 
 [package.host-dependencies]
-meson = { path = "../meson" }
+python = { path = "../cpython" }
+numpy = { path = "../numpy" }
 meson-python = "*"
 cython = "*"
 uv = "*"
-numpy = { path = "../numpy" }
-python = { path = "../cpython" }
 
 [package.run-dependencies]
 numpy = { path = "../numpy" }

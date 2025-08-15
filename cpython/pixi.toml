@@ -6,7 +6,10 @@ preview = ["pixi-build"]
 
 [package]
 name = "python"
-version = "3.15"
+version = "3.13.6"
 
 [package.build]
 backend = { name = "pixi-build-rattler-build", version = "*" }
+
+[dependencies]
+python = { path = "." }
