@@ -15,10 +15,10 @@ authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 backend.name = "pixi-build-python"
 backend.version = "*"
 source.path = "pywt"
-configuration.noarch = false
+config.noarch = false
 
 [package.host-dependencies]
-python = { path = "../cpython" }
+python = "*"
 numpy = { path = "../numpy" }
 meson-python = "*"
 cython = "*"
@@ -29,7 +29,7 @@ numpy = { path = "../numpy" }
 
 [feature.source.dependencies]
 pywavelets = { path = "." }
-ninja = "*"
+matplotlib = ">=3.10.5,<4"
 
 
 [tasks]

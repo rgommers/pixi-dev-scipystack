@@ -10,12 +10,19 @@ preview = ["pixi-build"]
 name = { workspace = true }
 version = "2.3.1"
 description = "Fundamental package for array computing in Python"
+license = "BSD-3-Clause"
+license-file = "numpy/LICENSE.txt"
 
 [package.build]
-backend.name = "pixi-build-python"
-backend.version = "*"
 source.path = "numpy"
-configuration.noarch = false
+
+[package.build.backend]
+name = "pixi-build-python"
+version = "*"
+
+[package.build.config]
+noarch = false
+extra-input-globs = ["**/*.c.src"]
 
 [package.build-dependencies]
 clangxx_osx-arm64 = "*"
@@ -28,7 +35,8 @@ uv = "*"
 
 [feature.source.dependencies]
 numpy = { path = "." }
-ninja = "*"
+ipython = ">=9.4.0,<10"
+python = { path = "../cpython" }
 
 
 [tasks]

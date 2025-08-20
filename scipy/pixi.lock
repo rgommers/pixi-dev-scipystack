@@ -6420,9 +6420,11 @@ packages:
   depends:
   - python
   - libcxx >=20
+  license: BSD-3-Clause
   input:
-    hash: e721ab1768f8dffc089d356375229bb5228f03e3a15153675452078d2014b2b3
-    globs: []
+    hash: e53d308879564b98b4681b0b9b21bf8ecb18b03f2461f103e9d08a2147a4ea01
+    globs:
+    - pyproject.toml
 - conda: https://prefix.dev/conda-forge/osx-arm64/numpy-2.3.1-py313hc192f47_1.conda
   sha256: 4b94ccfc2bee9d5e966acb008b0ca7a72b0f5b321c7196619aaa8057cdc4d204
   md5: 170eef0828b958193f18ad746dd4ae12
