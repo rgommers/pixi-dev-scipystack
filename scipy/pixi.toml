@@ -145,6 +145,11 @@ openblas = ">=0.3.27,<0.4"
 libblas = { version = "*", build = "*mkl" }
 mkl = ">=2023.2.0,<2025"
 
+[feature.mkl.tasks.build-mkl]
+cmd = "spin build --build-dir=build-mkl --setup-args=-Dblas=mkl-dynamic-ilp64-seq --setup-args=-Duse-g77-abi=true"
+cwd = "scipy"
+env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+
 [feature.accelerate]
 platforms = ["osx-arm64"]
 
