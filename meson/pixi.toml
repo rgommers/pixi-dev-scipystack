@@ -1,28 +1,28 @@
 [workspace]
-channels = [
-  "https://prefix.dev/pixi-build-backends",
-  "https://prefix.dev/conda-forge",
-]
-platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+name = "meson"
+channels = ["https://prefix.dev/conda-forge"]
+# platforms = ["win-64", "linux-64", "osx-arm64"]
+platforms = ["osx-arm64"]
 preview = ["pixi-build"]
 
+
+[package]
+name = { workspace = true }
+version = "1.8.2"
+
+[package.build]
+backend.name = "pixi-build-python"
+backend.version = "*"
+source.path = "meson"
+
+[package.host-dependencies]
+python = { path = "../cpython" }
+setuptools = ">=42"
+uv = "*"
+
+
 [dependencies]
-meson = { path = "meson" }
-ninja = "*"
+meson = { path = "." }
 
 [tasks]
 help = { cmd = "meson --help" }
-
-[package]
-name = "meson"
-version = "1.7.99"
-
-[package.build]
-backend = { name = "pixi-build-rattler-build", version = "*" }
-
-[package.host-dependencies]
-setuptools = "75.8.*"
-
-[package.run-dependencies]
-python = "*"
-ninja = "*"

@@ -1,0 +1,15 @@
+[workspace]
+name = "scipystack"
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["osx-arm64"]
+preview = ["pixi-build"]
+
+[dependencies]
+python = { path = "cpython" }
+numpy = { path = "numpy" }
+pywavelets = { path = "pywt" }
+scipy = { path = "scipy" }
+ipython = ">=9.4.0,<10"
+
+[tasks]
+start = "python scripts/interp.py"

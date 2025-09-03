@@ -1,10 +1,52 @@
-[project]
+[workspace]
 name = "scipy"
-version = "1.15.0.dev0"
+channels = ["https://prefix.dev/conda-forge"]
+# platforms = ["osx-arm64", "linux-64", "win-64"]
+platforms = ["osx-arm64"]
+preview = ["pixi-build"]
+
+
+[package]
+name = { workspace = true }
+version = "1.16.0"
 description = "Fundamental algorithms for scientific computing in Python"
 authors = ["SciPy Developers <scipy-dev@python.org>"]
-channels = ["https://prefix.dev/conda-forge"]
-platforms = ["osx-arm64", "linux-64", "win-64"]
+
+[package.build]
+backend.name = "pixi-build-python"
+backend.version = "*"
+source.path = "scipy"
+
+[package.build.configuration]
+noarch = false
+env.CXX = "clang++"
+env.CXXFLAGS = "${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+
+[package.build-dependencies]
+c-compiler = "*"
+clangxx_osx-arm64 = "*"
+fortran-compiler = "*"
+
+[package.host-dependencies]
+python = { path = "../cpython" }
+# meson = { path = "../meson" }
+numpy = { path = "../numpy" }
+meson-python = "*"
+pkg-config = "*"
+cython = "*"
+pythran = "*"
+openblas = "*"
+pybind11 = "*"
+libblas = "*"
+uv = "*"
+
+[package.run-dependencies]
+numpy = { path = "../numpy" }
+
+[feature.source.dependencies]
+scipy = { path = "." }
+ninja = "*"
+
 
 [dependencies]
 compilers = ">=1.7.0,<2"
@@ -469,3 +511,4 @@ array-api-cuda = [
 free-threading = { features = ["free-threading"], no-default-feature = true }
 openblas-src = { features = ["openblas-src"], no-default-feature = true }
 editable = { features = ["editable", "doc"] }
+source = { features = ["source"], no-default-feature = true }
