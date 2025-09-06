@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "scipy"
 version = "1.15.0.dev0"
 description = "Fundamental algorithms for scientific computing in Python"
@@ -200,6 +200,9 @@ cwd = "scipy"
 env.SCIPY_DEVICE = "cuda"
 depends-on = "build"
 
+
+[feature.array_api.activation.env]
+SCIPY_ARRAY_API = "1"
 
 [feature.array_api.tasks.ipython-array-api]
 cmd = "spin ipython --no-build"
@@ -438,13 +441,13 @@ mkl = ["mkl", "test"]
 accelerate = ["accelerate", "test"]
 netlib = ["netlib", "test"]
 blis = ["blis", "test"]
-torch = ["torch-cpu", "mkl"] # FIXME: add env var
-torch-cuda = ["cuda", "torch-cuda", "mkl"] # FIXME: add env var
-cupy = ["cupy"]
-jax = ["jax-cpu"]
-jax-cuda = ["cuda", "jax-cuda"]
-mlx = ["mlx"]
-array-api-strict = ["array_api_strict"]
+torch = ["array_api", "torch-cpu", "mkl"]
+torch-cuda = ["array_api", "cuda", "torch-cuda", "mkl"]
+cupy = ["array_api", "cupy"]
+jax = ["array_api", "jax-cpu"]
+jax-cuda = ["array_api", "cuda", "jax-cuda"]
+mlx = ["array_api","mlx"]
+array-api-strict = ["array_api", "array_api_strict"]
 array-api = [
   "array_api",
   "bench",
