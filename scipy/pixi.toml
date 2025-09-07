@@ -446,7 +446,7 @@ torch-cuda = ["array_api", "cuda", "torch-cuda", "mkl"]
 cupy = ["array_api", "cupy"]
 jax = ["array_api", "jax-cpu"]
 jax-cuda = ["array_api", "cuda", "jax-cuda"]
-mlx = ["array_api","mlx"]
+mlx = ["array_api", "mlx"]
 array-api-strict = ["array_api", "array_api_strict"]
 array-api = [
   "array_api",
