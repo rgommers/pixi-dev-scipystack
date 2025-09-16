@@ -13,17 +13,32 @@ args = ["repo"]
 cmd = "rm -rf {{ repo }}/{{ repo }}"
 description = "Clean the {repo}/{repo} directory."
 
+[tasks._repo_clone]
+args = ["org", "repo"]
+cmd = "gh repo clone {{ org }}/{{ repo }} {{ repo }}/{{ repo }}"
+
+[tasks._repo_set_default]
+args = ["repo"]
+cmd = "cd {{ repo }}/{{ repo }}; gh repo set-default"
+
+[tasks._repo_fork_remote]
+args = ["repo"]
+cmd = "cd {{ repo }}/{{ repo }}; gh repo fork --remote"
+
+[tasks.submodules]
+args = ["repo"]
+cmd = "cd {{ repo }}/{{ repo }}; git submodule update --init"
+
 [tasks.clone]
 args = ["org", "repo"]
-depends-on = [{ task = "clean", args = ["{{ repo }}"] }]
-cmd = [
-  "cd {{ repo }}",
-  "gh repo clone {{ org }}/{{ repo }}",
-  "cd {{ repo }}",
-  "gh repo set-default",
-  "gh repo fork --remote",
+depends-on = [
+  { task = "clean", args = ["{{ repo }}"] },
+  { task = "_repo_clone", args = ["{{ org }}", "{{ repo }}"] },
+  { task = "_repo_set_default", args = ["{{ repo }}"] },
+  { task = "_repo_fork_remote", args = ["{{ repo }}"] },
+  { task = "submodules", args = ["{{ repo }}"] },
 ]
-description = "Clone a given {org}/{repo} source from GitHub into the {repo}/{repo} directory of the workspace. Set the upstream repo as default, and set a fork as origin."
+description = "Clone a given {org}/{repo} source from GitHub into the {repo}/{repo} directory of the workspace. Set the upstream repo as default, and set a fork as origin. Update the repo's submodules."
 
 [tasks.clone-all]
 depends-on = ["clone-meson", "clone-numpy", "clone-openblas", "clone-pywt", "clone-scipy"]
