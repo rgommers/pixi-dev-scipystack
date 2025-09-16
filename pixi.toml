@@ -1,0 +1,43 @@
+[workspace]
+name = "scipystack"
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["osx-arm64", "linux-64", "win-64"]
+
+
+[dependencies]
+gh = ">=2.79.0,<3"
+
+
+[tasks.clean]
+args = ["repo"]
+cmd = "rm -rf {{ repo }}/{{ repo }}"
+description = "Clean the {repo}/{repo} directory."
+
+[tasks.clone]
+args = ["org", "repo"]
+cmd = "cd {{ repo }}; gh repo clone {{ org }}/{{ repo }}; cd {{ repo }}; gh repo set-default; gh repo fork --remote"
+depends-on = [{ task = "clean", args = ["{{ repo }}"] }]
+description = "Clone a given {org}/{repo} source from GitHub into the {repo}/{repo} directory of the workspace. Set the upstream repo as default, and set a fork as origin."
+
+[tasks.clone-all]
+depends-on = ["clone-meson", "clone-numpy", "clone-openblas", "clone-pywt", "clone-scipy"]
+
+[tasks.clone-meson]
+depends-on = [{ task = "clone", args = ["mesonbuild", "meson"] }]
+description = "Clone the mesonbuild/meson source into the workspace."
+
+[tasks.clone-numpy]
+depends-on = [{ task = "clone", args = ["numpy", "numpy"] }]
+description = "Clone the numpy/numpy source into the workspace."
+
+[tasks.clone-openblas]
+depends-on = [{ task = "clone", args = ["OpenMathLib", "OpenBLAS"] }]
+description = "Clone the OpenMathLib/OpenBLAS source into the workspace."
+
+[tasks.clone-pywt]
+depends-on = [{ task = "clone", args = ["PyWavelets", "pywt"] }]
+description = "Clone the PyWavelets/pywt source into the workspace."
+
+[tasks.clone-scipy]
+depends-on = [{ task = "clone", args = ["scipy", "scipy"] }]
+description = "Clone the scipy/scipy source into the workspace."
