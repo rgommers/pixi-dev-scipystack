@@ -27,7 +27,7 @@ cmd = "cd {{ repo }}/{{ repo }}; gh repo fork --remote"
 
 [tasks.submodules]
 args = ["repo"]
-cmd = "cd {{ repo }}/{{ repo }}; git submodule update --init"
+cmd = "cd {{ repo }}/{{ repo }}; git submodule update --init --recursive"
 
 [tasks.clone]
 args = ["org", "repo"]
