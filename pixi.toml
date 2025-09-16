@@ -15,8 +15,14 @@ description = "Clean the {repo}/{repo} directory."
 
 [tasks.clone]
 args = ["org", "repo"]
-cmd = "cd {{ repo }}; gh repo clone {{ org }}/{{ repo }}; cd {{ repo }}; gh repo set-default; gh repo fork --remote"
 depends-on = [{ task = "clean", args = ["{{ repo }}"] }]
+cmd = [
+  "cd {{ repo }}",
+  "gh repo clone {{ org }}/{{ repo }}",
+  "cd {{ repo }}",
+  "gh repo set-default",
+  "gh repo fork --remote",
+]
 description = "Clone a given {org}/{repo} source from GitHub into the {repo}/{repo} directory of the workspace. Set the upstream repo as default, and set a fork as origin."
 
 [tasks.clone-all]
