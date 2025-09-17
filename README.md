@@ -18,9 +18,15 @@ to do development work on NumPy, SciPy and some related projects.
 
 ### Setup
 
-In the root directory of this repository, run `pixi run clone-all` to clone
-all of the source repos into the workspace. Alternatively, you can select
-only specific repos to clone, like `pixi run clone-numpy`.
+In the root directory of this repository:
+- run `pixi run clone-all` to clone
+all of the source repos into the workspace
+  - alternatively, you can select only specific repos to clone, like `pixi run clone-numpy`
+- fork repositories with `pixi run fork-all`
+  - this forks repositories under the username set with `gh`, and sets `upstream` and `origin` remotes appropriately
+  - similarly, you can select specific repos to fork, like `pixi run fork-numpy`
+
+`pixi run clone-fork-all` will do all of this in one go.
 
 ### Usage
 

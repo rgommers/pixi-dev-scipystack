@@ -8,6 +8,10 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 gh = ">=2.79.0,<3"
 
 
+[tasks.clone-fork-all]
+depends-on = ["clone-all", "fork-all"]
+description = "Clone and fork all workspace repositories."
+
 [tasks.clean]
 args = ["repo"]
 cmd = "rm -rf {{ repo }}/{{ repo }}"
@@ -21,22 +25,18 @@ cmd = "gh repo clone {{ org }}/{{ repo }} {{ repo }}/{{ repo }} -- --recurse-sub
 args = ["repo"]
 cmd = "cd {{ repo }}/{{ repo }}; gh repo set-default"
 
-[tasks._repo_fork_remote]
-args = ["repo"]
-cmd = "cd {{ repo }}/{{ repo }}; gh repo fork --remote"
-
 [tasks.clone]
 args = ["org", "repo"]
 depends-on = [
   { task = "clean", args = ["{{ repo }}"] },
   { task = "_repo_clone", args = ["{{ org }}", "{{ repo }}"] },
   { task = "_repo_set_default", args = ["{{ repo }}"] },
-  { task = "_repo_fork_remote", args = ["{{ repo }}"] },
 ]
 description = "Clone a given {org}/{repo} source from GitHub into the {repo}/{repo} directory of the workspace. Set the upstream repo as default, and set a fork as origin."
 
 [tasks.clone-all]
 depends-on = ["clone-meson", "clone-numpy", "clone-openblas", "clone-pywt", "clone-scipy"]
+description = "Clone all repositories into the workspace."
 
 [tasks.clone-meson]
 depends-on = [{ task = "clone", args = ["mesonbuild", "meson"] }]
@@ -57,3 +57,32 @@ description = "Clone the PyWavelets/pywt source into the workspace."
 [tasks.clone-scipy]
 depends-on = [{ task = "clone", args = ["scipy", "scipy"] }]
 description = "Clone the scipy/scipy source into the workspace."
+
+[tasks.fork-all]
+depends-on = ["fork-meson", "fork-numpy", "fork-openblas", "fork-pywt", "fork-scipy"]
+description = "Fork all workspace repositories."
+
+[tasks.fork]
+args = ["repo"]
+cmd = "cd {{ repo }}/{{ repo }}; gh repo fork --remote"
+description = "Fork the repository at the {repo}/{repo} directory under the username set with `gh`, and set upstream and origin remotes."
+
+[tasks.fork-meson]
+depends-on = [{ task = "fork", args = ["meson"] }]
+description = "Fork the meson repository under the username set with `gh`, and set upstream and origin remotes."
+
+[tasks.fork-numpy]
+depends-on = [{ task = "fork", args = ["numpy"] }]
+description = "Fork the numpy repository under the username set with `gh`, and set upstream and origin remotes."
+
+[tasks.fork-openblas]
+depends-on = [{ task = "fork", args = ["OpenBLAS"] }]
+description = "Fork the OpenBLAS repository under the username set with `gh`, and set upstream and origin remotes."
+
+[tasks.fork-pywt]
+depends-on = [{ task = "fork", args = ["pywt"] }]
+description = "Fork the pywt repository under the username set with `gh`, and set upstream and origin remotes."
+
+[tasks.fork-scipy]
+depends-on = [{ task = "fork", args = ["scipy"] }]
+description = "Fork the scipy repository under the username set with `gh`, and set upstream and origin remotes."
