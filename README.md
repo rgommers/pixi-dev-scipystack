@@ -1,56 +1,66 @@
 # pixi-dev-scipystack
 
-This is an _experimental_ development setup for using [pixi](https://pixi.sh/)
+This is an _experimental_ development setup for using [Pixi](https://pixi.sh/)
 to do development work on NumPy, SciPy and some related projects.
 
 
 ## Getting started
 
-Install `pixi`, clone this repo, and then for the project you want to work
-on ensure that you have a clone of the upstream repo one level below the
-subdirectory for the project containing `pixi.toml`. For example:
+### Prerequisites
 
-```zsh
-% git clone https://github.com/rgommers/pixi-dev-scipystack.git
-% cd pixi-dev-scipystack/scipy
-% git clone https://github.com/scipy/scipy.git
-% cd scipy && git submodule update --init --recursive && cd ..
-```
+- [Install `pixi`](https://pixi.sh/latest/installation/)
+- Authenticate with [`gh`](https://cli.github.com/manual/gh)
+  - If you don't have `gh` installed, you can `pixi global install gh`
+  - Run [`gh auth login`](https://cli.github.com/manual/gh_auth_login)
+  - Run [`gh auth setup-git`](https://cli.github.com/manual/gh_auth_setup-git)
+- Clone this repository
+  - For example, with `gh repo clone rgommers/pixi-dev-scipystack`
 
-After that, you will be able to build and test SciPy (plus other dev tasks,
-see `pixi task ls`):
+### Setup
 
-```zsh
-% pixi run build
-✨ Pixi task (build in default): python dev.py build
-💻  meson setup /Users/rgommers/code/pixi-dev/scipy/scipy/build --prefix /Users/rgommers/code/pixi-dev/scipy/scipy/build-install
+In the root directory of this repository:
+- run `pixi run clone-all` to clone
+all of the source repos into the workspace
+  - alternatively, you can select only specific repos to clone, like `pixi run clone-numpy`
+- fork repositories with `pixi run fork-all`
+  - this forks repositories under the username set with `gh`, and sets `upstream` and `origin` remotes appropriately
+  - similarly, you can select specific repos to fork, like `pixi run fork-numpy`
+
+`pixi run clone-fork-all` will do all of this in one go.
+
+### Usage
+
+After that, if you `cd REPO` (replacing `REPO` with the name of a repo in the workspace),
+you will be able to build and test that repo (plus other dev tasks, see `pixi task list`).
+For example, with SciPy:
+
+```console
+❯ pixi run clone-scipy
+{snip}
+
+❯ cd scipy
+
+❯ pixi run build
+
+✨ Pixi task (build in default): spin build --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true  $ meson setup build --prefix=/usr -Dblas=blas -Dlapack=lapack -Duse-g77-abi=true
 The Meson build system
-Version: 1.5.1
-Source dir: /Users/rgommers/code/pixi-dev/scipy/scipy
-...
+Version: 1.8.2
+Source dir: /Users/lucascolley/ghq/github.com/rgommers/pixi-dev-scipystack/scipy/scipy
+{snip}
 
-
-% pixi run test-torch
+❯ pixi run test-torch
 ? The task 'test-torch' can be run in multiple environments.
 
 Please select an environment to run the task in: ›
-❯ pytorch
+❯ torch
   array-api
 
-✨ Pixi task (test-torch in pytorch): python dev.py test -b pytorch -s cluster
-💻  ninja -C /Users/rgommers/code/pixi-dev/scipy/scipy/build -j8
-ninja: Entering directory `/Users/rgommers/code/pixi-dev/scipy/scipy/build'
-[2/2] Generating scipy/generate-version with a custom command
-Build OK
-💻  meson install -C build --only-changed --tags runtime,python-runtime,tests,devel
-Installing, see meson-install.log...
-Installation OK
-SciPy from development installed path at: /Users/rgommers/code/pixi-dev/scipy/scipy/build-install/lib/python3.12/site-packages
-Running tests for scipy version:1.15.0.dev0+1346.64a49b0, installed at:/Users/rgommers/code/pixi-dev/scipy/scipy/build-install/lib/python3.12/site-packages/scipy
-...
-======================================================= 125 passed, 23 skipped in 2.46s =======================================================
+✨ Pixi task (build in default): spin build --setup-args=-Dblas=blas --setup-args=-Dlapack=lapack --setup-args=-Duse-g77-abi=true  $ meson compile -j 8 -C build
+{snip}
+✨ Pixi task (test-torch in torch): spin test --no-build -b torch -m 'array_api_backends and not slow'
+{snip}
+======================================== 1945 passed, 14 skipped, 228 deselected in 2.52s =========================================
 ```
-
 
 ## Goals
 
