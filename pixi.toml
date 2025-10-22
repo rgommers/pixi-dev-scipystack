@@ -63,26 +63,27 @@ depends-on = ["fork-meson", "fork-numpy", "fork-openblas", "fork-pywt", "fork-sc
 description = "Fork all workspace repositories."
 
 [tasks.fork]
-args = ["repo"]
+args = ["org", "repo"]
+depends-on = [{ task = "clone", args = ["{{ org }}", "{{ repo }}"]}]
 cmd = "cd {{ repo }}/{{ repo }}; gh repo fork --remote"
-description = "Fork the repository at the {repo}/{repo} directory under the username set with `gh`, and set upstream and origin remotes."
+description = "Clone {org}/{repo} source under {repo}/{repo}, fork it under the username set with `gh`, and set upstream and origin remotes."
 
 [tasks.fork-meson]
-depends-on = [{ task = "fork", args = ["meson"] }]
-description = "Fork the meson repository under the username set with `gh`, and set upstream and origin remotes."
+depends-on = [{ task = "fork", args = ["mesonbuild", "meson"] }]
+description = "Clone and fork the meson repository under the username set with `gh`, and set upstream and origin remotes."
 
 [tasks.fork-numpy]
-depends-on = [{ task = "fork", args = ["numpy"] }]
-description = "Fork the numpy repository under the username set with `gh`, and set upstream and origin remotes."
+depends-on = [{ task = "fork", args = ["numpy", "numpy"] }]
+description = "Clone and fork the numpy repository under the username set with `gh`, and set upstream and origin remotes."
 
 [tasks.fork-openblas]
-depends-on = [{ task = "fork", args = ["OpenBLAS"] }]
-description = "Fork the OpenBLAS repository under the username set with `gh`, and set upstream and origin remotes."
+depends-on = [{ task = "fork", args = ["OpenMathLib", "OpenBLAS"] }]
+description = "Clone and fork the OpenBLAS repository under the username set with `gh`, and set upstream and origin remotes."
 
 [tasks.fork-pywt]
-depends-on = [{ task = "fork", args = ["pywt"] }]
-description = "Fork the pywt repository under the username set with `gh`, and set upstream and origin remotes."
+depends-on = [{ task = "fork", args = ["PyWavelets", "pywt"] }]
+description = "Clone and fork the pywt repository under the username set with `gh`, and set upstream and origin remotes."
 
 [tasks.fork-scipy]
-depends-on = [{ task = "fork", args = ["scipy"] }]
-description = "Fork the scipy repository under the username set with `gh`, and set upstream and origin remotes."
+depends-on = [{ task = "fork", args = ["scipy", "scipy"] }]
+description = "Clone and fork the scipy repository under the username set with `gh`, and set upstream and origin remotes."
