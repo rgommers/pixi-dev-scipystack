@@ -19,7 +19,7 @@ description = "Clean the {repo}/{repo} directory."
 
 [tasks._repo_clone]
 args = ["org", "repo"]
-cmd = "gh repo clone {{ org }}/{{ repo }} {{ repo }}/{{ repo }} -- --recurse-submodules"
+cmd = "gh repo clone {{ org }}/{{ repo }} {{ repo | lower }}/{{ repo }} -- --recurse-submodules"
 
 [tasks._repo_set_default]
 args = ["repo"]
