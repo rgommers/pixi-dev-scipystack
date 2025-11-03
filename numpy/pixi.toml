@@ -74,7 +74,7 @@ ipython-nogil = { cmd = "spin ipython --build-dir=build-nogil", cwd = "numpy" }
 lint = { cmd = "spin lint", cwd = "numpy" }
 
 [feature.docs.tasks]
-docs = { cmd = "spin docs", cwd = "numpy" }
+docs = { cmd = "spin docs -j6", cwd = "numpy" }
 open-docs = { cmd = "open index.html", cwd = "numpy/doc/build/html" }
 
 [environments]
