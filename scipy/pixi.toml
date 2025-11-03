@@ -305,13 +305,13 @@ depends-on = "build"
 channels = ["conda-forge/label/cython_dev", "https://prefix.dev/conda-forge"]
 
 [feature.free-threading.dependencies]
-python-freethreading = ">=3.13.0,<3.14"
+python-freethreading = ">=3.14.0,<3.15"
 compilers = ">=1.7.0,<2"
 pkg-config = ">=0.29.2,<0.30"
 ninja = ">=1.12.1,<2"
 ccache = ">=4.10.1,<5"
 meson = ">=1.6.0,<2"
-meson-python = ">=0.16.0"
+meson-python = ">=0.18.0"
 cython = ">=3.1.0,<4"
 pythran = ">=0.18.0"
 python-build = "*"
@@ -324,7 +324,7 @@ pytest = "*"
 hypothesis = "*"
 threadpoolctl = "*"
 pooch = "*"
-pytest-run-parallel = ">=0.4.4"
+pytest-run-parallel = ">=0.7.1"
 ipython = "*"
 
 [feature.free-threading.tasks.build-nogil]
