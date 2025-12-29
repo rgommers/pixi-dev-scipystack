@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "numpy"
 version = "2.5.0.dev0"
 description = "Fundamental package for array computing in Python"
@@ -36,11 +36,25 @@ asv = "*"
 mypy = "==1.19.1"
 
 [feature.free-threading.dependencies]
+python-freethreading = ">=3.14.0,<3.15"
+compilers = ">=1.7.0,<2"
+pkg-config = ">=0.29.2,<0.30"
+ninja = ">=1.12.1,<2"
+ccache = ">=4.10.1,<5"
+meson = ">=1.6.0,<2"
+meson-python = ">=0.18.0"
+cython = ">=3.2.0,<4"
+python-build = "*"
+pip = "*"
+blas-devel = "*"
+pybind11 = ">=2.13.1"
+spin = "*"
 pytest = "*"
 hypothesis = "*"
-python-freethreading = ">=3.14.0,<3.15"
-cython = ">=3.2.0,<4"
-pytest-run-parallel = ">=0.4.3"
+threadpoolctl = "*"
+pooch = "*"
+pytest-run-parallel = ">=0.8.1"
+ipython = "*"
 
 [feature.lint.dependencies]
 ruff = "*"
