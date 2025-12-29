@@ -22,17 +22,18 @@ meson = ">=1.10.0,<2"
 meson-python = ">=0.18.0"
 openblas = ">=0.3.29,<0.4"
 spin = ">=0.15,<0.16"
-cython = ">=3.2.3,<4"
+cython = ">=3.2,<4"
 python-build = ">=1.2.2.post1,<2"
 ipython = ">=9.1.0,<10"
 ccache = ">=4.11.2,<5"
+python = ">=3.14,<3.15"
 
 [feature.test.dependencies]
 pytest = "*"
 hypothesis = "*"
 pytest-xdist = "*"
 asv = "*"
-mypy = "==1.15.0"
+mypy = "==1.19.1"
 
 [feature.free-threading.dependencies]
 pytest = "*"
@@ -81,4 +82,4 @@ open-docs = { cmd = "open index.html", cwd = "numpy/doc/build/html" }
 test = ["test"]
 lint = ["lint"]
 docs = ["docs"]
-free-threading = ["free-threading"]
+free-threading = { features = ["free-threading"], no-default-feature = true }
