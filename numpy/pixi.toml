@@ -1,6 +1,6 @@
 [project]
 name = "numpy"
-version = "2.2.0.dev0"
+version = "2.5.0.dev0"
 description = "Fundamental package for array computing in Python"
 authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 channels = ["https://prefix.dev/conda-forge"]
@@ -18,11 +18,11 @@ wheel = { cmd = "python -m build -wnx -Cbuild-dir=build-whl && mv dist/*.whl ../
 compilers = ">=1.9.0,<2"
 pkg-config = ">=0.29.2,<0.30"
 ninja = ">=1.12.1,<2"
-meson = ">=1.8.0,<2"
+meson = ">=1.10.0,<2"
 meson-python = ">=0.18.0"
 openblas = ">=0.3.29,<0.4"
-spin = ">=0.14,<0.15"
-cython = ">=3.0.12,<4"
+spin = ">=0.15,<0.16"
+cython = ">=3.2.3,<4"
 python-build = ">=1.2.2.post1,<2"
 ipython = ">=9.1.0,<10"
 ccache = ">=4.11.2,<5"
@@ -38,7 +38,7 @@ mypy = "==1.15.0"
 pytest = "*"
 hypothesis = "*"
 python-freethreading = ">=3.14.0,<3.15"
-cython = ">=3.1.0,<4"
+cython = ">=3.2.0,<4"
 pytest-run-parallel = ">=0.4.3"
 
 [feature.lint.dependencies]
@@ -56,7 +56,7 @@ sphinx-design = ">=0.6.1,<0.7"
 jupyterlite-sphinx = ">=0.19.1,<0.20"
 jupyterlite-pyodide-kernel = "==0.5.2"
 pydata-sphinx-theme = ">=0.16.1,<0.17"
-scipy = ">=1.15.2,<2"
+scipy = ">=1.16.3,<2"
 breathe = ">=4.36.0,<5"
 doxygen = ">=1.13.2,<2"
 
