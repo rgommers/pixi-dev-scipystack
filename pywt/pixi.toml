@@ -1,20 +1,20 @@
-[project]
-name = "trypixi"
-version = "0.1.0"
+[workspace]
+name = "pywavelets"
+version = "1.10.0.dev0"
 description = "Add a short description here"
 authors = ["Ralf Gommers <ralf.gommers@gmail.com>"]
 channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
-build = {cmd = "spin build", cwd = "pywt"}
+build = {cmd = "spin build", cwd = "pywt", env = { CC = "clang" }}
 test = {cmd = "spin test", cwd = "pywt"}
 doc = {cmd = "spin docs", cwd = "pywt"}
 ipython = {cmd = "spin ipython", cwd = "pywt"}
 wheel = {cmd = "python -m build -wnx -Cbuild-dir=build-whl && cp dist/*.whl ../../wheelhouse/", cwd = "pywt"}
 
 [dependencies]
-compilers = ">=1.7.0,<2"
+clang = "*"
 numpy = ">=2.0.0,<3"
 meson-python = "*"
 meson = "*"
