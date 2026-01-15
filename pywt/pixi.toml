@@ -7,7 +7,7 @@ channels = ["https://prefix.dev/conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
 
 [tasks]
-build = {cmd = "spin build", cwd = "pywt", env = { CC = "clang" }}
+build = {cmd = "spin build", cwd = "pywt"}
 test = {cmd = "spin test", cwd = "pywt"}
 doc = {cmd = "spin docs", cwd = "pywt"}
 ipython = {cmd = "spin ipython", cwd = "pywt"}
@@ -18,7 +18,7 @@ clang = "*"
 numpy = ">=2.0.0,<3"
 meson-python = "*"
 meson = "*"
-cython = ">=3.1.4,<4"
+cython = ">=3.2.0,<4"
 spin = ">=0.11,<0.12"
 python-build = "*"
 pytest = "*"
@@ -37,3 +37,49 @@ jupytext = "*"
 pooch = "*"
 jupyterlite-sphinx = ">=0.16.2"
 jupyterlite-pyodide-kernel = "*"
+
+#[pypi-dependencies]
+#cython = { path = "/home/rgommers/code/tmp/cython" }
+
+
+[feature.free-threading.dependencies]
+python-freethreading = ">=3.14.0,<3.15"
+clang = "*"
+pkg-config = ">=0.29.2,<0.30"
+ninja = ">=1.12.1,<2"
+meson = ">=1.6.0,<2"
+meson-python = ">=0.18.0"
+cython = ">=3.2.0,<4"
+python-build = "*"
+pip = "*"
+numpy = ">=2.3.2"
+spin = "*"
+pytest = "*"
+pytest-run-parallel = ">=0.7.1"
+ipython = "*"
+
+#[feature.free-threading.pypi-dependencies]
+#cython = { path = "/home/rgommers/code/tmp/cython" }
+
+[feature.free-threading.tasks.build-nogil]
+cmd = "spin build --build-dir=build-nogil"
+cwd = "pywt"
+env = { CC = "clang" }
+
+[feature.free-threading.tasks.test-nogil]
+cmd = "spin test --no-build --build-dir=build-nogil"
+cwd = "pywt"
+depends-on = "build-nogil"
+
+[feature.free-threading.tasks.ipython-nogil]
+cmd = "spin ipython --no-build --build-dir=build-nogil"
+cwd = "pywt"
+depends-on = "build-nogil"
+
+
+#[feature.py315.dependencies]
+#python = { git = "https://github.com/python/cpython", subdirectory = "Tools/pixi-packages/default" }
+
+
+[environments]
+free-threading = { features = ["free-threading"], no-default-feature = true }
