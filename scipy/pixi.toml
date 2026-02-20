@@ -19,7 +19,7 @@ pip = "*"
 blas-devel = "*"
 numpy = ">=2.0.0"
 pybind11 = ">=2.13.1"
-pythran = ">=0.15.0"
+pythran = ">=0.18.1"
 ipython = "*"
 # Add test dependencies to default list of dependencies so they show up in every
 # environment without having to also see the test task in those other envs
@@ -146,9 +146,19 @@ libblas = { version = "*", build = "*mkl" }
 mkl = ">=2023.2.0,<2025"
 
 [feature.mkl.tasks.build-mkl]
-cmd = "spin build --build-dir=build-mkl --setup-args=-Dblas=mkl-dynamic-ilp64-seq --setup-args=-Duse-g77-abi=true"
+cmd = "spin build --build-dir=build-mkl --setup-args=-Dblas=mkl-dynamic-lp64-seq --setup-args=-Duse-g77-abi=true"
 cwd = "scipy"
 env = { CC = "ccache $CC", CXX = "ccache $CXX", FC = "ccache $FC" }
+
+[feature.mkl.tasks.test-mkl]
+cmd = "spin test --no-build --build-dir=build-mkl"
+cwd = "scipy"
+depends-on = "build-mkl"
+
+[feature.mkl.tasks.ipython-mkl]
+cmd = "spin ipython --no-build --build-dir=build-mkl"
+cwd = "scipy"
+depends-on = "build-mkl"
 
 [feature.accelerate]
 platforms = ["osx-arm64"]
@@ -313,7 +323,7 @@ ccache = ">=4.10.1,<5"
 meson = ">=1.6.0,<2"
 meson-python = ">=0.18.0"
 cython = ">=3.1.0,<4"
-pythran = ">=0.18.0"
+pythran = ">=0.18.1"
 python-build = "*"
 pip = "*"
 blas-devel = "*"
@@ -369,7 +379,7 @@ ipython = "*"
 [feature.openblas-src.pypi-dependencies]
 # In order to have no BLAS library in the conda env at all
 numpy = ">=2.2.0.rc0" # hack, force install from PyPI
-pythran = ">=0.17.0"
+pythran = ">=0.18.1"
 
 [feature.openblas-src.tasks.build-openblas-src]
 cmd = "spin build --build-dir build-openblas --setup-args=-Dblas=openblas-src --setup-args=-Dbuildtype=release"
