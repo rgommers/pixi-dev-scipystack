@@ -1,0 +1,52 @@
+[project]
+name = "meson-python"
+version = "0.19.0.dev0"
+description = "Meson PEP 517 Python build backend"
+license = "MIT"
+documentation = "https://mesonbuild.com/meson-python"
+repository = "https://github.com/mesonbuild/meson-python"
+channels = ["https://prefix.dev/conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[dependencies]
+ninja = ">=1.12.1,<2"
+meson = ">=1.7.1,<2"
+packaging = ">=23.2"
+pyproject-metadata = ">=0.9.0"
+pip = ">=25.2,<26"
+
+[feature.test.dependencies]
+python-build = ">=1.2.2.post1,<2"
+cython = ">=3.0.12,<4"
+compilers = ">=1.9.0,<2"
+pytest = ">=6.0"
+pytest-mock = "*"
+wheel = "*"
+
+[feature.lint.dependencies]
+ruff = "==0.6.9"
+
+[feature.docs.dependencies]
+furo = ">=2024.08.06"
+sphinx = "8.1.*"
+sphinx-copybutton = ">=0.5.2,<0.6"
+sphinx-design = "*"
+sphinxext-opengraph = ">=0.7.0"
+
+[feature.build.tasks]
+build = { cmd = "pip install -e . --no-build-isolation", cwd = "meson-python" }
+
+[feature.test.tasks]
+test = { cmd = "pytest tests", cwd = "meson-python" }
+
+[feature.lint.tasks]
+lint = { cmd = "ruff check", cwd = "meson-python" }
+
+[feature.docs.tasks]
+docs = { cmd = "sphinx-build . build", cwd = "meson-python/docs" }
+open-docs = { cmd = "open index.html", cwd = "meson-python/docs/build" }
+
+[environments]
+default = ["build", "test"]
+lint = ["lint"]
+docs = ["docs"]
