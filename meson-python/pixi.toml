@@ -16,11 +16,11 @@ pyproject-metadata = ">=0.9.0"
 pip = ">=25.2,<26"
 cmake = ">=4.3.2,<5"
 patchelf = ">=0.18.0,<0.19"
+c-compiler = ">=1.11.0,<2"
 
 [feature.test.dependencies]
 python-build = ">=1.2.2.post1,<2"
 cython = ">=3.0.12,<4"
-compilers = ">=1.9.0,<2"
 pytest = ">=6.0"
 pytest-mock = "*"
 wheel = "*"
@@ -39,7 +39,7 @@ sphinxext-opengraph = ">=0.7.0"
 build = { cmd = "pip install -e . --no-build-isolation", cwd = "meson-python" }
 
 [feature.test.tasks]
-test = { cmd = "pytest tests", cwd = "meson-python" }
+test = { cmd = "pytest", cwd = "meson-python" }
 
 [feature.lint.tasks]
 lint = { cmd = "ruff check", cwd = "meson-python" }
