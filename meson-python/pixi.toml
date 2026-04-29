@@ -6,7 +6,7 @@ license = "MIT"
 documentation = "https://mesonbuild.com/meson-python"
 repository = "https://github.com/mesonbuild/meson-python"
 channels = ["https://prefix.dev/conda-forge"]
-platforms = ["osx-arm64", "linux-64"]
+platforms = ["osx-arm64", "linux-64", "linux-aarch64"]
 
 [dependencies]
 ninja = ">=1.12.1,<2"
@@ -14,6 +14,8 @@ meson = ">=1.7.1,<2"
 packaging = ">=23.2"
 pyproject-metadata = ">=0.9.0"
 pip = ">=25.2,<26"
+cmake = ">=4.3.2,<5"
+patchelf = ">=0.18.0,<0.19"
 
 [feature.test.dependencies]
 python-build = ">=1.2.2.post1,<2"
